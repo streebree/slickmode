@@ -1,0 +1,10 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1769730445
+icon.svg::CompressedTexture2D::8342535290686898148::1769730058::1769730062::1::::<><><>0<>0<>88142689a169cd0b04c6b9956ed7f080<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+node-test.gd::GDScript::5554769272489494879::1769730108::0::1::::<>Node2D<><>0<>0<><>::
+node_2d.tscn::PackedScene::6362690409761645594::1769730445::0::1::::<><><>0<>0<><>::uid://cle1idslv4gx8::::res://node-test.gd
+::res://addons/::1769730504
+::res://addons/godot-vim/::1769730504
+godot-vim.gd::GDScript::3265781988841439048::1769730504::0::1::::<>EditorPlugin<><>0<>1<><>::
+icon.svg::CompressedTexture2D::297080434105366696::1769730504::1769730504::1::::<><><>0<>0<>eefadc0489a0cced6ce01b78fe0f458f<>res://.godot/imported/icon.svg-5744b51718b6a64145ec5798797f7631.ctex::
+plugin.cfg::TextFile::-1::1769730504::0::1::::<><><>0<>0<><>::
