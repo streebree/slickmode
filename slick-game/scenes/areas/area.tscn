@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b4nwe3rb8yd41" path="res://assets/background0.png" id="5_p3lme"]
 [ext_resource type="Texture2D" uid="uid://br3x4cgwy2nx8" path="res://assets/background1.png" id="6_ag3m5"]
 [ext_resource type="Texture2D" uid="uid://f806pa0exola" path="res://assets/background2.png" id="7_aoiyj"]
+[ext_resource type="AudioStream" uid="uid://dl75krm64q111" path="res://assets/Snow.wav" id="8_ag3m5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e38xd"]
 texture = ExtResource("2_prnpl")
@@ -67,3 +68,8 @@ follow_viewport = false
 
 [node name="Sprite2D3" type="Sprite2D" parent="Parallax2D3" unique_id=1857026633]
 texture = ExtResource("7_aoiyj")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1346540891]
+stream = ExtResource("8_ag3m5")
+volume_db = -14.597
+autoplay = true
