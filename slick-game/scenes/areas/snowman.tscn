@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ckjpn0vpiwogk"]
+
+[ext_resource type="Texture2D" uid="uid://cvx1ecf0scy2n" path="res://assets/yukidaruma.png" id="1_s1rrw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j7fvb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_s1rrw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0et35"]
+size = Vector2(8, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1rrw"]
+size = Vector2(8, 14)
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1919126236]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=721837144]
+sprite_frames = SubResource("SpriteFrames_j7fvb")
+
+[node name="Physics Hitbox" type="CollisionShape2D" parent="." unique_id=713872290]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_0et35")
+
+[node name="Damage Hitbox" type="CollisionShape2D" parent="." unique_id=1018229339]
+visible = false
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_s1rrw")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=96300986]
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true

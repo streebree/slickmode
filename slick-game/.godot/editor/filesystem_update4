@@ -2,3 +2,6 @@ res://node-test.gd
 res://node_2d.tscn
 res://addons/vim/vim.gd
 res://addons/godot-vim/godot-vim.gd
+res://scenes/areas/area.tscn
+res://scenes/areas/snowman.tscn
+res://scenes/areas/snowman.gd
