@@ -36,11 +36,6 @@ func _physics_process(delta: float) -> void:
 			dash_cooldown_current = dash_cooldown
 			print("END DASH")
 			
-	if Input.is_action_just_pressed("run") and dash_cooldown_current <= 0 and dash_duration_current <= 0:
-		# dash just started:
-		dash_duration_current = dash_duration
-		sprite.rotation_degrees = 30
-		print("START DASH")
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -51,6 +46,20 @@ func _physics_process(delta: float) -> void:
 
 	# Handle left/right movement.
 	var direction := Input.get_axis("ui_left", "ui_right")
+	
+	if Input.is_action_just_pressed("run") and dash_cooldown_current <= 0 and dash_duration_current <= 0:
+		# dash just started:
+		dash_duration_current = dash_duration
+		sprite.rotation_degrees = 30
+		if direction == 0:
+			if velocity.x > 0:
+				velocity.x = SPEED_CAP
+			elif velocity.x < 0:
+				velocity.x = -SPEED_CAP
+		else:
+			velocity.x = SPEED_CAP * direction
+		print("START DASH")
+		
 	if is_on_wall():
 		velocity.x = -prev_x_velocity
 	if ice_collision_count == 0:
