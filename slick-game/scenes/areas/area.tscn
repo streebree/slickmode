@@ -7,26 +7,32 @@
 [ext_resource type="Texture2D" uid="uid://br3x4cgwy2nx8" path="res://assets/background1.png" id="6_ag3m5"]
 [ext_resource type="Texture2D" uid="uid://f806pa0exola" path="res://assets/background2.png" id="7_aoiyj"]
 [ext_resource type="AudioStream" uid="uid://dl75krm64q111" path="res://assets/Snow.wav" id="8_ag3m5"]
-[ext_resource type="PackedScene" uid="uid://ow5vth2oib6b" path="res://scenes/enemy.tscn" id="8_aoiyj"]
+[ext_resource type="PackedScene" uid="uid://bs81qvckva4lr" path="res://scenes/enemy.tscn" id="8_aoiyj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e38xd"]
 texture = ExtResource("2_prnpl")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:1/0 = 0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:1/0 = 0
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_0ik7n"]
 physics_layer_0/collision_layer = 1
 physics_layer_1/collision_layer = 2
 physics_layer_1/collision_mask = 2
+physics_layer_2/collision_layer = 16
+physics_layer_2/collision_mask = 16
 sources/0 = SubResource("TileSetAtlasSource_e38xd")
 
 [node name="Node2D" type="Node2D" unique_id=1625689784]
@@ -77,8 +83,8 @@ texture = ExtResource("7_aoiyj")
 stream = ExtResource("8_ag3m5")
 volume_db = -14.597
 
-[node name="RigidBody2D" parent="." unique_id=2019721684 instance=ExtResource("8_aoiyj")]
-position = Vector2(123, -19)
+[node name="Enemy" parent="." unique_id=1106049794 instance=ExtResource("8_aoiyj")]
+position = Vector2(118, -19)
 
-[node name="RigidBody2D2" parent="." unique_id=1475747742 instance=ExtResource("8_aoiyj")]
-position = Vector2(156, -19)
+[node name="Enemy2" parent="." unique_id=86569444 instance=ExtResource("8_aoiyj")]
+position = Vector2(146, -22)

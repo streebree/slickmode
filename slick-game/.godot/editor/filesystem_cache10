@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1769818387
+::res://::1769820857
 export_presets.cfg::TextFile::-1::1769744183::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::8342535290686898148::1769730058::1769730062::1::::<><><>0<>0<>88142689a169cd0b04c6b9956ed7f080<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 node-test.gd::GDScript::5554769272489494879::1769816878::0::1::::<>Node2D<><>0<>0<><>::
@@ -17,11 +17,12 @@ enemy.png::CompressedTexture2D::136724612432457655::1769817210::1769817216::1:::
 slicktileset.png::CompressedTexture2D::3374627722784278092::1769736048::1769736049::1::::<><><>0<>0<>3778521c66d8fe4b9c94a709bedb7b5d<>res://.godot/imported/slicktileset.png-b7b2c33c19163bb8d950db93452a5e04.ctex::
 Snow.wav::AudioStreamWAV::7999239699832132262::1769743612::1769810631::1::::<><><>0<>0<>c0a66aaf896b9db0dd690d67585b5139<>res://.godot/imported/Snow.wav-38bbfe9e4ed57298b7a4c88c896013af.sample::
 yukidaruma.png::CompressedTexture2D::6295873671046573971::1769732492::1769732572::1::::<><><>0<>0<>9b3f9ba692caafd50aa35c645c75a341<>res://.godot/imported/yukidaruma.png-97ce1c61f74002ee15494ad686f6f3ec.ctex::
-::res://scenes/::1769818387
+::res://scenes/::1769821028
 audio_stream_player.gd::GDScript::5203256897184605574::1769810477::0::1::::<>AudioStreamPlayer<><>0<>0<><>::
-emeny.tscn::PackedScene::1029920142979830627::1769817567::0::1::::<><><>0<>0<><>::uid://b7h3ms518vdv::::res://assets/enemy.png
-snowman.gd::GDScript::3187315447413407566::1769818310::0::1::::<>CharacterBody2D<><>0<>0<><>::
-snowman.tscn::PackedScene::5494244519983074014::1769818387::0::1::::<><><>0<>0<><>::uid://bln7vcorjgofm::::res://scenes/snowman.gd<>uid://cvx1ecf0scy2n::::res://assets/yukidaruma.png
-::res://scenes/areas/::1769818387
-area.tscn::PackedScene::6362690409761645594::1769818387::0::1::::<><><>0<>0<><>::uid://cle1idslv4gx8::::res://node-test.gd<>uid://bocxvje2vt7lo::::res://assets/slicktileset.png<>uid://ckjpn0vpiwogk::::res://scenes/snowman.tscn<>uid://b4nwe3rb8yd41::::res://assets/background0.png<>uid://br3x4cgwy2nx8::::res://assets/background1.png<>uid://f806pa0exola::::res://assets/background2.png<>uid://dl75krm64q111::::res://assets/Snow.wav
+enemy.gd::GDScript::8057497524603206419::1769820922::0::1::::<>CharacterBody2D<><>0<>0<><>::
+enemy.tscn::PackedScene::3719552656138476043::1769821034::0::1::::<><><>0<>0<><>::uid://b7h3ms518vdv::::res://assets/enemy.png<>uid://dm2d2o56k7nkl::::res://scenes/areas/enemy.gd
+snowman.gd::GDScript::3187315447413407566::1769820328::0::1::::<>CharacterBody2D<><>0<>0<><>::
+snowman.tscn::PackedScene::5494244519983074014::1769820328::0::1::::<><><>0<>0<><>::uid://bln7vcorjgofm::::res://scenes/snowman.gd<>uid://cvx1ecf0scy2n::::res://assets/yukidaruma.png
+::res://scenes/areas/::1769820954
+area.tscn::PackedScene::6362690409761645594::1769821034::0::1::::<><><>0<>0<><>::uid://cle1idslv4gx8::::res://node-test.gd<>uid://bocxvje2vt7lo::::res://assets/slicktileset.png<>uid://ckjpn0vpiwogk::::res://scenes/snowman.tscn<>uid://b4nwe3rb8yd41::::res://assets/background0.png<>uid://br3x4cgwy2nx8::::res://assets/background1.png<>uid://f806pa0exola::::res://assets/background2.png<>uid://dl75krm64q111::::res://assets/Snow.wav<>uid://bs81qvckva4lr::::res://scenes/areas/enemy.tscn
 ::res://scripts/::1769731349
