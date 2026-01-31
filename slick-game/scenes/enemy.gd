@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var damage_collision: CollisionShape2D = $Area2D/CollisionShape2D
+@onready var character_body: CharacterBody2D = $"."
 
 const SPEED = -10.0
 
@@ -27,7 +28,8 @@ func destroy(delta_x):
 		velocity.x = -200
 	velocity.y = -150
 	is_dead = true
-	collision_shape.disabled = true
-	damage_collision.disabled = true
+	
+	# When dying, they don't collide with anything.
+	character_body.collision_mask = 0
 
 	print("DO THING")

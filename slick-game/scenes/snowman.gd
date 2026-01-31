@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY = -350.0
 const SPEED_CAP = 150.0
 
 var ice_collision_count = 0
@@ -51,13 +51,13 @@ func _physics_process(delta: float) -> void:
 
 	# Handle left/right movement.
 	var direction := Input.get_axis("ui_left", "ui_right")
-	if ice_collision_count > 0:
-		if is_on_wall():
-			velocity.x = -prev_x_velocity
-	elif direction:
-		velocity.x += direction * SPEED * delta
-	elif is_on_floor():
-		velocity.x = move_toward(velocity.x, 0, delta * SPEED)
+	if is_on_wall():
+		velocity.x = -prev_x_velocity
+	if ice_collision_count == 0:
+		if direction:
+			velocity.x += direction * SPEED * delta
+		elif is_on_floor():
+			velocity.x = move_toward(velocity.x, 0, delta * SPEED)
 	
 	# Cap the speed
 	if absf(velocity.x) > SPEED_CAP:
@@ -99,10 +99,11 @@ func _on_area_2d_2_body_entered(body: Node2D) -> void:
 		delta_x_from_enemy_hit = body.position.x - position.x
 		damage_collision_count += 1
 	else:
+		# Else you're dashing:
 		print("body.name", body.name)
 		body.destroy(body.position.x - position.x)
 		# If you kill an enemy while dashing, you're dash time gets reset so you can chain them.
-		dash_cooldown_current = dash_cooldown
+		dash_duration_current = dash_duration
 
 func _on_area_2d_2_body_exited(body: Node2D) -> void:
 	pass
