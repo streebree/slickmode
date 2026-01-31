@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://ow5vth2oib6b"]
+
+[ext_resource type="Texture2D" uid="uid://b7h3ms518vdv" path="res://assets/enemy.png" id="1_cejb6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cejb6"]
+size = Vector2(6, 15)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cejb6"]
+radius = 4.0
+height = 16.0
+
+[node name="RigidBody2D" type="RigidBody2D" unique_id=2019721684]
+collision_layer = 5
+collision_mask = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=113236820]
+texture = ExtResource("1_cejb6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1294918762]
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_cejb6")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1458429884]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=384744522]
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_cejb6")

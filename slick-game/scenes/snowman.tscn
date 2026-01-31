@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://ckjpn0vpiwogk"]
+
+[ext_resource type="Script" uid="uid://bln7vcorjgofm" path="res://scenes/snowman.gd" id="1_j7fvb"]
+[ext_resource type="Texture2D" uid="uid://cvx1ecf0scy2n" path="res://assets/yukidaruma.png" id="1_s1rrw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j7fvb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_s1rrw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0et35"]
+size = Vector2(8, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1rrw"]
+size = Vector2(8, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7fvb"]
+size = Vector2(14, 18)
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1919126236]
+script = ExtResource("1_j7fvb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=721837144]
+sprite_frames = SubResource("SpriteFrames_j7fvb")
+
+[node name="Physics Hitbox" type="CollisionShape2D" parent="." unique_id=713872290]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_0et35")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=96300986]
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2102958704]
+collision_layer = 2
+collision_mask = 2
+
+[node name="IceSlide Hitbox" type="CollisionShape2D" parent="Area2D" unique_id=1018229339]
+position = Vector2(0, 16.5)
+shape = SubResource("RectangleShape2D_s1rrw")
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=475397153]
+collision_layer = 4
+collision_mask = 4
+
+[node name="DamageHitbox" type="CollisionShape2D" parent="Area2D2" unique_id=1762572663]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_j7fvb")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
+[connection signal="body_exited" from="Area2D2" to="." method="_on_area_2d_2_body_exited"]
