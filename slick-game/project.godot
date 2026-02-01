@@ -13,7 +13,14 @@ config_version=5
 config/name="SlickGame"
 run/main_scene="uid://cwwet1fh8wq47"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+boot_splash/stretch_mode=4
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

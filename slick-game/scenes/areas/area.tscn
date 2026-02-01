@@ -51,7 +51,6 @@ scroll_scale = Vector2(0, 0)
 scroll_offset = Vector2(-449, -101)
 repeat_size = Vector2(480, 0)
 repeat_times = 3
-follow_viewport = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=21092772]
 z_index = -1
@@ -63,7 +62,6 @@ scroll_scale = Vector2(0.01, 0.01)
 scroll_offset = Vector2(-449, -101)
 repeat_size = Vector2(480, 0)
 repeat_times = 3
-follow_viewport = false
 
 [node name="Sprite2D2" type="Sprite2D" parent="Parallax2D2" unique_id=1741634255]
 texture = ExtResource("6_ag3m5")
@@ -74,7 +72,6 @@ scroll_scale = Vector2(0.1, 0.01)
 scroll_offset = Vector2(-449, -101)
 repeat_size = Vector2(480, 0)
 repeat_times = 3
-follow_viewport = false
 
 [node name="Sprite2D3" type="Sprite2D" parent="Parallax2D3" unique_id=1857026633]
 texture = ExtResource("7_aoiyj")
@@ -90,16 +87,16 @@ position = Vector2(118, -19)
 position = Vector2(146, -22)
 
 [node name="Enemy3" parent="." unique_id=434226178 instance=ExtResource("8_aoiyj")]
-position = Vector2(482, 121)
+position = Vector2(475, 125)
 
 [node name="Enemy4" parent="." unique_id=1190469716 instance=ExtResource("8_aoiyj")]
-position = Vector2(516, 124)
+position = Vector2(529, 125)
 
 [node name="Enemy5" parent="." unique_id=1730459637 instance=ExtResource("8_aoiyj")]
-position = Vector2(552, 126)
+position = Vector2(583, 125)
 
 [node name="Enemy6" parent="." unique_id=1872232962 instance=ExtResource("8_aoiyj")]
-position = Vector2(587, 126)
+position = Vector2(635, 126)
 
 [node name="Enemy7" parent="." unique_id=670943870 instance=ExtResource("8_aoiyj")]
-position = Vector2(623, 125)
+position = Vector2(689, 126)
