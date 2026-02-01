@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://di0du105wmb17"]
+
+[ext_resource type="Texture2D" uid="uid://656hxj2u04gk" path="res://assets/spikyenemy.png" id="1_e1lf1"]
+[ext_resource type="Script" uid="uid://c6qojlbrx4o65" path="res://scenes/spiky_enemy.gd" id="1_ukxvi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ukxvi"]
+size = Vector2(12, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnwof"]
+size = Vector2(19.869423, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1lf1"]
+size = Vector2(20, 3)
+
+[node name="SpikyEnemy" type="CharacterBody2D" unique_id=1957662773]
+collision_layer = 112
+collision_mask = 112
+script = ExtResource("1_ukxvi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=458603828]
+position = Vector2(-1, 10.5)
+shape = SubResource("RectangleShape2D_ukxvi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=914774379]
+texture = ExtResource("1_e1lf1")
+
+[node name="Spike Damage Collision" type="Area2D" parent="." unique_id=1248367318]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike Damage Collision" unique_id=1496745926]
+position = Vector2(-1, 9)
+scale = Vector2(1.0065718, 1)
+shape = SubResource("RectangleShape2D_rnwof")
+debug_color = Color(0.9677796, 0.09199826, 0.39762312, 0.41960785)
+
+[node name="Stomp Collision" type="Area2D" parent="." unique_id=529953358]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stomp Collision" unique_id=406250458]
+position = Vector2(-1, 3.5)
+shape = SubResource("RectangleShape2D_e1lf1")

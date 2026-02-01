@@ -3,3 +3,5 @@ res://scenes/snowman.tscn
 res://scenes/snowman.gd
 res://scenes/enemy.tscn
 res://scenes/enemy.gd
+res://scenes/spiky_enemy.tscn
+res://scenes/spiky_enemy.gd

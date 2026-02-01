@@ -70,8 +70,13 @@ func _physics_process(delta: float) -> void:
 	# If you hit a wall and you're on ice or jumping from the ice, bounce off the wall to keep speed.
 	if is_on_wall() and (is_jumping_off_ice or ice_collision_count > 0):
 		velocity.x = -prev_x_velocity
-	if ice_collision_count == 0 and (is_on_floor() or not is_jumping_off_ice):
-		if direction:
+		
+	# Handle basic left/right movement input
+	if ice_collision_count == 0:
+	#if ice_collision_count == 0 and (is_on_floor() or not is_jumping_off_ice):
+		if is_on_floor():
+			velocity.x = 0
+		elif direction:
 			velocity.x += direction * SPEED * delta
 		elif is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, delta * SPEED)
@@ -127,3 +132,21 @@ func _on_area_2d_2_body_entered(body: Node2D) -> void:
 
 func _on_area_2d_2_body_exited(body: Node2D) -> void:
 	pass
+
+func on_spike_damage_enter(body: Node2D) -> void:
+	print("onspikeenter ", body.is_dead)
+	# It's difficult to get the enemy to not damage you while you're stomping it. 
+	# Use this hack to check if you're falling down and if the enemy already is dead.
+	if not body.is_dead and velocity.y <= 0:
+		damage_collision_count += 1
+		delta_x_from_enemy_hit = body.position.x - position.x
+
+func on_stomp_enter(body: Node2D) -> void:
+	# if you're moving down, destroy the enemy.
+	if velocity.y > 0:
+		body.destroy()
+		if Input.is_action_pressed("ui_accept"):
+			velocity.y = JUMP_VELOCITY
+		else:
+			velocity.y = JUMP_VELOCITY / 3
+		

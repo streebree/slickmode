@@ -23,6 +23,12 @@ size = Vector2(8, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7fvb"]
 size = Vector2(14, 18)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujryj"]
+size = Vector2(14, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1g3c"]
+size = Vector2(8, 2)
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1919126236]
 script = ExtResource("1_j7fvb")
 
@@ -53,7 +59,25 @@ collision_mask = 4
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_j7fvb")
 
+[node name="Area2D3" type="Area2D" parent="." unique_id=1289702716]
+collision_layer = 32
+collision_mask = 32
+
+[node name="SpikeDamageHitbox" type="CollisionShape2D" parent="Area2D3" unique_id=1820762867]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_ujryj")
+
+[node name="Area2D4" type="Area2D" parent="." unique_id=34361995]
+collision_layer = 64
+collision_mask = 64
+
+[node name="StompCollision" type="CollisionShape2D" parent="Area2D4" unique_id=232607131]
+position = Vector2(0, 15)
+shape = SubResource("RectangleShape2D_o1g3c")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
 [connection signal="body_exited" from="Area2D2" to="." method="_on_area_2d_2_body_exited"]
+[connection signal="body_entered" from="Area2D3" to="." method="on_spike_damage_enter"]
+[connection signal="body_entered" from="Area2D4" to="." method="on_stomp_enter"]

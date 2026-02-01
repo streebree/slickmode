@@ -78,10 +78,12 @@ run={
 
 [layer_names]
 
-2d_physics/layer_1="Collision"
+2d_physics/layer_1="Player Floor Collision"
 2d_physics/layer_2="IceSlide"
 2d_physics/layer_3="PlayerDamageHitbox"
 2d_physics/layer_5="Enemy Floor Collision"
+2d_physics/layer_6="SpikeHitbox"
+2d_physics/layer_7="Stomp"
 
 [physics]
 
