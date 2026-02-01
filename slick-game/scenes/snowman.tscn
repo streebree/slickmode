@@ -15,7 +15,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0et35"]
-size = Vector2(8, 18)
+size = Vector2(8, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gxhq"]
+size = Vector2(8, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s1rrw"]
 size = Vector2(8, 1)
@@ -35,9 +38,13 @@ script = ExtResource("1_j7fvb")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=721837144]
 sprite_frames = SubResource("SpriteFrames_j7fvb")
 
-[node name="Physics Hitbox" type="CollisionShape2D" parent="." unique_id=713872290]
-position = Vector2(0, 7)
+[node name="Body Hitbox" type="CollisionShape2D" parent="." unique_id=713872290]
+position = Vector2(0, 11.5)
 shape = SubResource("RectangleShape2D_0et35")
+
+[node name="Head Hitbox" type="CollisionShape2D" parent="." unique_id=1226077295]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_3gxhq")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=96300986]
 zoom = Vector2(2, 2)

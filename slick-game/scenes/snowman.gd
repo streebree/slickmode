@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var head_hitbox: CollisionShape2D = $"Head Hitbox"
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -350.0
@@ -67,6 +68,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle left/right movement.
 	var direction := Input.get_axis("ui_left", "ui_right")
+	var direction_vertical := Input.get_axis("ui_up", "ui_down")
 	
 	if Input.is_action_just_pressed("run") and dash_cooldown_current <= 0 and dash_duration_current <= 0:
 		# dash just started:
@@ -91,9 +93,9 @@ func _physics_process(delta: float) -> void:
 	# Cap the speed, but change it slowly.
 	if absf(velocity.x) > SPEED_CAP:
 		if velocity.x > 0:
-			velocity.x = move_toward(velocity.x, SPEED_CAP, delta * 300)
+			velocity.x = move_toward(velocity.x, SPEED_CAP, delta * 400)
 		else:
-			velocity.x = move_toward(velocity.x, -SPEED_CAP, delta * 300)
+			velocity.x = move_toward(velocity.x, -SPEED_CAP, delta * 400)
 			
 	prev_x_velocity = velocity.x
 	
@@ -102,14 +104,29 @@ func _physics_process(delta: float) -> void:
 		health -= 1
 		velocity.y -= 150
 		if delta_x_from_enemy_hit > 0:
-			velocity.x -= 200
+			velocity.x = -50
 		if delta_x_from_enemy_hit < 0:
-			velocity.x += 200
+			velocity.x = 50
 		damage_collision_count = 0
 		# TODO: Handle health if you die.
 		print("health ", health)
 			
-	
+	# Handle sprite change when pressing left or right.
+	if direction > 0:
+		sprite.flip_h = false
+	elif direction < 0:
+		sprite.flip_h = true
+		
+	# Handle ducking:
+	if direction_vertical > 0:
+		sprite.scale = Vector2(1.3, 0.7)
+		sprite.offset.y = 6
+		head_hitbox.disabled = true
+	else:
+		sprite.scale = Vector2(1, 1)
+		sprite.offset.y = 0
+		head_hitbox.disabled = false
+		
 	move_and_slide()
 	
 
@@ -151,7 +168,7 @@ func on_stomp_enter(body: Node2D) -> void:
 	if velocity.y > 0:
 		body.destroy()
 		if Input.is_action_pressed("ui_accept"):
-			velocity.y = JUMP_VELOCITY - 70
+			velocity.y = JUMP_VELOCITY - 30
 		else:
 			velocity.y = JUMP_VELOCITY / 3
 		
