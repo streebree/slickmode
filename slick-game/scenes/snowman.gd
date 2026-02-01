@@ -25,14 +25,19 @@ var is_jumping_off_ice = false
 
 func start_dash(direction):
 	dash_duration_current = dash_duration
-	sprite.rotation_degrees = 30
 	if direction == 0:
 		if velocity.x > 0:
 			velocity.x = SPEED_CAP + EXTRA_DASH_SPEED
+			sprite.rotation_degrees = 30
 		elif velocity.x < 0:
 			velocity.x = -SPEED_CAP - EXTRA_DASH_SPEED
+			sprite.rotation_degrees = -30
 	else:
 		velocity.x = (SPEED_CAP + EXTRA_DASH_SPEED) * direction
+		if direction > 0:
+			sprite.rotation_degrees = 30
+		else:
+			sprite.rotation_degrees = -30
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -146,7 +151,7 @@ func on_stomp_enter(body: Node2D) -> void:
 	if velocity.y > 0:
 		body.destroy()
 		if Input.is_action_pressed("ui_accept"):
-			velocity.y = JUMP_VELOCITY
+			velocity.y = JUMP_VELOCITY - 70
 		else:
 			velocity.y = JUMP_VELOCITY / 3
 		
