@@ -172,3 +172,5 @@ func on_stomp_enter(body: Node2D) -> void:
 		else:
 			velocity.y = JUMP_VELOCITY / 3
 		
+
+# Jame test
