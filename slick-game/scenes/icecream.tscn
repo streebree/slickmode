@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://by1ldxkw8bmvw"]
+
+[ext_resource type="Script" uid="uid://cbfh3vi32x4s0" path="res://scenes/icecream.gd" id="1_bk6j7"]
+[ext_resource type="Texture2D" uid="uid://kb41ex4lb4ht" path="res://assets/icecreamcone.png" id="1_lbo8j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bk6j7"]
+size = Vector2(9, 16)
+
+[node name="Area2D2" type="Area2D" unique_id=1376798953]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_bk6j7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=889168091]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_bk6j7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1246300091]
+texture = ExtResource("1_lbo8j")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
