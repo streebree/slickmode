@@ -5,3 +5,7 @@ res://scenes/enemy.tscn
 res://scenes/enemy.gd
 res://scenes/spiky_enemy.tscn
 res://scenes/spiky_enemy.gd
+res://scenes/key.tscn
+res://scenes/key.gd
+res://scenes/door.tscn
+res://scenes/door.gd

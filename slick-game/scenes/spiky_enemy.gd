@@ -24,7 +24,6 @@ func destroy():
 	spike_damage_collision.disabled = true
 	
 	stomp_collision_area.collision_mask = 0
-	print("Destroy Spiky Enemy")
 	stomp_collision_area.collision_layer = 0
 	
 	self.collision_layer = 0

@@ -25,6 +25,8 @@ var dash_cooldown_current = 0.0
 
 var is_jumping_off_ice = false
 
+var keys_collected: Array[String] = []
+
 func start_dash(direction):
 	dash_duration_current = dash_duration
 	if direction == 0:
