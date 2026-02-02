@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var head_hitbox: CollisionShape2D = $"Head Hitbox"
+@onready var head_spike_hitbox: CollisionShape2D = $Area2D3/SpikeDamageHitboxHead
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -350.0
@@ -122,10 +123,12 @@ func _physics_process(delta: float) -> void:
 		sprite.scale = Vector2(1.3, 0.7)
 		sprite.offset.y = 6
 		head_hitbox.disabled = true
+		head_spike_hitbox.disabled = true
 	else:
 		sprite.scale = Vector2(1, 1)
 		sprite.offset.y = 0
 		head_hitbox.disabled = false
+		head_spike_hitbox.disabled = false
 		
 	move_and_slide()
 	
@@ -156,12 +159,12 @@ func _on_area_2d_2_body_exited(body: Node2D) -> void:
 	pass
 
 func on_spike_damage_enter(body: Node2D) -> void:
-	print("onspikeenter ", body.is_dead)
 	# It's difficult to get the enemy to not damage you while you're stomping it. 
 	# Use this hack to check if you're falling down and if the enemy already is dead.
-	if not body.is_dead and velocity.y <= 0:
+	if ("is_dead" in body and not body.is_dead and velocity.y <= 0) or not "is_dead" in body:
 		damage_collision_count += 1
 		delta_x_from_enemy_hit = body.position.x - position.x
+		
 
 func on_stomp_enter(body: Node2D) -> void:
 	# if you're moving down, destroy the enemy.
@@ -174,3 +177,8 @@ func on_stomp_enter(body: Node2D) -> void:
 		
 
 # Jame test
+
+
+func on_collide_with_one_way_down(body: Node2D) -> void:
+	if velocity.y < 0:
+		velocity.y = 0

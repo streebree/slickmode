@@ -84,6 +84,8 @@ run={
 2d_physics/layer_5="Enemy Floor Collision"
 2d_physics/layer_6="SpikeHitbox"
 2d_physics/layer_7="Stomp"
+2d_physics/layer_8="Icecream"
+2d_physics/layer_9="One way down"
 
 [physics]
 
