@@ -87,6 +87,7 @@ run={
 2d_physics/layer_8="Items"
 2d_physics/layer_9="One way down"
 2d_physics/layer_10="Open Door"
+2d_physics/layer_11="OneWayRightOnly"
 
 [physics]
 

@@ -178,9 +178,11 @@ func on_stomp_enter(body: Node2D) -> void:
 			velocity.y = JUMP_VELOCITY / 3
 		
 
-# Jame test
-
-
 func on_collide_with_one_way_down(body: Node2D) -> void:
 	if velocity.y < 0:
 		velocity.y = 0
+
+
+func on_enter_one_way_right_only(body: Node2D) -> void:
+	if velocity.x < 0:
+		velocity.x = -velocity.x
