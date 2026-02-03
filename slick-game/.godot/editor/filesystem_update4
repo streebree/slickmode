@@ -9,3 +9,11 @@ res://scenes/door.gd
 res://scenes/checkpoint.tscn
 res://scenes/checkpoint.gd
 res://node-test.gd
+res://scenes/hud.tscn
+res://scenes/hud.gd
+res://scenes/icecream.tscn
+res://scenes/icecream.gd
+res://scenes/enemy.tscn
+res://scenes/enemy.gd
+res://scenes/spiky_enemy.tscn
+res://scenes/spiky_enemy.gd

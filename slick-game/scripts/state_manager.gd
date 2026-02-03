@@ -2,16 +2,26 @@ extends Node
 
 var listeners = {}
 
-#var health = 3
-#var maxHealth = 3
-#
-#func damage_player(points: int):
-	#health -= points
+var health = 3
+var maxHealth = 3
 
+var score = 0
+
+func update_score(delta):
+	score += delta
+	raise("score_update", score)
+
+func update_health(delta, delta_x):
+	health += delta
+	if health > maxHealth:
+		health = maxHealth
+	raise("health_update", health)
+	if delta < 0: # If you're taking damage.
+		raise("take_damage", delta_x)
+	
 # void listen(string event, funcref callback)
 # adds a function reference to the list of listeners for the given named event
 func listen(event, callback):
-	print("listen for ", event)
 	if not listeners.has(event):
 		listeners[event] = []
 	listeners[event].append(callback)

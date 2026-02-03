@@ -8,6 +8,7 @@ class_name Door extends StaticBody2D
 	
 func open():
 	call_deferred("queue_free")
+	StateManager.update_score(50)
 	#sprite.visible = false
 
 func on_key_entered(body: Node2D) -> void:

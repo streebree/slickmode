@@ -33,6 +33,12 @@ var is_jumping_off_ice = false
 
 var keys_collected: Array[String] = []
 
+var previous_health = StateManager.maxHealth
+
+func _ready() -> void:
+	StateManager.listen("health_update", Callable(self, "on_health_update"))
+	StateManager.listen("take_damage", Callable(self, "on_take_damage"))
+
 func start_dash(direction):
 	dash_duration_current = dash_duration
 	if direction == 0:
@@ -53,7 +59,7 @@ func handle_die():
 	StateManager.raise("player_death", null)
 	keys_collected = []
 	position = checkpoint_position
-	health = max_health
+	StateManager.update_health(StateManager.maxHealth, 0)
 	sprite.modulate = Color(1, 1, 1)
 	damage_cooldown = 0
 
@@ -156,7 +162,7 @@ func _on_area_2d_2_body_entered(body: Node2D) -> void:
 	# Only take damage if you're not dashing.
 	if dash_duration_current <= 0 and damage_cooldown <= 0:
 		delta_x_from_enemy_hit = body.position.x - position.x
-		take_damage(delta_x_from_enemy_hit)
+		StateManager.update_health(-1, 0)
 
 	else:
 		# Else you're dashing so destroy the enemy.
@@ -169,20 +175,25 @@ func _on_area_2d_2_body_entered(body: Node2D) -> void:
 func _on_area_2d_2_body_exited(body: Node2D) -> void:
 	pass
 	
-func take_damage(delta_x_from_enemy_hit):
-	health -= 1
+func on_take_damage(delta_x):
 	damage_cooldown = damage_cooldown_max
 	sprite.modulate = Color(0.5, 0, 0, 0.3)
 	velocity.y -= 150
-	if delta_x_from_enemy_hit > 0:
+	if delta_x > 0:
 		velocity.x = -50
-	if delta_x_from_enemy_hit < 0:
+	if delta_x < 0:
 		velocity.x = 50
 	
-	if health <= 0:
+	if StateManager.health <= 0:
 		handle_die()
-		
-	print("health ", health)
+
+func on_health_update(health):
+	pass
+	
+#func take_damage(delta_x_from_enemy_hit):
+	#health -= 1
+	#StateManager.raise("health_update", health)
+	#print("health ", health)
 
 func on_spike_damage_enter(body: Node2D) -> void:
 	# It's difficult to get the enemy to not damage you while you're stomping it. 
@@ -190,7 +201,9 @@ func on_spike_damage_enter(body: Node2D) -> void:
 	if ("is_dead" in body and not body.is_dead and velocity.y <= 0) or not "is_dead" in body:
 		delta_x_from_enemy_hit = body.position.x - position.x
 		if damage_cooldown <= 0:
-			take_damage(delta_x_from_enemy_hit)
+			#take_damage(delta_x_from_enemy_hit)
+			StateManager.update_health(-1, delta_x_from_enemy_hit)
+
 		
 
 func on_stomp_enter(body: Node2D) -> void:

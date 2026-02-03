@@ -12,5 +12,6 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	# TODO: Add a count to the player's score here.
+	StateManager.update_health(1, 0)
+	StateManager.update_score(200)
 	call_deferred("queue_free")

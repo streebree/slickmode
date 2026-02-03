@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ova0ckhtdby8" path="res://scenes/door.tscn" id="14_7ve73"]
 [ext_resource type="PackedScene" uid="uid://by1ldxkw8bmvw" path="res://scenes/icecream.tscn" id="15_7ve73"]
 [ext_resource type="PackedScene" uid="uid://bjllpyn7o184f" path="res://scenes/checkpoint.tscn" id="16_bu7ht"]
+[ext_resource type="PackedScene" uid="uid://7pdxc61d0xxu" path="res://scenes/hud.tscn" id="17_6xikd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e38xd"]
 texture = ExtResource("2_prnpl")
@@ -104,7 +105,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAA
 tile_set = SubResource("TileSet_0ik7n")
 
 [node name="CharacterBody2D" parent="." unique_id=1919126236 instance=ExtResource("3_prnpl")]
-position = Vector2(1644, 2)
+position = Vector2(-183, -67)
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=2142179580]
 z_index = -5
@@ -232,3 +233,5 @@ scale = Vector2(2.08, 2.52)
 [node name="Checkpoint5" parent="." unique_id=1690805066 instance=ExtResource("16_bu7ht")]
 position = Vector2(2057, 2.9999998)
 scale = Vector2(2.08, 2.52)
+
+[node name="CanvasLayer" parent="." unique_id=67627577 instance=ExtResource("17_6xikd")]

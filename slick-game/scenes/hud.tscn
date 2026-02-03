@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://7pdxc61d0xxu"]
+
+[ext_resource type="Texture2D" uid="uid://kb41ex4lb4ht" path="res://assets/icecreamcone.png" id="1_ahhtf"]
+[ext_resource type="Script" uid="uid://bmhupfrg4pevn" path="res://scenes/hud.gd" id="1_oo0fn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=67627577]
+script = ExtResource("1_oo0fn")
+
+[node name="health1" type="Sprite2D" parent="." unique_id=683705566]
+position = Vector2(17, 16)
+texture = ExtResource("1_ahhtf")
+
+[node name="health2" type="Sprite2D" parent="." unique_id=422010243]
+position = Vector2(38, 16)
+texture = ExtResource("1_ahhtf")
+
+[node name="health3" type="Sprite2D" parent="." unique_id=101570060]
+position = Vector2(59, 16)
+texture = ExtResource("1_ahhtf")
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=332320828]
+offset_left = 558.0
+offset_top = 26.0
+offset_right = 598.0
+offset_bottom = 49.0
+text = "0 pts"
+label_settings = SubResource("LabelSettings_oo0fn")
+horizontal_alignment = 2

@@ -1,6 +1,8 @@
+Label
+Sprite2D
+CanvasLayer
 CollisionShape2D
 Area2D
-Sprite2D
 StaticBody2D
 CharacterBody2D
 RigidBody2D
