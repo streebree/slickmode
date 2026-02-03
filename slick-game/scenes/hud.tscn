@@ -28,3 +28,12 @@ offset_bottom = 49.0
 text = "0 pts"
 label_settings = SubResource("LabelSettings_oo0fn")
 horizontal_alignment = 2
+
+[node name="MultiplierLabel" type="Label" parent="." unique_id=247713794]
+offset_left = 557.0
+offset_top = 51.0
+offset_right = 597.0
+offset_bottom = 74.0
+text = "x 1.0"
+label_settings = SubResource("LabelSettings_oo0fn")
+horizontal_alignment = 2

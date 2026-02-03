@@ -54,6 +54,7 @@ func start_dash(direction):
 			sprite.rotation_degrees = 30
 		else:
 			sprite.rotation_degrees = -30
+	velocity.y = 0
 
 func handle_die():
 	StateManager.raise("player_death", null)
@@ -176,6 +177,7 @@ func _on_area_2d_2_body_exited(body: Node2D) -> void:
 	pass
 	
 func on_take_damage(delta_x):
+	StateManager.update_multiplier(-1)
 	damage_cooldown = damage_cooldown_max
 	sprite.modulate = Color(0.5, 0, 0, 0.3)
 	velocity.y -= 150
