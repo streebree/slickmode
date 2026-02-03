@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://6ctj6mrcdqgc" path="res://scenes/key.tscn" id="13_mdq12"]
 [ext_resource type="PackedScene" uid="uid://ova0ckhtdby8" path="res://scenes/door.tscn" id="14_7ve73"]
 [ext_resource type="PackedScene" uid="uid://by1ldxkw8bmvw" path="res://scenes/icecream.tscn" id="15_7ve73"]
+[ext_resource type="PackedScene" uid="uid://bjllpyn7o184f" path="res://scenes/checkpoint.tscn" id="16_bu7ht"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e38xd"]
 texture = ExtResource("2_prnpl")
@@ -211,3 +212,23 @@ position = Vector2(1671, -170)
 
 [node name="Area2D8" parent="." unique_id=1074814339 instance=ExtResource("15_7ve73")]
 position = Vector2(2848, 3)
+
+[node name="Checkpoint" parent="." unique_id=221122544 instance=ExtResource("16_bu7ht")]
+position = Vector2(-125, -75)
+scale = Vector2(1, 5.123798)
+
+[node name="Checkpoint2" parent="." unique_id=1567214793 instance=ExtResource("16_bu7ht")]
+position = Vector2(776, 124)
+scale = Vector2(2.08, 2.52)
+
+[node name="Checkpoint3" parent="." unique_id=944611744 instance=ExtResource("16_bu7ht")]
+position = Vector2(1479.0001, 115)
+scale = Vector2(2.08, 2.52)
+
+[node name="Checkpoint4" parent="." unique_id=2127903270 instance=ExtResource("16_bu7ht")]
+position = Vector2(1688, 4.9999847)
+scale = Vector2(2.08, 2.52)
+
+[node name="Checkpoint5" parent="." unique_id=1690805066 instance=ExtResource("16_bu7ht")]
+position = Vector2(2057, 2.9999998)
+scale = Vector2(2.08, 2.52)

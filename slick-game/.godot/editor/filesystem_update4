@@ -1,3 +1,11 @@
 res://scenes/snowman.tscn
 res://scenes/snowman.gd
 res://scenes/areas/area.tscn
+res://scenes/key.tscn
+res://scenes/key.gd
+res://scripts/state_manager.gd
+res://scenes/door.tscn
+res://scenes/door.gd
+res://scenes/checkpoint.tscn
+res://scenes/checkpoint.gd
+res://node-test.gd

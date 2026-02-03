@@ -1,8 +1,16 @@
 extends Area2D
+@onready var sprite: Sprite2D = $"Sprite2D"
 
 @export var door_name: String
 
+func _ready() -> void:
+	StateManager.listen("player_death", Callable(self, "on_player_death"))
+
 func _on_body_entered(body: Node2D) -> void:
-	print("key_body eneterd")
-	body.keys_collected.append(door_name)
-	call_deferred("queue_free")
+	if body.keys_collected.find(door_name) == -1:
+		body.keys_collected.append(door_name)
+	sprite.visible = false
+
+func on_player_death(args):
+	print("PLAYER DIED, REMAKE KEY")
+	sprite.visible = true

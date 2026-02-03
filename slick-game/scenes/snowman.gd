@@ -9,11 +9,17 @@ const JUMP_VELOCITY = -350.0
 const SPEED_CAP = 150.0
 const EXTRA_DASH_SPEED = 150.0
 
+@export var checkpoint_position = Vector2(0, 0)
+
 var ice_collision_count = 0
 var prev_x_velocity = 0
 var damage_collision_count = 0
 
 var health = 3
+var max_health = 3
+
+var damage_cooldown = 0.0
+var damage_cooldown_max = 0.7
 
 var delta_x_from_enemy_hit = 0
 
@@ -42,6 +48,14 @@ func start_dash(direction):
 			sprite.rotation_degrees = 30
 		else:
 			sprite.rotation_degrees = -30
+
+func handle_die():
+	StateManager.raise("player_death", null)
+	keys_collected = []
+	position = checkpoint_position
+	health = max_health
+	sprite.modulate = Color(1, 1, 1)
+	damage_cooldown = 0
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -102,18 +116,12 @@ func _physics_process(delta: float) -> void:
 			
 	prev_x_velocity = velocity.x
 	
-	# Handle damage:
-	if damage_collision_count > 0:
-		health -= 1
-		velocity.y -= 150
-		if delta_x_from_enemy_hit > 0:
-			velocity.x = -50
-		if delta_x_from_enemy_hit < 0:
-			velocity.x = 50
-		damage_collision_count = 0
-		# TODO: Handle health if you die.
-		print("health ", health)
-			
+	# Handle damage cooldowns:
+	if damage_cooldown > 0:
+		damage_cooldown -= delta
+		if damage_cooldown <= 0:
+			sprite.modulate = Color(1, 1, 1)
+	
 	# Handle sprite change when pressing left or right.
 	if direction > 0:
 		sprite.flip_h = false
@@ -146,9 +154,10 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 # Enemy collision
 func _on_area_2d_2_body_entered(body: Node2D) -> void:
 	# Only take damage if you're not dashing.
-	if dash_duration_current <= 0:
+	if dash_duration_current <= 0 and damage_cooldown <= 0:
 		delta_x_from_enemy_hit = body.position.x - position.x
-		damage_collision_count += 1
+		take_damage(delta_x_from_enemy_hit)
+
 	else:
 		# Else you're dashing so destroy the enemy.
 		body.destroy(body.position.x - position.x)
@@ -159,13 +168,29 @@ func _on_area_2d_2_body_entered(body: Node2D) -> void:
 
 func _on_area_2d_2_body_exited(body: Node2D) -> void:
 	pass
+	
+func take_damage(delta_x_from_enemy_hit):
+	health -= 1
+	damage_cooldown = damage_cooldown_max
+	sprite.modulate = Color(0.5, 0, 0, 0.3)
+	velocity.y -= 150
+	if delta_x_from_enemy_hit > 0:
+		velocity.x = -50
+	if delta_x_from_enemy_hit < 0:
+		velocity.x = 50
+	
+	if health <= 0:
+		handle_die()
+		
+	print("health ", health)
 
 func on_spike_damage_enter(body: Node2D) -> void:
 	# It's difficult to get the enemy to not damage you while you're stomping it. 
 	# Use this hack to check if you're falling down and if the enemy already is dead.
 	if ("is_dead" in body and not body.is_dead and velocity.y <= 0) or not "is_dead" in body:
-		damage_collision_count += 1
 		delta_x_from_enemy_hit = body.position.x - position.x
+		if damage_cooldown <= 0:
+			take_damage(delta_x_from_enemy_hit)
 		
 
 func on_stomp_enter(body: Node2D) -> void:
