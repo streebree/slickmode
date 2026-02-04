@@ -286,6 +286,8 @@ func on_animation_finished():
 			sprite.play("lean")
 			
 func check_above_tile() -> bool:
+	if tilemap == null:
+		return false
 	var head_tile_pos = tilemap.local_to_map(global_position)
 	var head_tile_data = tilemap.get_cell_tile_data(head_tile_pos)
 	

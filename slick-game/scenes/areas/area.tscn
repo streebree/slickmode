@@ -265,7 +265,7 @@ level_c_rank = 1000.0
 next_level_name = "res://scenes/areas/area2.tscn"
 
 [node name="LevelEnd" parent="." unique_id=1730276792 instance=ExtResource("19_2ij62")]
-position = Vector2(2894, -34)
+position = Vector2(2894, -52)
 
 [node name="KillPlane" parent="." unique_id=967972591 instance=ExtResource("21_ydapt")]
 position = Vector2(1144, 499)
