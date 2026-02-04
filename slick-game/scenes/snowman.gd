@@ -4,6 +4,7 @@ class_name snowman
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var head_hitbox: CollisionShape2D = $"Head Hitbox"
 @onready var head_spike_hitbox: CollisionShape2D = $Area2D3/SpikeDamageHitboxHead
+@onready var tilemap: TileMapLayer = %TileMapLayer
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -350.0
@@ -34,6 +35,7 @@ var dash_cooldown_current = 0.0
 
 var is_jumping_off_ice = false
 var is_on_ice = false
+var is_ducked_under_tile = false
 
 var keys_collected: Array[String] = []
 
@@ -136,15 +138,21 @@ func _physics_process(delta: float) -> void:
 	
 		
 	# Handle ducking:
-	if direction_vertical > 0:
+	if not is_ducked_under_tile:
+		if direction_vertical > 0:
+			head_hitbox.disabled = true
+			head_spike_hitbox.disabled = true
+		else:
+			head_hitbox.disabled = false
+			head_spike_hitbox.disabled = false
+	else: # override normal behavior to force player to stay ducked
 		head_hitbox.disabled = true
 		head_spike_hitbox.disabled = true
-	else:
-		head_hitbox.disabled = false
-		head_spike_hitbox.disabled = false
 		
 	move_and_slide()
+	check_above_tile()
 	update_animation()
+	#queue_redraw()
 
 func update_animation():
 	# Handle sprite change when pressing left or right.
@@ -154,27 +162,31 @@ func update_animation():
 		sprite.flip_h = true
 		
 	# Handle jumping animation
-	#if Input.is_action_just_pressed("ui_accept"):
-		#sprite.play("jump")
-	if velocity.y < 0:
-		if sprite.animation != "jump":
-			sprite.play("jump")
-	elif velocity.y > 0:
-		if sprite.animation != "falling":
-			sprite.play("falling")
-	elif velocity.y == 0 and sprite.animation == "falling":
-			if  Input.is_action_pressed("ui_down"):
-				sprite.play("duck")
-			else:
-				sprite.play("landing")
+	if not is_ducked_under_tile:
+		if velocity.y < 0:
+			if sprite.animation != "jump":
+				sprite.play("jump")
+		elif velocity.y > 0:
+			if sprite.animation != "falling":
+				sprite.play("falling")
+		elif velocity.y == 0 and sprite.animation == "falling":
+				if  Input.is_action_pressed("ui_down"):
+					sprite.play("duck")
+				else:
+					sprite.play("landing")
 		
 	# Handle ducking animation
 	if Input.is_action_just_pressed("ui_down"):
 		sprite.play("duck")
 	elif Input.is_action_just_released("ui_down"):
-		sprite.play_backwards("duck")
+			if not is_ducked_under_tile:
+				sprite.play_backwards("duck")
+			else:
+				return
 	elif Input.is_action_pressed("ui_down"):
 		return
+	elif not Input.is_anything_pressed() and not is_ducked_under_tile and sprite.animation == "duck":
+		sprite.play_backwards("duck")
 		
 	# Handle left/right movement input
 	if (Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right")) or (Input.is_action_just_pressed("ui_right") and not Input.is_action_pressed("ui_left")):
@@ -184,11 +196,33 @@ func update_animation():
 
 func on_animation_finished():
 	if not Input.is_anything_pressed():
-		sprite.play("idle")
+		if is_ducked_under_tile:
+			return
+		elif sprite.animation == "duck":
+			sprite.play_backwards("duck")
+		
+		if velocity.y == 0 and sprite.animation != "idle":
+			sprite.play("idle")
 		
 	if (sprite.animation == "duck" and not Input.is_action_pressed("ui_down")) or (sprite.animation == "landing"):
 		if (Input.is_action_pressed("ui_right")) or (Input.is_action_pressed("ui_left")):
 			sprite.play("lean")
+			
+func check_above_tile() -> bool:
+	var head_tile_pos = tilemap.local_to_map(global_position)
+	var head_tile_data = tilemap.get_cell_tile_data(head_tile_pos)
+	
+	if head_tile_data and not head_tile_data.get_custom_data("is_deadly"):
+		is_ducked_under_tile = true
+	else:
+		is_ducked_under_tile = false
+	return head_tile_data == null
+	
+#func _draw():
+		#print(check_above_tile())
+		## Draw where the head collision would be
+		#draw_circle(Vector2(0, 0), 5, Color.RED if not check_above_tile() else Color.GREEN)
+
 	
 # Ice physics collision
 func _on_area_2d_body_entered(body: Node2D) -> void:

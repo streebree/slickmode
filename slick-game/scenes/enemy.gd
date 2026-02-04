@@ -1,11 +1,19 @@
 extends CharacterBody2D
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var damage_collision: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var character_body: CharacterBody2D = $"."
 
 var is_dead = false
+var rng: RandomNumberGenerator
+
+func _ready() -> void:
+	rng = RandomNumberGenerator.new()
+	match rng.randi_range(0,2):
+		0: sprite.play("idle")
+		1: sprite.play("idle_2")
+		2: sprite.play("idle_3")
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -15,16 +23,17 @@ func _physics_process(delta: float) -> void:
 	# When dying, they spin.
 	if is_dead:
 		sprite.rotation_degrees += 500 * delta
+		velocity += get_gravity() * delta * 0.5
 	
 	move_and_slide()
 
 func destroy(delta_x):
 	# When dying, they fly up in the air and to the direction you hit them.
 	if delta_x > 0: 
-		velocity.x = 400
+		velocity.x = rng.randi_range(350, 400)
 	else:
-		velocity.x = -400
-	velocity.y = -150
+		velocity.x = rng.randi_range(-350, -400)
+	velocity.y = rng.randi_range(-250, -125)
 	is_dead = true
 	
 	StateManager.update_score(50)
