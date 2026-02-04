@@ -31,3 +31,7 @@ func destroy(delta_x):
 	
 	# When dying, they don't collide with anything.
 	character_body.collision_mask = 0
+
+# called by the kill plane if the enemy is out of bounds.
+func destroy_self():
+	call_deferred("queue_free")

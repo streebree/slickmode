@@ -4,36 +4,68 @@
 [ext_resource type="Script" uid="uid://bmhupfrg4pevn" path="res://scenes/hud.gd" id="1_oo0fn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
+font_size = 20
+font_color = Color(0.84867877, 0.94227004, 0.99999994, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0.2592936, 0.25929374, 0.2592937, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=67627577]
 script = ExtResource("1_oo0fn")
 
 [node name="health1" type="Sprite2D" parent="." unique_id=683705566]
-position = Vector2(17, 16)
+position = Vector2(47, 42)
+scale = Vector2(2, 2)
 texture = ExtResource("1_ahhtf")
 
 [node name="health2" type="Sprite2D" parent="." unique_id=422010243]
-position = Vector2(38, 16)
+position = Vector2(78, 42)
+scale = Vector2(2, 2)
 texture = ExtResource("1_ahhtf")
 
 [node name="health3" type="Sprite2D" parent="." unique_id=101570060]
-position = Vector2(59, 16)
+position = Vector2(111, 42)
+scale = Vector2(2, 2)
 texture = ExtResource("1_ahhtf")
 
 [node name="ScoreLabel" type="Label" parent="." unique_id=332320828]
-offset_left = 558.0
-offset_top = 26.0
-offset_right = 598.0
-offset_bottom = 49.0
+offset_left = 559.0
+offset_top = 25.0
+offset_right = 606.0
+offset_bottom = 53.0
 text = "0 pts"
 label_settings = SubResource("LabelSettings_oo0fn")
 horizontal_alignment = 2
 
 [node name="MultiplierLabel" type="Label" parent="." unique_id=247713794]
-offset_left = 557.0
+offset_left = 550.0
 offset_top = 51.0
-offset_right = 597.0
-offset_bottom = 74.0
-text = "x 1.0"
+offset_right = 607.0
+offset_bottom = 79.0
+text = "x 1.00"
 label_settings = SubResource("LabelSettings_oo0fn")
 horizontal_alignment = 2
+
+[node name="TimerLabel" type="Label" parent="." unique_id=78227745]
+offset_left = 527.0
+offset_top = 79.0
+offset_right = 607.0
+offset_bottom = 107.0
+text = "00:00.00"
+label_settings = SubResource("LabelSettings_oo0fn")
+horizontal_alignment = 2
+
+[node name="LevelResultsLabel" type="Label" parent="." unique_id=1841695926]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.5
+offset_top = -35.0
+offset_right = 60.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_oo0fn")
+horizontal_alignment = 1

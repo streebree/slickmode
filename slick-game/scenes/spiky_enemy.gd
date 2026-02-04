@@ -46,3 +46,7 @@ func destroy():
 func delete_self():
 	await get_tree().create_timer(0.3).timeout
 	call_deferred("queue_free")
+	
+# called by the kill plane if the enemy is out of bounds.
+func destroy_self():
+	call_deferred("queue_free")

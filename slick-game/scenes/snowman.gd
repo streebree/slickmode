@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var head_spike_hitbox: CollisionShape2D = $Area2D3/SpikeDamageHitboxHead
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -350.0
+const JUMP_VELOCITY = -320.0
 const SPEED_CAP = 150.0
 const EXTRA_DASH_SPEED = 150.0
 
@@ -65,9 +65,25 @@ func handle_die():
 	damage_cooldown = 0
 
 func _physics_process(delta: float) -> void:
+	if StateManager.level_has_ended:
+		velocity.x = 0
+		velocity.y = 0
+		move_and_slide()
+		return
+		
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		var multiplier = 0.8
+		# If you're falling and you're holding jump, do a slower fall.
+		if velocity.y > 0:
+			if Input.is_action_pressed("ui_accept"):
+				multiplier = 0.6
+			# if you're holding down, do a fast fall
+			elif Input.is_action_pressed("ui_down"):
+				multiplier = 1
+		velocity += get_gravity() * multiplier * delta
+		if velocity.y > 500:
+			velocity.y = 500
 		
 	# Decrease the dash cooldown.
 	if dash_cooldown_current > 0:
@@ -148,8 +164,9 @@ func _physics_process(delta: float) -> void:
 		head_spike_hitbox.disabled = false
 		
 	move_and_slide()
-	
 
+func destroy_self():
+	StateManager.update_health(-100, 0)
 
 # Ice physics collision
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -206,8 +223,6 @@ func on_spike_damage_enter(body: Node2D) -> void:
 			#take_damage(delta_x_from_enemy_hit)
 			StateManager.update_health(-1, delta_x_from_enemy_hit)
 
-		
-
 func on_stomp_enter(body: Node2D) -> void:
 	# if you're moving down, destroy the enemy.
 	if velocity.y > 0:
@@ -215,7 +230,7 @@ func on_stomp_enter(body: Node2D) -> void:
 		if Input.is_action_pressed("ui_accept"):
 			velocity.y = JUMP_VELOCITY - 30
 		else:
-			velocity.y = JUMP_VELOCITY / 3
+			velocity.y = JUMP_VELOCITY / 2
 		
 
 func on_collide_with_one_way_down(body: Node2D) -> void:
