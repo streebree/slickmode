@@ -32,11 +32,11 @@ func destroy():
 	self.collision_layer = 0
 	
 	if not comes_back:
-		StateManager.update_score(100)
+		StateManager.update_score(100, position)
 		delete_self()
 	else:
 		# if it comes back, re-enable collision normal size.
-		StateManager.update_score(30)
+		StateManager.update_score(30, position)
 		await get_tree().create_timer(1.0).timeout
 		is_dead = false
 		sprite.scale = Vector2(1, 1)

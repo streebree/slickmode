@@ -27,7 +27,7 @@ func destroy(delta_x):
 	velocity.y = -150
 	is_dead = true
 	
-	StateManager.update_score(50)
+	StateManager.update_score(50, position)
 	
 	# When dying, they don't collide with anything.
 	character_body.collision_mask = 0

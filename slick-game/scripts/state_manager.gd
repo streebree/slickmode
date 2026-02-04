@@ -23,6 +23,8 @@ var level_c_rank = 0
 
 var next_level_name = ""
 
+var score_label = preload("res://scenes/score_text.tscn")
+
 func _process(delta: float) -> void:
 	# Lower the multiplier every half second. The half second cooldown
 	# is just to avoid spamming updates.
@@ -84,18 +86,27 @@ func end_level():
 	}
 	raise("level_end", results)
 
-func update_score(amount):
+func update_score(amount, position):
 	score += amount * multiplier
 	raise("score_update", score)
 	
 	if amount > 0:
 		multiplier += 0.1
 		raise("multiplier_update", multiplier)
+		
+		var score_text = score_label.instantiate()
+		score_text.score = "%d" % amount
+		score_text.position = position
+		score_text.position.y -= 15
+		call_deferred("add_sibling", score_text)
+		await get_tree().create_timer(1.0).timeout
 
 func update_health(amount, delta_x):
 	health += amount
 	if health > maxHealth:
 		health = maxHealth
+	if health < 0:
+		health = 0
 	raise("health_update", health)
 	if amount < 0: # If you're taking damage.
 		raise("take_damage", delta_x)

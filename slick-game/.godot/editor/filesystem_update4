@@ -15,3 +15,7 @@ res://scenes/kill_plane.tscn
 res://scenes/kill_plane.gd
 res://scenes/enemy.gd
 res://scenes/spiky_enemy.gd
+res://scenes/score_text.tscn
+res://scenes/score_text.gd
+res://scenes/icecream.gd
+res://scenes/door.gd
