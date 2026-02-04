@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bk0d2nat47ssr"]
+
+[ext_resource type="Script" uid="uid://cw3ycvw2br7c5" path="res://scenes/kill_plane.gd" id="1_xygd1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d38ia"]
+
+[node name="KillPlane" type="Area2D" unique_id=967972591]
+collision_layer = 17
+collision_mask = 17
+script = ExtResource("1_xygd1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=648823873]
+scale = Vector2(50, 50)
+shape = SubResource("RectangleShape2D_d38ia")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

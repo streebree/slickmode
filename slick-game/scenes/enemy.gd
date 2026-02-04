@@ -36,7 +36,11 @@ func destroy(delta_x):
 	velocity.y = rng.randi_range(-250, -125)
 	is_dead = true
 	
-	StateManager.update_score(50)
+	StateManager.update_score(50, position)
 	
 	# When dying, they don't collide with anything.
 	character_body.collision_mask = 0
+
+# called by the kill plane if the enemy is out of bounds.
+func destroy_self():
+	call_deferred("queue_free")

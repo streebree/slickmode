@@ -13,5 +13,5 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	StateManager.update_health(1, 0)
-	StateManager.update_score(200)
+	StateManager.update_score(200, position)
 	call_deferred("queue_free")

@@ -12,5 +12,4 @@ func _on_body_entered(body: Node2D) -> void:
 	sprite.visible = false
 
 func on_player_death(args):
-	print("PLAYER DIED, REMAKE KEY")
 	sprite.visible = true
