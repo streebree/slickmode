@@ -21,6 +21,8 @@ var level_a_rank = 0
 var level_b_rank = 0
 var level_c_rank = 0
 
+var next_level_name = ""
+
 func _process(delta: float) -> void:
 	# Lower the multiplier every half second. The half second cooldown
 	# is just to avoid spamming updates.
@@ -45,15 +47,16 @@ func _process(delta: float) -> void:
 		multiplier = 1.0
 		score = 0
 		level_timer = 0
-		get_tree().change_scene_to_file("res://scenes/areas/area.tscn")
+		get_tree().change_scene_to_file(next_level_name)
 
-func start_level(par_time, s_rank, a_rank, b_rank, c_rank):
+func start_level(par_time, s_rank, a_rank, b_rank, c_rank, next_level):
 	level_par_time = par_time
 	level_has_started = true
 	level_s_rank = s_rank
 	level_a_rank = a_rank
 	level_b_rank = b_rank
 	level_c_rank = c_rank
+	next_level_name = next_level
 	
 func end_level():
 	if not level_has_started:

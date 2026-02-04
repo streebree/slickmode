@@ -23,10 +23,10 @@ var damage_cooldown_max = 0.7
 
 var delta_x_from_enemy_hit = 0
 
-var dash_duration = 0.5
+var dash_duration = 0.3
 var dash_duration_current = 0.0
 
-var dash_cooldown = 0.5
+var dash_cooldown = 0.3
 var dash_cooldown_current = 0.0
 
 var is_jumping_off_ice = false
@@ -34,6 +34,7 @@ var is_jumping_off_ice = false
 var keys_collected: Array[String] = []
 
 var previous_health = StateManager.maxHealth
+var looking_direction = 1
 
 func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
@@ -42,10 +43,10 @@ func _ready() -> void:
 func start_dash(direction):
 	dash_duration_current = dash_duration
 	if direction == 0:
-		if velocity.x > 0:
+		if looking_direction > 0:
 			velocity.x = SPEED_CAP + EXTRA_DASH_SPEED
 			sprite.rotation_degrees = 30
-		elif velocity.x < 0:
+		else:
 			velocity.x = -SPEED_CAP - EXTRA_DASH_SPEED
 			sprite.rotation_degrees = -30
 	else:
@@ -55,6 +56,7 @@ func start_dash(direction):
 		else:
 			sprite.rotation_degrees = -30
 	velocity.y = 0
+	sprite.modulate = Color(1, 0, 0, 1)
 
 func handle_die():
 	StateManager.raise("player_death", null)
@@ -88,6 +90,8 @@ func _physics_process(delta: float) -> void:
 	# Decrease the dash cooldown.
 	if dash_cooldown_current > 0:
 		dash_cooldown_current -= delta
+		if dash_cooldown_current <= 0:
+			sprite.modulate = Color(1, 1, 1)
 		
 	# Decrease dash time.
 	if dash_duration_current > 0:
@@ -96,6 +100,8 @@ func _physics_process(delta: float) -> void:
 			# dash just ended:
 			sprite.rotation_degrees = 0
 			dash_cooldown_current = dash_cooldown
+			sprite.modulate = Color(0, 1, 1, 0.3)
+
 
 
 	# Handle jump.
@@ -108,6 +114,9 @@ func _physics_process(delta: float) -> void:
 
 	# Handle left/right movement.
 	var direction := Input.get_axis("ui_left", "ui_right")
+	# Remember which direction you're looking for dash calculations
+	if absf(direction) != 0:
+		looking_direction = direction
 	var direction_vertical := Input.get_axis("ui_up", "ui_down")
 	
 	if Input.is_action_just_pressed("run") and dash_cooldown_current <= 0 and dash_duration_current <= 0:
@@ -123,10 +132,10 @@ func _physics_process(delta: float) -> void:
 	#if ice_collision_count == 0 and (is_on_floor() or not is_jumping_off_ice):
 		if is_on_floor():
 			velocity.x = 0
-		elif direction:
-			velocity.x += direction * SPEED * delta
-		elif is_on_floor():
-			velocity.x = move_toward(velocity.x, 0, delta * SPEED)
+		#elif direction:
+			#velocity.x += direction * SPEED * delta
+		#elif is_on_floor():
+			#velocity.x = move_toward(velocity.x, 0, delta * SPEED)
 	
 	# If you're dashing, the speed cap is a little higher.
 	var current_speed_cap = SPEED_CAP + EXTRA_DASH_SPEED if dash_duration > 0 else SPEED_CAP
@@ -178,10 +187,10 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 # Enemy collision
 func _on_area_2d_2_body_entered(body: Node2D) -> void:
 	# Only take damage if you're not dashing.
-	if dash_duration_current <= 0 and damage_cooldown <= 0:
-		delta_x_from_enemy_hit = body.position.x - position.x
-		StateManager.update_health(-1, 0)
-
+	if dash_duration_current <= 0:
+		if damage_cooldown <= 0:
+			delta_x_from_enemy_hit = body.position.x - position.x
+			StateManager.update_health(-1, 0)
 	else:
 		# Else you're dashing so destroy the enemy.
 		body.destroy(body.position.x - position.x)
