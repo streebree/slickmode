@@ -10,6 +10,7 @@ const SPEED_CAP = 150.0
 const EXTRA_DASH_SPEED = 150.0
 
 @export var checkpoint_position = Vector2(0, 0)
+@export var has_jacket = false
 
 var ice_collision_count = 0
 var prev_x_velocity = 0
@@ -38,6 +39,11 @@ var looking_direction = 1
 var was_in_air_last_frame = false
 
 var has_ground_pounded = false
+var has_double_jumped = false
+var is_double_jumping = false
+var target_velocity = 0
+var time_double_jumping = 0
+var double_jump_length = 1.0
 
 func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
@@ -87,7 +93,8 @@ func _physics_process(delta: float) -> void:
 			# if you're holding down, do a fast fall
 			elif Input.is_action_pressed("ui_down"):
 				multiplier = 1
-		velocity += get_gravity() * multiplier * delta
+		if not is_double_jumping: 
+			velocity += get_gravity() * multiplier * delta
 		if velocity.y > 500:
 			velocity.y = 500
 		
@@ -113,9 +120,31 @@ func _physics_process(delta: float) -> void:
 
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		is_jumping_off_ice = ice_collision_count > 0
+	if Input.is_action_just_pressed("ui_accept"):
+		if is_on_floor():
+			velocity.y = JUMP_VELOCITY
+			is_jumping_off_ice = ice_collision_count > 0
+		elif has_jacket and not has_double_jumped:
+			#target_velocity = -velocity.y
+			target_velocity = -(velocity.y * 0.8)
+			if target_velocity > -100:
+				target_velocity = -100
+				velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
+			has_double_jumped = true
+			is_double_jumping = true
+			time_double_jumping = 0
+	
+	if is_double_jumping:
+		time_double_jumping += delta
+		if Input.is_action_pressed("ui_accept"):
+			if time_double_jumping > double_jump_length:
+				is_double_jumping = false
+			else:
+				var distance = (time_double_jumping / double_jump_length) * 2 * absf(target_velocity)
+				velocity.y = move_toward(-target_velocity, target_velocity, distance)
+		else:
+			is_double_jumping = false
+	
 	# Letting go of jump makes you stop moving upward.
 	if Input.is_action_just_released("ui_accept") and velocity.y < 0:
 		velocity.y /= 3.0
@@ -123,6 +152,8 @@ func _physics_process(delta: float) -> void:
 	# Reset your midair abilities when landing:
 	if was_in_air_last_frame and is_on_floor():
 		has_ground_pounded = false
+		has_double_jumped = false
+		is_double_jumping = false
 		
 	# Handle left/right movement.
 	var direction := Input.get_axis("ui_left", "ui_right")

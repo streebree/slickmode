@@ -49,6 +49,7 @@ size = Vector2(8, 18)
 collision_layer = 641
 collision_mask = 641
 script = ExtResource("1_j7fvb")
+has_jacket = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=721837144]
 sprite_frames = SubResource("SpriteFrames_j7fvb")

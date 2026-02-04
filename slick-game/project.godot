@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SlickGame"
-run/main_scene="uid://cwwet1fh8wq47"
+run/main_scene="uid://dvg7dlwjq6olc"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/stretch_mode=4
 config/icon="res://icon.svg"
