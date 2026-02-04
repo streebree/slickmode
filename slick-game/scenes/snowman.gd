@@ -11,6 +11,7 @@ const EXTRA_DASH_SPEED = 150.0
 
 @export var checkpoint_position = Vector2(0, 0)
 @export var has_jacket = false
+@export var can_dash = false
 
 var ice_collision_count = 0
 var prev_x_velocity = 0
@@ -48,8 +49,12 @@ var double_jump_length = 1.0
 func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
 	StateManager.listen("take_damage", Callable(self, "on_take_damage"))
+	StateManager.listen("give_abilities", Callable(self, "on_give_abilities"))
 
 func start_dash(direction):
+	if not can_dash:
+		return
+		
 	dash_duration_current = dash_duration
 	if direction == 0:
 		if looking_direction > 0:
@@ -264,6 +269,10 @@ func on_take_damage(delta_x):
 
 func on_health_update(health):
 	pass
+	
+func on_give_abilities(abilities):
+	has_jacket = abilities.has_jacket
+	can_dash = abilities.can_dash
 	
 #func take_damage(delta_x_from_enemy_hit):
 	#health -= 1

@@ -1,2 +1,5 @@
 res://scenes/snowman.tscn
 res://scenes/snowman.gd
+res://scenes/areas/area.tscn
+res://node-test.gd
+res://scenes/areas/area2.tscn
