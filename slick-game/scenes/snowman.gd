@@ -35,6 +35,9 @@ var keys_collected: Array[String] = []
 
 var previous_health = StateManager.maxHealth
 var looking_direction = 1
+var was_in_air_last_frame = false
+
+var has_ground_pounded = false
 
 func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
@@ -55,7 +58,8 @@ func start_dash(direction):
 			sprite.rotation_degrees = 30
 		else:
 			sprite.rotation_degrees = -30
-	velocity.y = 0
+	# Should it affect your y velocity in some way?
+	#velocity.y = 0
 	sprite.modulate = Color(1, 0, 0, 1)
 
 func handle_die():
@@ -87,6 +91,10 @@ func _physics_process(delta: float) -> void:
 		if velocity.y > 500:
 			velocity.y = 500
 		
+		if Input.is_action_just_pressed("ui_down") and not has_ground_pounded:
+			velocity.y += 100
+			has_ground_pounded = true
+		
 	# Decrease the dash cooldown.
 	if dash_cooldown_current > 0:
 		dash_cooldown_current -= delta
@@ -111,7 +119,11 @@ func _physics_process(delta: float) -> void:
 	# Letting go of jump makes you stop moving upward.
 	if Input.is_action_just_released("ui_accept") and velocity.y < 0:
 		velocity.y /= 3.0
-
+		
+	# Reset your midair abilities when landing:
+	if was_in_air_last_frame and is_on_floor():
+		has_ground_pounded = false
+		
 	# Handle left/right movement.
 	var direction := Input.get_axis("ui_left", "ui_right")
 	# Remember which direction you're looking for dash calculations
@@ -132,8 +144,8 @@ func _physics_process(delta: float) -> void:
 	#if ice_collision_count == 0 and (is_on_floor() or not is_jumping_off_ice):
 		if is_on_floor():
 			velocity.x = 0
-		#elif direction:
-			#velocity.x += direction * SPEED * delta
+		elif direction:
+			velocity.x += direction * SPEED * delta
 		#elif is_on_floor():
 			#velocity.x = move_toward(velocity.x, 0, delta * SPEED)
 	
@@ -146,7 +158,11 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, -SPEED_CAP, delta * 400)
 			
+	# Set some values about this frame so the next frame can compare how the state changed.
 	prev_x_velocity = velocity.x
+	if not is_on_floor():
+		was_in_air_last_frame = true
+	
 	
 	# Handle damage cooldowns:
 	if damage_cooldown > 0:
