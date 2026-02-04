@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://di0du105wmb17"]
 
-[ext_resource type="Texture2D" uid="uid://656hxj2u04gk" path="res://assets/spikyenemy.png" id="1_e1lf1"]
+[ext_resource type="Texture2D" path="res://assets/art/placeholder/spikyenemy.png" id="1_e1lf1"]
 [ext_resource type="Script" uid="uid://c6qojlbrx4o65" path="res://scenes/spiky_enemy.gd" id="1_ukxvi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukxvi"]

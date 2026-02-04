@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name snowman
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var head_hitbox: CollisionShape2D = $"Head Hitbox"
@@ -11,6 +12,8 @@ const EXTRA_DASH_SPEED = 150.0
 
 @export var checkpoint_position = Vector2(0, 0)
 
+var direction = 0
+var direction_vertical = 0
 var ice_collision_count = 0
 var prev_x_velocity = 0
 var damage_collision_count = 0
@@ -30,6 +33,7 @@ var dash_cooldown = 0.5
 var dash_cooldown_current = 0.0
 
 var is_jumping_off_ice = false
+var is_on_ice = false
 
 var keys_collected: Array[String] = []
 
@@ -38,22 +42,24 @@ var previous_health = StateManager.maxHealth
 func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
 	StateManager.listen("take_damage", Callable(self, "on_take_damage"))
+	
+	sprite.animation_finished.connect(on_animation_finished)
 
-func start_dash(direction):
+func start_dash(dir):
 	dash_duration_current = dash_duration
-	if direction == 0:
+	if dir == 0:
 		if velocity.x > 0:
 			velocity.x = SPEED_CAP + EXTRA_DASH_SPEED
-			sprite.rotation_degrees = 30
+			#sprite.rotation_degrees = 30
 		elif velocity.x < 0:
 			velocity.x = -SPEED_CAP - EXTRA_DASH_SPEED
-			sprite.rotation_degrees = -30
+			#sprite.rotation_degrees = -30
 	else:
-		velocity.x = (SPEED_CAP + EXTRA_DASH_SPEED) * direction
-		if direction > 0:
-			sprite.rotation_degrees = 30
-		else:
-			sprite.rotation_degrees = -30
+		velocity.x = (SPEED_CAP + EXTRA_DASH_SPEED) * dir
+		#if dir > 0:
+			#sprite.rotation_degrees = 30
+		#else:
+			#sprite.rotation_degrees = -30
 
 func handle_die():
 	StateManager.raise("player_death", null)
@@ -90,8 +96,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y /= 3.0
 
 	# Handle left/right movement.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	var direction_vertical := Input.get_axis("ui_up", "ui_down")
+	direction = Input.get_axis("ui_left", "ui_right")
+	direction_vertical = Input.get_axis("ui_up", "ui_down")
 	
 	if Input.is_action_just_pressed("run") and dash_cooldown_current <= 0 and dash_duration_current <= 0:
 		# dash just started:
@@ -128,34 +134,71 @@ func _physics_process(delta: float) -> void:
 		if damage_cooldown <= 0:
 			sprite.modulate = Color(1, 1, 1)
 	
+		
+	# Handle ducking:
+	if direction_vertical > 0:
+		head_hitbox.disabled = true
+		head_spike_hitbox.disabled = true
+	else:
+		head_hitbox.disabled = false
+		head_spike_hitbox.disabled = false
+		
+	move_and_slide()
+	update_animation()
+
+func update_animation():
 	# Handle sprite change when pressing left or right.
 	if direction > 0:
 		sprite.flip_h = false
 	elif direction < 0:
 		sprite.flip_h = true
 		
-	# Handle ducking:
-	if direction_vertical > 0:
-		sprite.scale = Vector2(1.3, 0.7)
-		sprite.offset.y = 6
-		head_hitbox.disabled = true
-		head_spike_hitbox.disabled = true
-	else:
-		sprite.scale = Vector2(1, 1)
-		sprite.offset.y = 0
-		head_hitbox.disabled = false
-		head_spike_hitbox.disabled = false
+	# Handle jumping animation
+	#if Input.is_action_just_pressed("ui_accept"):
+		#sprite.play("jump")
+	if velocity.y < 0:
+		if sprite.animation != "jump":
+			sprite.play("jump")
+	elif velocity.y > 0:
+		if sprite.animation != "falling":
+			sprite.play("falling")
+	elif velocity.y == 0 and sprite.animation == "falling":
+			if  Input.is_action_pressed("ui_down"):
+				sprite.play("duck")
+			else:
+				sprite.play("landing")
 		
-	move_and_slide()
+	# Handle ducking animation
+	if Input.is_action_just_pressed("ui_down"):
+		sprite.play("duck")
+	elif Input.is_action_just_released("ui_down"):
+		sprite.play_backwards("duck")
+	elif Input.is_action_pressed("ui_down"):
+		return
+		
+	# Handle left/right movement input
+	if (Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right")) or (Input.is_action_just_pressed("ui_right") and not Input.is_action_pressed("ui_left")):
+			sprite.play("lean")
+	if (Input.is_action_just_released("ui_left") and not Input.is_action_pressed("ui_right")) or (Input.is_action_just_released("ui_right") and not Input.is_action_pressed("ui_left")):
+		sprite.play_backwards("lean")
+
+func on_animation_finished():
+	if not Input.is_anything_pressed():
+		sprite.play("idle")
+		
+	if (sprite.animation == "duck" and not Input.is_action_pressed("ui_down")) or (sprite.animation == "landing"):
+		if (Input.is_action_pressed("ui_right")) or (Input.is_action_pressed("ui_left")):
+			sprite.play("lean")
 	
-
-
 # Ice physics collision
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	ice_collision_count += 1
+	is_on_ice = true
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	ice_collision_count -= 1
+	if (ice_collision_count == 0):
+		is_on_ice = false
 
 # Enemy collision
 func _on_area_2d_2_body_entered(body: Node2D) -> void:

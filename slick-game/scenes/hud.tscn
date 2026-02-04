@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://7pdxc61d0xxu"]
 
-[ext_resource type="Texture2D" uid="uid://kb41ex4lb4ht" path="res://assets/icecreamcone.png" id="1_ahhtf"]
+[ext_resource type="Texture2D" uid="uid://kb41ex4lb4ht" path="res://assets/art/placeholder/icecreamcone.png" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://bmhupfrg4pevn" path="res://scenes/hud.gd" id="1_oo0fn"]
+
 
 [sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
 

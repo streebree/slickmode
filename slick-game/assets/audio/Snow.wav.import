@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dl75krm64q111"
-path="res://.godot/imported/Snow.wav-38bbfe9e4ed57298b7a4c88c896013af.sample"
+path="res://.godot/imported/Snow.wav-6e7573002330b9d74546c76500cf1780.sample"
 
 [deps]
 
-source_file="res://assets/Snow.wav"
-dest_files=["res://.godot/imported/Snow.wav-38bbfe9e4ed57298b7a4c88c896013af.sample"]
+source_file="res://assets/audio/Snow.wav"
+dest_files=["res://.godot/imported/Snow.wav-6e7573002330b9d74546c76500cf1780.sample"]
 
 [params]
 

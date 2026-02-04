@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://656hxj2u04gk"
-path="res://.godot/imported/spikyenemy.png-91125e87b8896f257778595be2ff52d2.ctex"
+uid="uid://kb41ex4lb4ht"
+path="res://.godot/imported/icecreamcone.png-3674516af415669233eb238a3cbebe17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spikyenemy.png"
-dest_files=["res://.godot/imported/spikyenemy.png-91125e87b8896f257778595be2ff52d2.ctex"]
+source_file="res://assets/art/placeholder/icecreamcone.png"
+dest_files=["res://.godot/imported/icecreamcone.png-3674516af415669233eb238a3cbebe17.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br01qmnsdeifq"
-path="res://.godot/imported/kagi.png-5f06bdac0f08266180399705f41622ea.ctex"
+uid="uid://cvx1ecf0scy2n"
+path="res://.godot/imported/yukidaruma.png-b131e6b37240783987effa2b603143b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/kagi.png"
-dest_files=["res://.godot/imported/kagi.png-5f06bdac0f08266180399705f41622ea.ctex"]
+source_file="res://assets/art/placeholder/yukidaruma.png"
+dest_files=["res://.godot/imported/yukidaruma.png-b131e6b37240783987effa2b603143b2.ctex"]
 
 [params]
 

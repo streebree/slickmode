@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kb41ex4lb4ht"
-path="res://.godot/imported/icecreamcone.png-b7cadd5cf44ff03015a111a6fbc2b128.ctex"
+uid="uid://bocxvje2vt7lo"
+path="res://.godot/imported/slicktileset.png-764c47b5604571435555f92bea98410c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icecreamcone.png"
-dest_files=["res://.godot/imported/icecreamcone.png-b7cadd5cf44ff03015a111a6fbc2b128.ctex"]
+source_file="res://assets/art/placeholder/slicktileset.png"
+dest_files=["res://.godot/imported/slicktileset.png-764c47b5604571435555f92bea98410c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciugfv0kguxah"
-path="res://.godot/imported/tallicicles.png-9472562c5db4913cefca49128c6d6521.ctex"
+uid="uid://o0djwg5f6kfi"
+path="res://.godot/imported/snowman_sheet.png-d1929c7e4f402ae5bb18ac1120db0f63.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tallicicles.png"
-dest_files=["res://.godot/imported/tallicicles.png-9472562c5db4913cefca49128c6d6521.ctex"]
+source_file="res://assets/art/spritesheets/snowman_sheet.png"
+dest_files=["res://.godot/imported/snowman_sheet.png-d1929c7e4f402ae5bb18ac1120db0f63.ctex"]
 
 [params]
 

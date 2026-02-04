@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://duu3vk0jetcx7"
-path="res://.godot/imported/door.png-b71998044d513d047c9b0091ee4a07ff.ctex"
+uid="uid://ciugfv0kguxah"
+path="res://.godot/imported/tallicicles.png-515638004467ded21a4ae5ac2932aad3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/door.png"
-dest_files=["res://.godot/imported/door.png-b71998044d513d047c9b0091ee4a07ff.ctex"]
+source_file="res://assets/art/placeholder/tallicicles.png"
+dest_files=["res://.godot/imported/tallicicles.png-515638004467ded21a4ae5ac2932aad3.ctex"]
 
 [params]
 

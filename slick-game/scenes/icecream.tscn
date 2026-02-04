@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://by1ldxkw8bmvw"]
 
 [ext_resource type="Script" uid="uid://cbfh3vi32x4s0" path="res://scenes/icecream.gd" id="1_bk6j7"]
-[ext_resource type="Texture2D" uid="uid://kb41ex4lb4ht" path="res://assets/icecreamcone.png" id="1_lbo8j"]
+[ext_resource type="Texture2D" uid="uid://kb41ex4lb4ht" path="res://assets/art/placeholder/icecreamcone.png" id="1_lbo8j"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bk6j7"]
 size = Vector2(9, 16)

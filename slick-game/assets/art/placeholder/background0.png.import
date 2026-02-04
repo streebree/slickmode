@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2p74m7rj3d5i"
-path="res://.godot/imported/icecicle.png-dbc3d9d2333720f41f4fb86bfdce38b3.ctex"
+uid="uid://b4nwe3rb8yd41"
+path="res://.godot/imported/background0.png-398ed041cc4605a63701364d3e267367.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icecicle.png"
-dest_files=["res://.godot/imported/icecicle.png-dbc3d9d2333720f41f4fb86bfdce38b3.ctex"]
+source_file="res://assets/art/placeholder/background0.png"
+dest_files=["res://.godot/imported/background0.png-398ed041cc4605a63701364d3e267367.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfdahldmb68v4"
-path="res://.godot/imported/icecream.png-3bd6ad495cec1cc2afc4c39ea6b0df93.ctex"
+uid="uid://br01qmnsdeifq"
+path="res://.godot/imported/kagi.png-0d08fccd00ec6220d828c5eb86af6663.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icecream.png"
-dest_files=["res://.godot/imported/icecream.png-3bd6ad495cec1cc2afc4c39ea6b0df93.ctex"]
+source_file="res://assets/art/placeholder/kagi.png"
+dest_files=["res://.godot/imported/kagi.png-0d08fccd00ec6220d828c5eb86af6663.ctex"]
 
 [params]
 

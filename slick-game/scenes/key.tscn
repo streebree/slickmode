@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://6ctj6mrcdqgc"]
 
 [ext_resource type="Script" uid="uid://y3rmvff1tauv" path="res://scenes/key.gd" id="1_fttkb"]
-[ext_resource type="Texture2D" uid="uid://br01qmnsdeifq" path="res://assets/kagi.png" id="1_yk2u2"]
+[ext_resource type="Texture2D" uid="uid://br01qmnsdeifq" path="res://assets/art/placeholder/kagi.png" id="1_yk2u2"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fttkb"]
 size = Vector2(4, 12)

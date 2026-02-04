@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bln7vcorjgofm" path="res://scenes/snowman.gd" id="1_j7fvb"]
 [ext_resource type="Texture2D" uid="uid://cvx1ecf0scy2n" path="res://assets/art/placeholder/yukidaruma.png" id="1_s1rrw"]
 [ext_resource type="Texture2D" uid="uid://o0djwg5f6kfi" path="res://assets/art/spritesheets/snowman_sheet.png" id="3_o1g3c"]
+[ext_resource type="Script" uid="uid://deq5i02w67cvm" path="res://scenes/snowman_animator.gd" id="4_3gxhq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3gxhq"]
 atlas = ExtResource("3_o1g3c")
@@ -183,6 +184,7 @@ sprite_frames = SubResource("SpriteFrames_j7fvb")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.69711983
+script = ExtResource("4_3gxhq")
 
 [node name="Body Hitbox" type="CollisionShape2D" parent="." unique_id=713872290]
 position = Vector2(0, 11.5)
