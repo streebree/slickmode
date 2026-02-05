@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://7e4jnuro1vgm" path="res://assets/checkeredflag.png" id="3_l2ry5"]
 [ext_resource type="Texture2D" uid="uid://ciugfv0kguxah" path="res://assets/art/placeholder/tallicicles.png" id="4_s6q82"]
 [ext_resource type="Texture2D" uid="uid://bfdahldmb68v4" path="res://assets/art/placeholder/icecream.png" id="5_k1mlc"]
+[ext_resource type="Texture2D" uid="uid://oe4uhh0hbrve" path="res://assets/art/placeholder/wind.png" id="6_3l4e8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e38xd"]
 texture = ExtResource("1_oufjc")
@@ -79,6 +80,18 @@ texture = ExtResource("5_k1mlc")
 0:0/3/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, -6, -8, -6, 8, -8, 8)
 0:0/3/physics_layer_6/polygon_0/points = PackedVector2Array(-8, -8, -6, -8, -6, 8, -8, 8)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2ry5"]
+texture = ExtResource("6_3l4e8")
+0:0/next_alternative_id = 3
+0:0/animation_columns = 4
+0:0/animation_speed = 15.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/0 = 0
+0:0/0/physics_layer_7/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
 [resource]
 physics_layer_0/collision_layer = 1
 physics_layer_1/collision_layer = 2
@@ -93,6 +106,8 @@ physics_layer_5/collision_layer = 1024
 physics_layer_5/collision_mask = 1024
 physics_layer_6/collision_layer = 4096
 physics_layer_6/collision_mask = 4096
+physics_layer_7/collision_layer = 8192
+physics_layer_7/collision_mask = 8192
 custom_data_layer_0/name = "is_deadly"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_e38xd")
@@ -100,3 +115,4 @@ sources/1 = SubResource("TileSetAtlasSource_qkrab")
 sources/3 = SubResource("TileSetAtlasSource_x6i5t")
 sources/4 = SubResource("TileSetAtlasSource_rulmf")
 sources/2 = SubResource("TileSetAtlasSource_ydapt")
+sources/5 = SubResource("TileSetAtlasSource_l2ry5")

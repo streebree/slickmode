@@ -10,3 +10,4 @@ res://scenes/enemy.tscn
 res://scenes/areas/enemy_spawner.gd
 res://scenes/enemy_spawner.tscn
 res://scenes/enemy_spawner.gd
+res://scenes/areas/area2.tscn
