@@ -176,6 +176,9 @@ size = Vector2(8, 18)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gxhq"]
 size = Vector2(8, 18)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_no5s5"]
+size = Vector2(14, 21)
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1919126236]
 collision_layer = 641
 collision_mask = 641
@@ -271,6 +274,14 @@ collision_mask = 4096
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_3gxhq")
 
+[node name="Area2D9" type="Area2D" parent="." unique_id=1967878360]
+collision_layer = 8192
+collision_mask = 8192
+
+[node name="WindCollision" type="CollisionShape2D" parent="Area2D9" unique_id=588253239]
+position = Vector2(1, 4.5)
+shape = SubResource("RectangleShape2D_no5s5")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
@@ -280,3 +291,5 @@ shape = SubResource("RectangleShape2D_3gxhq")
 [connection signal="body_entered" from="Area2D5" to="." method="on_collide_with_one_way_down"]
 [connection signal="body_entered" from="Area2D7" to="." method="on_enter_one_way_right_only"]
 [connection signal="body_entered" from="Area2D8" to="." method="on_one_way_left_collision"]
+[connection signal="body_entered" from="Area2D9" to="." method="on_enter_wind"]
+[connection signal="body_exited" from="Area2D9" to="." method="on_exit_wind"]

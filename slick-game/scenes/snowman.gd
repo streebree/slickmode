@@ -15,6 +15,9 @@ const EXTRA_DASH_SPEED = 150.0
 @export var has_jacket = false
 @export var can_dash = false
 
+var is_player = true
+var is_player_on_floor = true
+
 var direction = 0
 var direction_vertical = 0
 var ice_collision_count = 0
@@ -51,6 +54,8 @@ var is_double_jumping = false
 var target_velocity = 0
 var time_double_jumping = 0
 var double_jump_length = 1.0
+
+var in_wind_count = 0
 
 func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
@@ -156,9 +161,21 @@ func _physics_process(delta: float) -> void:
 			else:
 				var distance = (time_double_jumping / double_jump_length) * 2 * absf(target_velocity)
 				velocity.y = move_toward(-target_velocity, target_velocity, distance)
+
 		else:
 			is_double_jumping = false
-	
+			
+	# Handle wind physics. If you're holding jump, get extra height.
+	if in_wind_count > 0 and not is_on_floor():
+		if Input.is_action_pressed("ui_accept"):
+			velocity.y -= 1000 * delta
+			# Speed cap your vertical speed in the wind, or it gets a little crazy.
+			# Consider taking this out though, if it feels good.
+			if velocity.y < -300:
+				velocity.y = -300
+		else:
+			velocity.y -= 500 * delta
+		
 	# Letting go of jump makes you stop moving upward.
 	if Input.is_action_just_released("ui_accept") and velocity.y < 0:
 		velocity.y /= 3.0
@@ -207,6 +224,7 @@ func _physics_process(delta: float) -> void:
 	prev_x_velocity = velocity.x
 	if not is_on_floor():
 		was_in_air_last_frame = true
+	is_player_on_floor = is_on_floor()
 	
 	
 	# Handle damage cooldowns:
@@ -393,3 +411,13 @@ func on_enter_one_way_right_only(body: Node2D) -> void:
 func on_one_way_left_collision(body: Node2D) -> void:
 	if velocity.x > 0:
 		velocity.x = -velocity.x
+
+
+func on_enter_wind(body: Node2D) -> void:
+	in_wind_count += 1
+
+func on_exit_wind(body: Node2D) -> void:
+	in_wind_count -= 1
+	# Leaving the wind gives you a refreshed double jump.
+	if in_wind_count == 0:
+		has_double_jumped = false
