@@ -15,6 +15,9 @@ const EXTRA_DASH_SPEED = 150.0
 @export var has_jacket = false
 @export var can_dash = false
 
+var is_player = true
+var is_player_on_floor = true
+
 var direction = 0
 var direction_vertical = 0
 var ice_collision_count = 0
@@ -221,6 +224,7 @@ func _physics_process(delta: float) -> void:
 	prev_x_velocity = velocity.x
 	if not is_on_floor():
 		was_in_air_last_frame = true
+	is_player_on_floor = is_on_floor()
 	
 	
 	# Handle damage cooldowns:

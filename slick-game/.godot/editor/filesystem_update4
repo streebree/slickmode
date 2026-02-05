@@ -11,3 +11,5 @@ res://scenes/areas/enemy_spawner.gd
 res://scenes/enemy_spawner.tscn
 res://scenes/enemy_spawner.gd
 res://scenes/areas/area2.tscn
+res://scenes/falling_platform.gd
+res://scenes/falling_platform.tscn
