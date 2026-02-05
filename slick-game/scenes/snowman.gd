@@ -351,7 +351,9 @@ func _on_area_2d_2_body_entered(body: Node2D) -> void:
 
 func _on_area_2d_2_body_exited(body: Node2D) -> void:
 	pass
-	
+
+# Key door collision
+
 func on_take_damage(delta_x):
 	StateManager.update_multiplier(-1)
 	damage_cooldown = damage_cooldown_max

@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://6ctj6mrcdqgc"]
 
 [ext_resource type="Script" uid="uid://y3rmvff1tauv" path="res://scenes/key.gd" id="1_fttkb"]
-[ext_resource type="Texture2D" uid="uid://br01qmnsdeifq" path="res://assets/art/placeholder/kagi.png" id="1_yk2u2"]
-
+[ext_resource type="Texture2D" uid="uid://0ckvy7okr51o" path="res://assets/art/key.png" id="2_fttkb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fttkb"]
 size = Vector2(4, 12)
@@ -13,7 +12,7 @@ collision_mask = 128
 script = ExtResource("1_fttkb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=926476474]
-texture = ExtResource("1_yk2u2")
+texture = ExtResource("2_fttkb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=670348075]
 position = Vector2(-1, 1)
