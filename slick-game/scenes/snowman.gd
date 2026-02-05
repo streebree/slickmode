@@ -140,9 +140,9 @@ func _physics_process(delta: float) -> void:
 			is_jumping_off_ice = ice_collision_count > 0
 		elif has_jacket and not has_double_jumped:
 			#target_velocity = -velocity.y
-			target_velocity = -(velocity.y * 0.8)
-			if target_velocity > -100:
-				target_velocity = -100
+			target_velocity = -(velocity.y * 1.1)
+			if target_velocity > 100:
+				target_velocity = 200
 				velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
 			has_double_jumped = true
 			is_double_jumping = true

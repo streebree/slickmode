@@ -7,3 +7,6 @@ res://scenes/areas/area1.tscn
 res://scenes/main_tile_set.tres
 res://scenes/spiky_enemy.tscn
 res://scenes/enemy.tscn
+res://scenes/areas/enemy_spawner.gd
+res://scenes/enemy_spawner.tscn
+res://scenes/enemy_spawner.gd
