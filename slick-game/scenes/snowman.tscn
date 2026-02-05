@@ -166,12 +166,15 @@ size = Vector2(16, 6.25)
 size = Vector2(15, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksmda"]
-size = Vector2(8, 3)
+size = Vector2(9, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eg3al"]
 size = Vector2(16, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8t5k0"]
+size = Vector2(8, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gxhq"]
 size = Vector2(8, 18)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1919126236]
@@ -210,7 +213,6 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="DamageHitbox" type="CollisionShape2D" parent="Area2D2" unique_id=1762572663]
-visible = false
 position = Vector2(1, 4)
 shape = SubResource("RectangleShape2D_j7fvb")
 
@@ -223,10 +225,10 @@ position = Vector2(1, 11)
 shape = SubResource("RectangleShape2D_ujryj")
 
 [node name="SpikeDamageHitboxHead" type="CollisionShape2D" parent="Area2D3" unique_id=699396849]
-visible = false
 position = Vector2(1, -3)
 shape = SubResource("RectangleShape2D_v53y5")
 disabled = true
+debug_color = Color(0.87794, 0.11768969, 0.7785667, 0.41960785)
 
 [node name="Area2D4" type="Area2D" parent="." unique_id=34361995]
 collision_layer = 64
@@ -241,7 +243,7 @@ collision_layer = 256
 collision_mask = 256
 
 [node name="OneWayDownCollision" type="CollisionShape2D" parent="Area2D5" unique_id=34179405]
-position = Vector2(0, -1.5)
+position = Vector2(1, -5)
 shape = SubResource("RectangleShape2D_ksmda")
 
 [node name="Area2D6" type="Area2D" parent="." unique_id=856514962]
@@ -260,6 +262,14 @@ collision_mask = 1024
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_8t5k0")
 
+[node name="Area2D8" type="Area2D" parent="." unique_id=55240918]
+collision_layer = 4096
+collision_mask = 4096
+
+[node name="OneWayLeftCollision" type="CollisionShape2D" parent="Area2D8" unique_id=427873783]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_3gxhq")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
@@ -268,3 +278,4 @@ shape = SubResource("RectangleShape2D_8t5k0")
 [connection signal="body_entered" from="Area2D4" to="." method="on_stomp_enter"]
 [connection signal="body_entered" from="Area2D5" to="." method="on_collide_with_one_way_down"]
 [connection signal="body_entered" from="Area2D7" to="." method="on_enter_one_way_right_only"]
+[connection signal="body_entered" from="Area2D8" to="." method="on_one_way_left_collision"]

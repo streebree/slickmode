@@ -1,0 +1,102 @@
+[gd_resource type="TileSet" format=3 uid="uid://ioexiochvppf"]
+
+[ext_resource type="Texture2D" uid="uid://bocxvje2vt7lo" path="res://assets/art/placeholder/slicktileset.png" id="1_oufjc"]
+[ext_resource type="Texture2D" uid="uid://d2p74m7rj3d5i" path="res://assets/art/placeholder/icecicle.png" id="2_3l4e8"]
+[ext_resource type="Texture2D" uid="uid://7e4jnuro1vgm" path="res://assets/checkeredflag.png" id="3_l2ry5"]
+[ext_resource type="Texture2D" uid="uid://ciugfv0kguxah" path="res://assets/art/placeholder/tallicicles.png" id="4_s6q82"]
+[ext_resource type="Texture2D" uid="uid://bfdahldmb68v4" path="res://assets/art/placeholder/icecream.png" id="5_k1mlc"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e38xd"]
+texture = ExtResource("1_oufjc")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qkrab"]
+texture = ExtResource("2_3l4e8")
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/physics_layer_3/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -1.5690312, -8, -1.4838352)
+0:0/0/custom_data_0 = true
+0:0/1 = 1
+0:0/1/flip_v = true
+0:0/1/physics_layer_3/polygon_0/points = PackedVector2Array(-8, 0.893425, 8, 0.7259083, 8, 8, -8, 8)
+0:0/1/custom_data_0 = true
+0:0/2 = 2
+0:0/2/transpose = true
+0:0/2/physics_layer_3/polygon_0/points = PackedVector2Array(-8, -8, -1.4838352, -8, -1.4838352, 8, -8, 8)
+0:0/2/custom_data_0 = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/transpose = true
+0:0/3/physics_layer_3/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, 1.6816788, 8, 1.2859898, -8)
+0:0/3/custom_data_0 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ydapt"]
+texture = ExtResource("3_l2ry5")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x6i5t"]
+texture = ExtResource("4_s6q82")
+0:0/0 = 0
+0:0/0/physics_layer_3/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/custom_data_0 = true
+0:1/0 = 0
+0:1/0/custom_data_0 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rulmf"]
+texture = ExtResource("5_k1mlc")
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, 6, 8, 6, 8, 8, -8, 8)
+0:0/0/physics_layer_2/polygon_0/one_way = true
+0:0/0/physics_layer_4/polygon_0/points = PackedVector2Array(-8, 6, 8, 6, 8, 8, -8, 8)
+0:0/1 = 1
+0:0/1/flip_v = true
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -6, -8, -6)
+0:0/1/physics_layer_0/polygon_0/one_way = true
+0:0/1/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -6, -8, -6)
+0:0/1/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -6, -8, -6)
+0:0/1/physics_layer_2/polygon_0/one_way = true
+0:0/2 = 2
+0:0/2/transpose = true
+0:0/2/physics_layer_5/polygon_0/points = PackedVector2Array(6, -8, 8, -8, 8, 8, 6, 8)
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/transpose = true
+0:0/3/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, -6, -8, -6, 8, -8, 8)
+0:0/3/physics_layer_6/polygon_0/points = PackedVector2Array(-8, -8, -6, -8, -6, 8, -8, 8)
+
+[resource]
+physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 2
+physics_layer_1/collision_mask = 2
+physics_layer_2/collision_layer = 16
+physics_layer_2/collision_mask = 16
+physics_layer_3/collision_layer = 32
+physics_layer_3/collision_mask = 32
+physics_layer_4/collision_layer = 256
+physics_layer_4/collision_mask = 256
+physics_layer_5/collision_layer = 1024
+physics_layer_5/collision_mask = 1024
+physics_layer_6/collision_layer = 4096
+physics_layer_6/collision_mask = 4096
+custom_data_layer_0/name = "is_deadly"
+custom_data_layer_0/type = 1
+sources/0 = SubResource("TileSetAtlasSource_e38xd")
+sources/1 = SubResource("TileSetAtlasSource_qkrab")
+sources/3 = SubResource("TileSetAtlasSource_x6i5t")
+sources/4 = SubResource("TileSetAtlasSource_rulmf")
+sources/2 = SubResource("TileSetAtlasSource_ydapt")

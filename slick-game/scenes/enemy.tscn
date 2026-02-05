@@ -71,8 +71,8 @@ radius = 9.0
 height = 26.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1106049794]
-collision_layer = 20
-collision_mask = 20
+collision_layer = 4
+collision_mask = 16
 script = ExtResource("1_ihwpr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1847098602]

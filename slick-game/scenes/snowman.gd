@@ -82,8 +82,10 @@ func start_dash(direction):
 
 func handle_die():
 	StateManager.raise("player_death", null)
-	keys_collected = []
+	# for now, when you die, you keep your keys
+	#keys_collected = []
 	position = checkpoint_position
+	velocity = Vector2(0, 0)
 	StateManager.update_health(StateManager.maxHealth, 0)
 	sprite.modulate = Color(1, 1, 1)
 	damage_cooldown = 0
@@ -320,7 +322,7 @@ func _on_area_2d_2_body_entered(body: Node2D) -> void:
 	if dash_duration_current <= 0:
 		if damage_cooldown <= 0:
 			delta_x_from_enemy_hit = body.position.x - position.x
-			StateManager.update_health(-1, 0)
+			StateManager.update_health(-1, delta_x_from_enemy_hit)
 	else:
 		# Else you're dashing so destroy the enemy.
 		body.destroy(body.position.x - position.x)
@@ -383,4 +385,9 @@ func on_collide_with_one_way_down(body: Node2D) -> void:
 
 func on_enter_one_way_right_only(body: Node2D) -> void:
 	if velocity.x < 0:
+		velocity.x = -velocity.x
+
+
+func on_one_way_left_collision(body: Node2D) -> void:
+	if velocity.x > 0:
 		velocity.x = -velocity.x
