@@ -57,6 +57,8 @@ var double_jump_length = 1.0
 
 var in_wind_count = 0
 
+var stomp_y = 0
+
 func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
 	StateManager.listen("take_damage", Callable(self, "on_take_damage"))
@@ -158,9 +160,16 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("ui_accept"):
 			if time_double_jumping > double_jump_length:
 				is_double_jumping = false
+				stomp_y = 0
 			else:
 				var distance = (time_double_jumping / double_jump_length) * 2 * absf(target_velocity)
 				velocity.y = move_toward(-target_velocity, target_velocity, distance)
+				# This stomp_y hack is a way to make the stomp bounce still work 
+				# while you're hovering. The above line overwrites the normal stomp
+				# velocity, so add it in but quickly taper it back down.
+				if stomp_y != 0:
+					velocity.y += stomp_y
+					stomp_y /= 1.1
 
 		else:
 			is_double_jumping = false
@@ -382,7 +391,10 @@ func on_give_abilities(abilities):
 func on_spike_damage_enter(body: Node2D) -> void:
 	# It's difficult to get the enemy to not damage you while you're stomping it. 
 	# Use this hack to check if you're falling down and if the enemy already is dead.
-	if ("is_dead" in body and not body.is_dead and velocity.y <= 0) or not "is_dead" in body:
+	if ("is_dead" in body and not body.is_dead) or not "is_dead" in body:
+	# If there are issues with the stomp collision after this change, consider changing 
+	# it back to this:
+	#if ("is_dead" in body and not body.is_dead and velocity.y <= 0) or not "is_dead" in body:
 		delta_x_from_enemy_hit = body.position.x - position.x
 		if damage_cooldown <= 0:
 			#take_damage(delta_x_from_enemy_hit)
@@ -392,9 +404,12 @@ func on_stomp_enter(body: Node2D) -> void:
 	# if you're moving down, destroy the enemy.
 	if velocity.y > 0:
 		body.destroy()
+		has_double_jumped = false
 		if Input.is_action_pressed("ui_accept"):
+			stomp_y = JUMP_VELOCITY - 30
 			velocity.y = JUMP_VELOCITY - 30
 		else:
+			stomp_y = JUMP_VELOCITY / 2
 			velocity.y = JUMP_VELOCITY / 2
 		
 
