@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://j6fyafu5ymtk" path="res://scenes/falling_platform.tscn" id="14_b8qy5"]
 [ext_resource type="PackedScene" uid="uid://by1ldxkw8bmvw" path="res://scenes/icecream.tscn" id="16_u0ssx"]
 [ext_resource type="PackedScene" uid="uid://cdxrdmuc2vxdm" path="res://scenes/snowball.tscn" id="16_xr0et"]
+[ext_resource type="PackedScene" uid="uid://bqhotj5hq1x6c" path="res://scenes/flying_enemy.tscn" id="17_4ibi2"]
 [ext_resource type="PackedScene" uid="uid://bjllpyn7o184f" path="res://scenes/checkpoint.tscn" id="17_k0rj5"]
 [ext_resource type="PackedScene" uid="uid://cr46fersqcshr" path="res://scenes/spiky_enemy_big.tscn" id="17_rnhrw"]
 [ext_resource type="PackedScene" uid="uid://g6bny3qfqfd5" path="res://scenes/flying_enemy_spawner.tscn" id="18_4ibi2"]
@@ -150,30 +151,39 @@ position = Vector2(-504, -40)
 
 [node name="EnemySpawner" parent="." unique_id=1810855687 instance=ExtResource("18_4ibi2")]
 position = Vector2(984, -408)
+enemy = ExtResource("17_4ibi2")
 
 [node name="EnemySpawner2" parent="." unique_id=2027412560 instance=ExtResource("18_4ibi2")]
 position = Vector2(1264, -512)
+enemy = ExtResource("17_4ibi2")
 
 [node name="EnemySpawner3" parent="." unique_id=2067320681 instance=ExtResource("18_4ibi2")]
 position = Vector2(776, -128)
+enemy = ExtResource("17_4ibi2")
 
 [node name="EnemySpawner4" parent="." unique_id=1798648669 instance=ExtResource("18_4ibi2")]
 position = Vector2(632, -88)
+enemy = ExtResource("17_4ibi2")
 
 [node name="EnemySpawner5" parent="." unique_id=1857921325 instance=ExtResource("18_4ibi2")]
 position = Vector2(1808, -352)
+enemy = ExtResource("17_4ibi2")
 
 [node name="EnemySpawner6" parent="." unique_id=1607446051 instance=ExtResource("18_4ibi2")]
 position = Vector2(2312, -328)
+enemy = ExtResource("17_4ibi2")
 
 [node name="EnemySpawner7" parent="." unique_id=206735756 instance=ExtResource("18_4ibi2")]
 position = Vector2(1408, -512)
+enemy = ExtResource("17_4ibi2")
 
 [node name="EnemySpawner8" parent="." unique_id=1105597593 instance=ExtResource("18_4ibi2")]
 position = Vector2(1560, -512)
+enemy = ExtResource("17_4ibi2")
 
 [node name="EnemySpawner9" parent="." unique_id=1877656082 instance=ExtResource("18_4ibi2")]
 position = Vector2(1704, -504)
+enemy = ExtResource("17_4ibi2")
 
 [node name="Checkpoint2" parent="." unique_id=1438692204 instance=ExtResource("17_k0rj5")]
 position = Vector2(1872, -496)
@@ -181,9 +191,11 @@ scale = Vector2(4.76, 18.8048)
 
 [node name="EnemySpawner10" parent="." unique_id=476508525 instance=ExtResource("18_4ibi2")]
 position = Vector2(1792, -184)
+enemy = ExtResource("17_4ibi2")
 
 [node name="EnemySpawner11" parent="." unique_id=1034476545 instance=ExtResource("18_4ibi2")]
 position = Vector2(2232, -216)
+enemy = ExtResource("17_4ibi2")
 
 [node name="SpikyEnemyBEEG" parent="." unique_id=1957662773 instance=ExtResource("17_rnhrw")]
 position = Vector2(2016, -168)
