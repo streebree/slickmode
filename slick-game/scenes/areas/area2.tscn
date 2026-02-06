@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://br3x4cgwy2nx8" path="res://assets/art/placeholder/background1.png" id="9_o0vff"]
 [ext_resource type="Texture2D" uid="uid://f806pa0exola" path="res://assets/art/placeholder/background2.png" id="10_nywgu"]
 [ext_resource type="AudioStream" uid="uid://dl75krm64q111" path="res://assets/audio/Snow.wav" id="11_hk863"]
-[ext_resource type="PackedScene" path="res://scenes/falling_platform.tscn" id="14_b8qy5"]
+[ext_resource type="PackedScene" uid="uid://j6fyafu5ymtk" path="res://scenes/falling_platform.tscn" id="14_b8qy5"]
 [ext_resource type="PackedScene" uid="uid://by1ldxkw8bmvw" path="res://scenes/icecream.tscn" id="16_u0ssx"]
 [ext_resource type="PackedScene" uid="uid://bjllpyn7o184f" path="res://scenes/checkpoint.tscn" id="17_k0rj5"]
 [ext_resource type="PackedScene" uid="uid://7pdxc61d0xxu" path="res://scenes/hud.tscn" id="18_6ya1w"]
@@ -21,7 +21,7 @@ level_name = "level2"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=977616795]
 unique_name_in_owner = true
-tile_map_data = PackedByteArray("AADu//3/AAAAAAAAAADt//3/AAAAAAAAAADs//3/AAAAAAAAAADv//3/AAAAAAAAAADw//3/AAAAAAAAAADx//3/AAAAAAAAAADr//3/AAAAAAAAAAD2//3/AAABAAAAAAD1//3/AAABAAAAAAD6//3/AAABAAAAAAD7//3/AAABAAAAAADy//3/AAABAAAAAADz//3/AAABAAAAAAD0//3/AAABAAAAAAD3//3/AAABAAAAAAD4//3/AAABAAAAAAD5//3/AAABAAAAAAAGAP3/AAABAAAAAAADAP3/AAABAAAAAAAEAP3/AAABAAAAAAAFAP3/AAABAAAAAAAPAP3/AAABAAAAAAAQAP3/AAABAAAAAAARAP3/AAABAAAAAAASAP3/AAABAAAAAAATAP3/AAABAAAAAAAKAPz/BQAAAAAAAAAKAPv/BQAAAAAAAAAKAPr/BQAAAAAAAAAKAPn/BQAAAAAAAAAKAPj/BQAAAAAAAAALAPj/BQAAAAAAAAALAPn/BQAAAAAAAAALAPr/BQAAAAAAAAALAPv/BQAAAAAAAAALAPz/BQAAAAAAAAALAP3/BQAAAAAAAAAKAP3/BQAAAAAAAAAMAPn/BQAAAAAAAAAOAPn/BQAAAAAAAAANAPn/BQAAAAAAAAAMAPr/BQAAAAAAAAANAPj/BQAAAAAAAAANAPf/BQAAAAAAAAAMAPf/BQAAAAAAAAAOAPj/BQAAAAAAAAAMAPj/BQAAAAAAAAAKAPf/BQAAAAAAAAAMAPz/BQAAAAAAAAANAPz/BQAAAAAAAAANAPv/BQAAAAAAAAANAPr/BQAAAAAAAAAMAP3/BQAAAAAAAAANAP3/BQAAAAAAAAAMAPv/BQAAAAAAAAAOAP3/BQAAAAAAAAAOAPz/BQAAAAAAAAAOAPv/BQAAAAAAAAAOAPr/BQAAAAAAAAAOAPf/BQAAAAAAAAD7//z/BQAAAAAAAAD7//v/BQAAAAAAAAD7//r/BQAAAAAAAAD7//n/BQAAAAAAAAD7//j/BQAAAAAAAAD7//f/BQAAAAAAAAD6//z/BQAAAAAAAAD6//v/BQAAAAAAAAD6//r/BQAAAAAAAAD6//n/BQAAAAAAAAD6//j/BQAAAAAAAAD6//f/BQAAAAAAAAAVAPX/AQAAAAAAAAAWAPX/AQAAAAAAAAAXAPX/AQAAAAAAAAAYAPX/AQAAAAAAAAAZAPX/AQAAAAAAAAAaAPX/AQAAAAAAAAAbAPX/AQAAAAAAAAAcAPX/AQAAAAAAAAAVAPr/AQAAAAAAAQAWAPr/AQAAAAAAAQAXAPr/AQAAAAAAAQAYAPr/AQAAAAAAAQAZAPr/AQAAAAAAAQAaAPr/AQAAAAAAAQAbAPr/AQAAAAAAAQAdAP3/AAABAAAAAAAeAP3/AAABAAAAAAAfAP3/AAABAAAAAAAgAP3/AAABAAAAAAAhAP3/AAABAAAAAAAiAP3/AAABAAAAAAA=")
+tile_map_data = PackedByteArray("AADu//3/BQACAAAAAADt//3/BQACAAAAAADs//3/BQABAAAAAADv//3/BQAAAAAAAADw//3/BQABAAAAAADx//3/BQACAAAAAADr//3/BQAAAAAAAAD2//3/BQABAAMAAAD1//3/BQABAAMAAAD6//3/BQABAAMAAAD7//3/BQABAAMAAADy//3/BQABAAMAAADz//3/BQABAAMAAAD0//3/BQABAAMAAAD3//3/BQABAAMAAAD4//3/BQABAAMAAAD5//3/BQABAAMAAAAGAP3/BQABAAMAAAADAP3/BQABAAMAAAAEAP3/BQABAAMAAAAFAP3/BQABAAMAAAAPAP3/BQABAAMAAAAQAP3/BQABAAMAAAARAP3/BQABAAMAAAASAP3/BQABAAMAAAATAP3/BQABAAMAAAAVAPX/BQAGAAEAAwAWAPX/BQAGAAEAAwAXAPX/BQAGAAEAAwAYAPX/BQAGAAEAAwAZAPX/BQAGAAEAAwAaAPX/BQAGAAEAAwAbAPX/BQAGAAEAAwAVAPr/BQAGAAEAAAAWAPr/BQAGAAEAAAAXAPr/BQAGAAEAAAAYAPr/BQAGAAEAAAAZAPr/BQAGAAEAAAAaAPr/BQAGAAEAAAAbAPr/BQAGAAEAAAAdAP3/AAABAAAAAAAeAP3/AAABAAAAAAAfAP3/AAABAAAAAAAgAP3/AAABAAAAAAAhAP3/AAABAAAAAAAiAP3/AAABAAAAAAD7//z/BgAAAAAAAAD7//v/BgAAAAAAAAD7//r/BgAAAAAAAAD7//n/BgAAAAAAAAD7//j/BgAAAAAAAAD6//z/BgAAAAAAAAD6//v/BgAAAAAAAAD6//r/BgAAAAAAAAD6//n/BgAAAAAAAAD6//j/BgAAAAAAAAAGAPz/BgAAAAAAAAAGAPv/BgAAAAAAAAAGAPr/BgAAAAAAAAAGAPn/BgAAAAAAAAAGAPj/BgAAAAAAAAAFAPz/BgAAAAAAAAAFAPv/BgAAAAAAAAAFAPr/BgAAAAAAAAAFAPn/BgAAAAAAAAAFAPj/BgAAAAAAAAAVAPv/BQABAAMAAAAWAPv/BQABAAMAAAAXAPv/BQABAAMAAAAYAPv/BQABAAMAAAAZAPv/BQABAAMAAAAaAPv/BQABAAMAAAAbAPv/BQABAAMAAAAbAPT/BQABAAMAAAAaAPT/BQABAAMAAAAZAPT/BQABAAMAAAAYAPT/BQABAAMAAAAXAPT/BQABAAMAAAAWAPT/BQABAAMAAAAVAPT/BQABAAMAAADf//3/BQABAAMAAADe//3/BQABAAMAAADd//3/BQABAAMAAADc//3/BQABAAMAAADb//3/BQABAAMAAAA=")
 tile_set = ExtResource("2_thd2o")
 
 [node name="CharacterBody2D" parent="." unique_id=1919126236 instance=ExtResource("7_cqopj")]
@@ -95,10 +95,10 @@ position = Vector2(3680.9998, -732)
 scale = Vector2(1.1020579, 3.9529526)
 
 [node name="Area2D2" parent="." unique_id=1376798953 instance=ExtResource("16_u0ssx")]
-position = Vector2(-2, -131)
+position = Vector2(-4, -186)
 
 [node name="Area2D3" parent="." unique_id=517866652 instance=ExtResource("16_u0ssx")]
-position = Vector2(184, -125)
+position = Vector2(182, -184)
 
 [node name="Area2D4" parent="." unique_id=1740677639 instance=ExtResource("16_u0ssx")]
 position = Vector2(394, -134)
@@ -110,4 +110,34 @@ scale = Vector2(5.223857, 2.5126812)
 [node name="FallingPlatform" parent="." unique_id=212630240 instance=ExtResource("14_b8qy5")]
 
 [node name="Sprite2D" parent="." unique_id=2135192827 instance=ExtResource("14_b8qy5")]
-position = Vector2(-372, -38)
+position = Vector2(-360, -40)
+
+[node name="RigidBody2D" parent="." unique_id=1175102570 instance=ExtResource("14_b8qy5")]
+position = Vector2(-344, -40)
+
+[node name="RigidBody2D2" parent="." unique_id=614571288 instance=ExtResource("14_b8qy5")]
+position = Vector2(-376, -40)
+
+[node name="RigidBody2D3" parent="." unique_id=372698978 instance=ExtResource("14_b8qy5")]
+position = Vector2(-392, -40)
+
+[node name="RigidBody2D4" parent="." unique_id=2027364701 instance=ExtResource("14_b8qy5")]
+position = Vector2(-408, -40)
+
+[node name="RigidBody2D5" parent="." unique_id=798540938 instance=ExtResource("14_b8qy5")]
+position = Vector2(-424, -40)
+
+[node name="RigidBody2D6" parent="." unique_id=1089153000 instance=ExtResource("14_b8qy5")]
+position = Vector2(-440, -40)
+
+[node name="RigidBody2D7" parent="." unique_id=1481947270 instance=ExtResource("14_b8qy5")]
+position = Vector2(-456, -40)
+
+[node name="RigidBody2D8" parent="." unique_id=1340174080 instance=ExtResource("14_b8qy5")]
+position = Vector2(-472, -40)
+
+[node name="RigidBody2D9" parent="." unique_id=1168751918 instance=ExtResource("14_b8qy5")]
+position = Vector2(-488, -40)
+
+[node name="RigidBody2D10" parent="." unique_id=1916535625 instance=ExtResource("14_b8qy5")]
+position = Vector2(-504, -40)
