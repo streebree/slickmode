@@ -8,3 +8,7 @@ res://scenes/falling_platform.tscn
 res://scenes/falling_platform.gd
 res://scenes/flying_enemy.tscn
 res://scenes/flying_enemy.gd
+res://scenes/snowball.tscn
+res://scenes/snowball.gd
+res://scenes/enemy.gd
+res://scenes/snowman.tscn

@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://j6fyafu5ymtk" path="res://scenes/falling_platform.tscn" id="14_b8qy5"]
 [ext_resource type="PackedScene" uid="uid://bqhotj5hq1x6c" path="res://scenes/flying_enemy.tscn" id="15_4esdq"]
 [ext_resource type="PackedScene" uid="uid://by1ldxkw8bmvw" path="res://scenes/icecream.tscn" id="16_u0ssx"]
+[ext_resource type="PackedScene" uid="uid://cdxrdmuc2vxdm" path="res://scenes/snowball.tscn" id="16_xr0et"]
 [ext_resource type="PackedScene" uid="uid://bjllpyn7o184f" path="res://scenes/checkpoint.tscn" id="17_k0rj5"]
 [ext_resource type="PackedScene" uid="uid://7pdxc61d0xxu" path="res://scenes/hud.tscn" id="18_6ya1w"]
 [ext_resource type="PackedScene" uid="uid://c1duoa4rdhgyi" path="res://scenes/level_start.tscn" id="19_485r1"]
@@ -146,3 +147,5 @@ position = Vector2(-504, -40)
 
 [node name="CharacterBody2D2" parent="." unique_id=1146614045 instance=ExtResource("15_4esdq")]
 position = Vector2(-193, -108)
+
+[node name="RigidBody2D11" parent="." unique_id=245870808 instance=ExtResource("16_xr0et")]
