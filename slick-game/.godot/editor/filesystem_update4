@@ -6,3 +6,5 @@ res://scenes/snowman.gd
 res://scenes/areas/area2.tscn
 res://scenes/falling_platform.tscn
 res://scenes/falling_platform.gd
+res://scenes/flying_enemy.tscn
+res://scenes/flying_enemy.gd

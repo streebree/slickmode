@@ -1,14 +1,14 @@
 CollisionShape2D
 Area2D
+AnimatedSprite2D
+CharacterBody2D
 RigidBody2D
 StaticBody2D
 Sprite2D
 Node2D
 Label
 CanvasLayer
-CharacterBody2D
 AudioStreamPlayer
 Parallax2D
 Camera2D
-AnimatedSprite2D
 TileMapLayer
