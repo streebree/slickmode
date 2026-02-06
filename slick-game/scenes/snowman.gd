@@ -6,11 +6,16 @@ class_name snowman
 @onready var head_spike_hitbox: CollisionShape2D = $Area2D3/SpikeDamageHitboxHead
 @onready var tilemap: TileMapLayer = %TileMapLayer
 
+@onready var sprite_marker: Marker2D = $AnimatedSprite2D/SpriteMarker
+@onready var scarf_link: Line2D = $ScarfLink
+@onready var scarf: Scarf = $ScarfEnd
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -320.0
 const SPEED_CAP = 150.0
 const EXTRA_DASH_SPEED = 150.0
 
+@export var looking_direction = 1
 @export var checkpoint_position = Vector2(0, 0)
 @export var has_jacket = false
 @export var can_dash = false
@@ -45,7 +50,7 @@ var is_ducked_under_tile = false
 var keys_collected: Array[String] = []
 
 var previous_health = StateManager.maxHealth
-var looking_direction = 1
+#var looking_direction = 1
 var was_in_air_last_frame = false
 
 var has_ground_pounded = false
@@ -57,11 +62,33 @@ var double_jump_length = 1.0
 
 var in_wind_count = 0
 
+var is_in_hit_shake = false
+var shake_frames = 3
+var shake_counter = 0
+
 func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
 	StateManager.listen("take_damage", Callable(self, "on_take_damage"))
 	StateManager.listen("give_abilities", Callable(self, "on_give_abilities"))
 	sprite.animation_finished.connect(on_animation_finished)
+	
+	scarf_link.points = [Vector2.ZERO, Vector2.ZERO]
+	scarf.hit_something.connect(on_scarf_hit)
+	scarf.visible = false
+	scarf_link.visible = false
+	
+func start_scarf_throw():
+	sprite.stop()
+	sprite.play("scarf_startup")
+	# Start throw after startup is finished in on_animation_finished
+
+func on_scarf_hit(direction):
+	is_in_hit_shake = true
+	await get_tree().create_timer(0.2).timeout
+	
+	start_dash(direction)
+	sprite.play("scarf_return")
+	
 
 func start_dash(direction):
 	if not can_dash:
@@ -102,8 +129,38 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 		
+	# Update scarf link during animation
+	if scarf.is_thrown:
+		scarf_link.visible = true
+		
+		var start = scarf_link.to_local(sprite_marker.global_position)
+		var end = scarf_link.to_local(scarf.marker.global_position)
+		scarf_link.points = [
+			start,
+			end
+		]
+		
+		if end.x < start.x:  # Make sure the texture is facing the correct way
+			#scarf_link.texture_mode = Line2D.LINE_TEXTURE_TILE
+			scarf_link.scale.y = -1
+		else:
+			scarf_link.scale.y = 1
+		
+		if is_in_hit_shake:
+			if shake_counter < shake_frames:
+				match shake_counter:
+					0: position.x += 5 * looking_direction
+					1: position.x -= 9 * looking_direction
+					2: position.x += 6 * looking_direction
+					3: 
+						position.x -= 5 * looking_direction
+						is_in_hit_shake = false
+				shake_counter += 1
+	else:
+		scarf_link.visible = false
+		
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() and not scarf.is_thrown:
 		var multiplier = 0.8
 		# If you're falling and you're holding jump, do a slower fall.
 		if velocity.y > 0:
@@ -136,10 +193,12 @@ func _physics_process(delta: float) -> void:
 			dash_cooldown_current = dash_cooldown
 			sprite.modulate = Color(0, 1, 1, 0.3)
 
-
-
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept"):
+		if scarf.is_thrown:
+			scarf.cancel_scarf()
+			return
+		
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
 			is_jumping_off_ice = ice_collision_count > 0
@@ -188,6 +247,7 @@ func _physics_process(delta: float) -> void:
 		
 	# Handle left/right movement.
 	direction = Input.get_axis("ui_left", "ui_right")
+	
 	# Remember which direction you're looking for dash calculations
 	if absf(direction) != 0:
 		looking_direction = direction
@@ -195,7 +255,8 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("run") and dash_cooldown_current <= 0 and dash_duration_current <= 0:
 		# dash just started:
-		start_dash(direction)
+		#start_dash()
+		start_scarf_throw()
 	
 	# If you hit a wall and you're on ice or jumping from the ice, bounce off the wall to keep speed.
 	if is_on_wall() and (is_jumping_off_ice or ice_collision_count > 0):
@@ -252,14 +313,17 @@ func _physics_process(delta: float) -> void:
 	#queue_redraw()
 
 func update_animation():
+	if scarf.is_thrown or sprite.animation == "scarf_startup":
+		return
+	
 	# Handle sprite change when pressing left or right.
 	if direction > 0:
 		sprite.flip_h = false
 	elif direction < 0:
 		sprite.flip_h = true
 		
-	# Handle jumping animation
 	if not is_ducked_under_tile:
+		# Handle jumping animation
 		if velocity.y < 0:
 			if sprite.animation != "jump":
 				sprite.play("jump")
@@ -271,6 +335,21 @@ func update_animation():
 					sprite.play("duck")
 				else:
 					sprite.play("landing")
+					
+		# Handle dashing animation
+		if not sprite.animation == "duck":
+			if abs(velocity.x) > 175:
+				sprite.play("dash")
+				sprite.stop()
+				sprite.frame = 0
+			elif abs(velocity.x) <= 175 and abs(velocity.x) > 160:
+				sprite.play("dash")
+				sprite.stop()
+				sprite.frame = 1
+			elif abs(velocity.x) <= 160 and abs(velocity.x) > 150:
+				sprite.play("dash")
+				sprite.stop()
+				sprite.frame = 2
 		
 	# Handle ducking animation
 	if Input.is_action_just_pressed("ui_down"):
@@ -281,17 +360,33 @@ func update_animation():
 			else:
 				return
 	elif Input.is_action_pressed("ui_down"):
-		return
+		if sprite.animation == "dash" and is_player_on_floor: # To handle ducking when landing out of a dash
+			sprite.play("duck")
+		return # return regardless so that the lean is not triggered when player should be ducking
 	elif not Input.is_anything_pressed() and not is_ducked_under_tile and sprite.animation == "duck":
 		sprite.play_backwards("duck")
 		
-	# Handle left/right movement input
-	if (Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right")) or (Input.is_action_just_pressed("ui_right") and not Input.is_action_pressed("ui_left")):
-			sprite.play("lean")
-	if (Input.is_action_just_released("ui_left") and not Input.is_action_pressed("ui_right")) or (Input.is_action_just_released("ui_right") and not Input.is_action_pressed("ui_left")):
-		sprite.play_backwards("lean")
+	# Handle left/right movement input on ground
+	if is_player_on_floor:
+		if (Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right")) or (Input.is_action_just_pressed("ui_right") and not Input.is_action_pressed("ui_left")):
+				if not sprite.animation == "dash":
+					sprite.play("lean")
+				else:
+					sprite.frame = 2 # the last frame of dash is the same as the last frame of lean
+		if (Input.is_action_just_released("ui_left") and not Input.is_action_pressed("ui_right")) or (Input.is_action_just_released("ui_right") and not Input.is_action_pressed("ui_left")):
+			sprite.play_backwards("lean")
 
 func on_animation_finished():
+	if sprite.animation == "scarf_startup":
+		scarf.throw(looking_direction)
+		sprite.play("scarf_idle")
+		
+		velocity.x *= 0.5 
+		velocity.y = 0
+		
+	if scarf.is_thrown:
+		return
+	
 	if not Input.is_anything_pressed():
 		if is_ducked_under_tile:
 			return
@@ -336,6 +431,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 # Enemy collision
 func _on_area_2d_2_body_entered(body: Node2D) -> void:
+	print(body)
 	# Only take damage if you're not dashing.
 	if dash_duration_current <= 0:
 		if damage_cooldown <= 0:
@@ -346,7 +442,7 @@ func _on_area_2d_2_body_entered(body: Node2D) -> void:
 		body.destroy(body.position.x - position.x)
 		# If you kill an enemy while dashing, you're dash time gets reset so you can chain them.
 		dash_duration_current = dash_duration
-		var direction := Input.get_axis("ui_left", "ui_right")
+		direction = Input.get_axis("ui_left", "ui_right")
 		start_dash(direction)
 
 func _on_area_2d_2_body_exited(body: Node2D) -> void:
