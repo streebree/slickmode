@@ -7,9 +7,14 @@
 size = Vector2(16, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgkqx"]
-size = Vector2(16, 1)
+size = Vector2(16, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rehgp"]
+size = Vector2(16, 4)
 
 [node name="RigidBody2D" type="RigidBody2D" unique_id=1175102570]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("2_rehgp")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=212630240]
@@ -23,7 +28,15 @@ one_way_collision = true
 [node name="Area2D" type="Area2D" parent="." unique_id=2121693713]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=41811367]
-position = Vector2(0, -8.5)
+position = Vector2(0, -9.5)
 shape = SubResource("RectangleShape2D_cgkqx")
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=1584917685]
+collision_layer = 2
+collision_mask = 2
+
+[node name="IceSlide" type="CollisionShape2D" parent="Area2D2" unique_id=1629887307]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_rehgp")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

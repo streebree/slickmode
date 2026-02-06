@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://7pdxc61d0xxu"]
 
 [ext_resource type="Script" uid="uid://bmhupfrg4pevn" path="res://scenes/hud.gd" id="1_oo0fn"]
+[ext_resource type="FontFile" uid="uid://cm7k3bq0r3j0a" path="res://assets/monogram.ttf" id="3_5ysmq"]
 [ext_resource type="Texture2D" uid="uid://de62fqh1gawch" path="res://assets/art/ice_cream.png" id="2_oo0fn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
-font_size = 20
+font = ExtResource("3_5ysmq")
+font_size = 26
 font_color = Color(0.84867877, 0.94227004, 0.99999994, 1)
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)

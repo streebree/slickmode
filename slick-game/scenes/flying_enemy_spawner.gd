@@ -1,7 +1,6 @@
-@tool
 extends Node2D
 
-@export var enemy: PackedScene = preload("res://scenes/enemy.tscn")
+var enemy = preload("res://scenes/enemy.tscn")
 var spawned_enemy = null
 
 @onready var debug_sprite: Sprite2D = $Sprite2D

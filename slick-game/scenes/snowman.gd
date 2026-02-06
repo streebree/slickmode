@@ -5,6 +5,7 @@ class_name snowman
 @onready var head_hitbox: CollisionShape2D = $"Head Hitbox"
 @onready var head_spike_hitbox: CollisionShape2D = $Area2D3/SpikeDamageHitboxHead
 @onready var tilemap: TileMapLayer = %TileMapLayer
+@onready var camera: Camera2D = $Camera2D
 
 @onready var sprite_marker: Marker2D = $AnimatedSprite2D/SpriteMarker
 @onready var scarf_link: Line2D = $ScarfLink
@@ -65,6 +66,7 @@ var in_wind_count = 0
 var is_in_hit_shake = false
 var shake_frames = 3
 var shake_counter = 0
+var stomp_y = 0
 
 func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
@@ -202,24 +204,31 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
 			is_jumping_off_ice = ice_collision_count > 0
-		elif has_jacket and not has_double_jumped:
-			#target_velocity = -velocity.y
-			target_velocity = -(velocity.y * 1.1)
-			if target_velocity > 100:
-				target_velocity = 200
-				velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
-			has_double_jumped = true
-			is_double_jumping = true
-			time_double_jumping = 0
+	if not is_on_floor() and has_jacket and Input.is_action_just_pressed("double_jump") and not has_double_jumped:
+		#target_velocity = -velocity.y
+		target_velocity = -(velocity.y * 1.1)
+		if target_velocity > 100:
+			target_velocity = 200
+			velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
+		has_double_jumped = true
+		is_double_jumping = true
+		time_double_jumping = 0
 	
 	if is_double_jumping:
 		time_double_jumping += delta
-		if Input.is_action_pressed("ui_accept"):
+		if Input.is_action_pressed("double_jump"):
 			if time_double_jumping > double_jump_length:
 				is_double_jumping = false
+				stomp_y = 0
 			else:
 				var distance = (time_double_jumping / double_jump_length) * 2 * absf(target_velocity)
 				velocity.y = move_toward(-target_velocity, target_velocity, distance)
+				# This stomp_y hack is a way to make the stomp bounce still work 
+				# while you're hovering. The above line overwrites the normal stomp
+				# velocity, so add it in but quickly taper it back down.
+				if stomp_y != 0:
+					velocity.y += stomp_y
+					stomp_y /= 1.1
 
 		else:
 			is_double_jumping = false
@@ -478,7 +487,10 @@ func on_give_abilities(abilities):
 func on_spike_damage_enter(body: Node2D) -> void:
 	# It's difficult to get the enemy to not damage you while you're stomping it. 
 	# Use this hack to check if you're falling down and if the enemy already is dead.
-	if ("is_dead" in body and not body.is_dead and velocity.y <= 0) or not "is_dead" in body:
+	if ("is_dead" in body and not body.is_dead) or not "is_dead" in body:
+	# If there are issues with the stomp collision after this change, consider changing 
+	# it back to this:
+	#if ("is_dead" in body and not body.is_dead and velocity.y <= 0) or not "is_dead" in body:
 		delta_x_from_enemy_hit = body.position.x - position.x
 		if damage_cooldown <= 0:
 			#take_damage(delta_x_from_enemy_hit)
@@ -488,9 +500,12 @@ func on_stomp_enter(body: Node2D) -> void:
 	# if you're moving down, destroy the enemy.
 	if velocity.y > 0:
 		body.destroy()
+		has_double_jumped = false
 		if Input.is_action_pressed("ui_accept"):
+			stomp_y = JUMP_VELOCITY - 30
 			velocity.y = JUMP_VELOCITY - 30
 		else:
+			stomp_y = JUMP_VELOCITY / 2
 			velocity.y = JUMP_VELOCITY / 2
 		
 
@@ -511,6 +526,8 @@ func on_one_way_left_collision(body: Node2D) -> void:
 
 func on_enter_wind(body: Node2D) -> void:
 	in_wind_count += 1
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(camera, "zoom", Vector2(1, 1), 0.8)
 
 func on_exit_wind(body: Node2D) -> void:
 	in_wind_count -= 1

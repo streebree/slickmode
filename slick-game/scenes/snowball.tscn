@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://cdxrdmuc2vxdm"]
+
+[ext_resource type="Script" uid="uid://cd4p8psv0qonm" path="res://scenes/snowball.gd" id="1_xsgkx"]
+[ext_resource type="Texture2D" uid="uid://du6u6pgh7gdb0" path="res://assets/art/placeholder/snowball.png" id="2_dnn3y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_svv1h"]
+radius = 2.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4rw7"]
+atlas = ExtResource("2_dnn3y")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kbcc"]
+atlas = ExtResource("2_dnn3y")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6q0j"]
+atlas = ExtResource("2_dnn3y")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1p75y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4rw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kbcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6q0j")
+}],
+"loop": false,
+"name": &"default",
+"speed": 9.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6lar"]
+size = Vector2(7, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsgkx"]
+size = Vector2(3, 2)
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=458650786]
+scale = Vector2(1.6799996, 1.6799996)
+collision_layer = 96
+collision_mask = 96
+script = ExtResource("1_xsgkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=104284051]
+position = Vector2(0.5, -0.5)
+shape = SubResource("CircleShape2D_svv1h")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=918045341]
+sprite_frames = SubResource("SpriteFrames_1p75y")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=620676841]
+collision_layer = 64
+collision_mask = 64
+
+[node name="StompArea" type="CollisionShape2D" parent="Area2D" unique_id=1076484351]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_f6lar")
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=134207167]
+collision_layer = 32
+collision_mask = 32
+
+[node name="DamageArea" type="CollisionShape2D" parent="Area2D2" unique_id=267721524]
+shape = SubResource("RectangleShape2D_xsgkx")

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://g6bny3qfqfd5"]
+
+[ext_resource type="Script" uid="uid://cvpgp2x6qmk61" path="res://scenes/enemy_spawner.gd" id="1_gujr5"]
+[ext_resource type="Texture2D" uid="uid://bsnurv8bf02um" path="res://assets/art/placeholder/flyingenemy.png" id="2_gujr5"]
+
+[node name="EnemySpawner" type="Node2D" unique_id=1810855687]
+script = ExtResource("1_gujr5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=603237183]
+texture = ExtResource("2_gujr5")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
