@@ -267,11 +267,13 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0et35"]
-size = Vector2(12, 15)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ksmda"]
+radius = 6.0
+height = 15.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iulbc"]
-size = Vector2(23, 12)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eg3al"]
+radius = 6.0000005
+height = 23.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s1rrw"]
 size = Vector2(14, 1)
@@ -386,15 +388,44 @@ autoplay = "idle"
 [node name="SpriteMarker" type="Marker2D" parent="AnimatedSprite2D" unique_id=2147407151]
 position = Vector2(0, -1)
 
+[node name="FarCastBody" type="RayCast2D" parent="AnimatedSprite2D" unique_id=843807438]
+position = Vector2(0, 16)
+target_position = Vector2(74, 0)
+collision_mask = 20
+
+[node name="ShortCastBody" type="RayCast2D" parent="AnimatedSprite2D" unique_id=1931526577]
+position = Vector2(0, 16)
+target_position = Vector2(24, 0)
+collision_mask = 20
+
+[node name="FarCastHead" type="RayCast2D" parent="AnimatedSprite2D" unique_id=515007191]
+position = Vector2(0, -6)
+target_position = Vector2(74, 0)
+collision_mask = 20
+
+[node name="ShortCastHead" type="RayCast2D" parent="AnimatedSprite2D" unique_id=1048611967]
+position = Vector2(0, -6)
+target_position = Vector2(24, 0)
+collision_mask = 20
+
+[node name="FarCastScarf" type="RayCast2D" parent="AnimatedSprite2D" unique_id=197551047]
+position = Vector2(0, 4)
+target_position = Vector2(74, 0)
+collision_mask = 20
+
+[node name="ShortCastScarf" type="RayCast2D" parent="AnimatedSprite2D" unique_id=1097586859]
+position = Vector2(0, 4)
+target_position = Vector2(24, 0)
+collision_mask = 20
+
 [node name="Body Hitbox" type="CollisionShape2D" parent="." unique_id=713872290]
 position = Vector2(1, 8.5)
-shape = SubResource("RectangleShape2D_0et35")
+shape = SubResource("CapsuleShape2D_ksmda")
 debug_color = Color(0.68083644, 0.5037522, 0, 0.41960785)
 
 [node name="Head Hitbox" type="CollisionShape2D" parent="." unique_id=1226077295]
 position = Vector2(0.9999995, 4.5)
-rotation = 1.5707964
-shape = SubResource("RectangleShape2D_iulbc")
+shape = SubResource("CapsuleShape2D_eg3al")
 debug_color = Color(0.98059624, 0, 0.38231117, 0.41960785)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=96300986]
@@ -402,7 +433,6 @@ zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2102958704]
-visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -514,11 +544,6 @@ shape = SubResource("CircleShape2D_34s63")
 
 [node name="ScarfEndMarker" type="Marker2D" parent="ScarfEnd" unique_id=1038968396]
 position = Vector2(0, -2)
-
-[node name="RayCast2D" type="RayCast2D" parent="ScarfEnd" unique_id=515007191]
-position = Vector2(-24, 0)
-target_position = Vector2(0, 0)
-collision_mask = 21
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

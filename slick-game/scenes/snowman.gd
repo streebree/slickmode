@@ -10,6 +10,12 @@ class_name snowman
 @onready var sprite_marker: Marker2D = $AnimatedSprite2D/SpriteMarker
 @onready var scarf_link: Line2D = $ScarfLink
 @onready var scarf: Scarf = $ScarfEnd
+@onready var farcast_head: RayCast2D = $AnimatedSprite2D/FarCastHead
+@onready var shortcast_head: RayCast2D = $AnimatedSprite2D/ShortCastHead
+@onready var farcast_body: RayCast2D = $AnimatedSprite2D/FarCastBody
+@onready var shortcast_body: RayCast2D = $AnimatedSprite2D/ShortCastBody
+@onready var farcast_scarf: RayCast2D = $AnimatedSprite2D/FarCastScarf
+@onready var shortcast_scarf: RayCast2D = $AnimatedSprite2D/ShortCastScarf
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -320.0
@@ -51,7 +57,6 @@ var is_ducked_under_tile = false
 var keys_collected: Array[String] = []
 
 var previous_health = StateManager.maxHealth
-#var looking_direction = 1
 var was_in_air_last_frame = false
 
 var has_ground_pounded = false
@@ -63,7 +68,9 @@ var double_jump_length = 1.0
 
 var in_wind_count = 0
 
+var is_scarf_started = false
 var is_in_hit_shake = false
+var shake_origin_position = null
 var shake_frames = 3
 var shake_counter = 0
 var stomp_y = 0
@@ -80,13 +87,31 @@ func _ready() -> void:
 	scarf_link.visible = false
 	
 func start_scarf_throw():
+	is_scarf_started = true
 	sprite.stop()
 	sprite.play("scarf_startup")
 	# Start throw after startup is finished in on_animation_finished
 
+func update_scarflink():
+	var start = scarf_link.to_local(sprite_marker.global_position)
+	var end = scarf_link.to_local(scarf.marker.global_position)
+	scarf_link.points = [
+		start,
+		end
+	]
+	
+	if end.x < start.x:  # Make sure the texture is facing the correct way
+		#scarf_link.texture_mode = Line2D.LINE_TEXTURE_TILEd 
+		scarf_link.scale.y = -1
+	else:
+		scarf_link.scale.y = 1
+
 func on_scarf_hit(direction):
+	print("on_scarf_hit")
+	
 	is_in_hit_shake = true
-	await get_tree().create_timer(0.2).timeout
+	shake_origin_position = position
+	await get_tree().create_timer(0.3).timeout
 	
 	start_dash(direction)
 	sprite.play("scarf_return")
@@ -95,8 +120,10 @@ func on_scarf_hit(direction):
 func start_dash(direction):
 	if not can_dash:
 		return
-
+	
 	dash_duration_current = dash_duration
+	is_scarf_started = false
+	
 	if direction == 0:
 		if looking_direction > 0:
 			velocity.x = SPEED_CAP + EXTRA_DASH_SPEED
@@ -133,31 +160,23 @@ func _physics_process(delta: float) -> void:
 		
 	# Update scarf link during animation
 	if scarf.is_thrown:
+		update_scarflink()
 		scarf_link.visible = true
 		
-		var start = scarf_link.to_local(sprite_marker.global_position)
-		var end = scarf_link.to_local(scarf.marker.global_position)
-		scarf_link.points = [
-			start,
-			end
-		]
-		
-		if end.x < start.x:  # Make sure the texture is facing the correct way
-			#scarf_link.texture_mode = Line2D.LINE_TEXTURE_TILE
-			scarf_link.scale.y = -1
-		else:
-			scarf_link.scale.y = 1
-		
 		if is_in_hit_shake:
-			if shake_counter < shake_frames:
-				match shake_counter:
-					0: position.x += 5 * looking_direction
-					1: position.x -= 9 * looking_direction
-					2: position.x += 6 * looking_direction
-					3: 
-						position.x -= 5 * looking_direction
-						is_in_hit_shake = false
+			if shake_counter < shake_frames + 1:
 				shake_counter += 1
+				match shake_counter:
+					1: position.x = shake_origin_position.x + 5 * looking_direction
+					2: position.x = shake_origin_position.x - 3 * looking_direction
+					3: position.x = shake_origin_position.x + 1 * looking_direction
+					4: 
+						position = shake_origin_position
+						
+						print("hello")
+						is_in_hit_shake = false
+						shake_counter = 0
+						shake_origin_position = null
 	else:
 		scarf_link.visible = false
 		
@@ -256,24 +275,35 @@ func _physics_process(delta: float) -> void:
 		
 	# Handle left/right movement.
 	direction = Input.get_axis("ui_left", "ui_right")
+	#print("hello direction: ", direction)
 	
 	# Remember which direction you're looking for dash calculations
 	if absf(direction) != 0:
-		looking_direction = direction
+		if not is_scarf_started or not scarf.is_thrown:
+			looking_direction = direction # Once scarf is started lock your looking direction
+			
+		shortcast_head.target_position.x = 24.0 * looking_direction
+		shortcast_scarf.target_position.x = 24.0 * looking_direction
+		shortcast_body.target_position.x = 24.0 * looking_direction
+		
+		farcast_head.target_position.x = 74.0 * looking_direction
+		farcast_scarf.target_position.x = 74.0 * looking_direction
+		farcast_body.target_position.x = 74.0 * looking_direction
+		
 	direction_vertical = Input.get_axis("ui_up", "ui_down")
 	
-	if Input.is_action_just_pressed("run") and dash_cooldown_current <= 0 and dash_duration_current <= 0:
+	if Input.is_action_just_pressed("run") and not is_scarf_started and dash_cooldown_current <= 0 and dash_duration_current <= 0:
 		# dash just started:
 		#start_dash()
 		start_scarf_throw()
 	
 	# If you hit a wall and you're on ice or jumping from the ice, bounce off the wall to keep speed.
 	if is_on_wall() and (is_jumping_off_ice or ice_collision_count > 0):
+		scarf.reset()
 		velocity.x = -prev_x_velocity
 		
 	# Handle basic left/right movement input
-	if ice_collision_count == 0:
-	#if ice_collision_count == 0 and (is_on_floor() or not is_jumping_off_ice):
+	if ice_collision_count == 0 and not scarf.is_thrown:
 		if is_on_floor():
 			velocity.x = 0
 		elif direction:
@@ -319,17 +349,17 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	check_above_tile()
 	update_animation()
-	#queue_redraw()
+	queue_redraw()
 
 func update_animation():
+	# Handle sprite change when pressing left or right.
+	if looking_direction > 0:
+		sprite.flip_h = false
+	elif looking_direction < 0:
+		sprite.flip_h = true
+		
 	if scarf.is_thrown or sprite.animation == "scarf_startup":
 		return
-	
-	# Handle sprite change when pressing left or right.
-	if direction > 0:
-		sprite.flip_h = false
-	elif direction < 0:
-		sprite.flip_h = true
 		
 	if not is_ducked_under_tile:
 		# Handle jumping animation
@@ -387,16 +417,20 @@ func update_animation():
 
 func on_animation_finished():
 	if sprite.animation == "scarf_startup":
-		scarf.throw(looking_direction)
-		sprite.play("scarf_idle")
-		
-		velocity.x *= 0.5 
-		velocity.y = 0
+		if not check_shortcast():
+			scarf.throw(looking_direction)
+			sprite.play("scarf_idle")
+			
+			velocity.x *= 0.5 
+			velocity.y = 0
+		else:
+			sprite.play("scarf_return")
+			is_scarf_started = false
 		
 	if scarf.is_thrown:
 		return
 	
-	if not Input.is_anything_pressed():
+	if not Input.is_anything_pressed() or sprite.animation == "scarf_return":
 		if is_ducked_under_tile:
 			return
 		elif sprite.animation == "duck":
@@ -420,11 +454,72 @@ func check_above_tile() -> bool:
 	else:
 		is_ducked_under_tile = false
 	return head_tile_data == null
+
+func check_shortcast() -> bool:
+	return shortcast_head.is_colliding() or shortcast_body.is_colliding() or shortcast_scarf.is_colliding()
 	
-#func _draw():
-		#print(check_above_tile())
-		## Draw where the head collision would be
-		#draw_circle(Vector2(0, 0), 5, Color.RED if not check_above_tile() else Color.GREEN)
+func get_farcast():
+	var closest_collision_point = null
+	var closest_distance = INF
+	
+	if farcast_head.is_colliding() or farcast_body.is_colliding() or farcast_scarf.is_colliding():
+		if farcast_head.is_colliding():
+			if farcast_head.position.distance_to(to_local(farcast_head.get_collision_point())) < closest_distance:
+				closest_collision_point = to_local(farcast_head.get_collision_point())
+				closest_distance = farcast_head.position.distance_to(to_local(farcast_head.get_collision_point()))
+		
+		if farcast_scarf.is_colliding():
+			if farcast_scarf.position.distance_to(to_local(farcast_scarf.get_collision_point())) < closest_distance:
+				closest_collision_point = to_local(farcast_scarf.get_collision_point())
+				closest_distance = farcast_scarf.position.distance_to(to_local(farcast_scarf.get_collision_point()))
+				
+		if farcast_body.is_colliding():
+			if farcast_body.position.distance_to(to_local(farcast_body.get_collision_point())) < closest_distance:
+				closest_collision_point = to_local(farcast_body.get_collision_point())
+				closest_distance = farcast_body.position.distance_to(to_local(farcast_body.get_collision_point()))
+
+	return { "point": closest_collision_point, "distance": closest_distance - 24.0 } # Remove offset
+
+func _draw():
+		# Draw where the head collision would be
+		draw_circle(shortcast_head.target_position, 5, Color.RED if  shortcast_head.is_colliding() or shortcast_body.is_colliding() or shortcast_scarf.is_colliding()  else Color.GREEN)
+		draw_circle(shortcast_body.target_position, 5, Color.RED if  shortcast_head.is_colliding() or shortcast_body.is_colliding() or shortcast_scarf.is_colliding() else Color.GREEN)
+		
+		draw_circle(farcast_body.target_position, 5, Color.RED if  farcast_body.is_colliding() or farcast_head.is_colliding() or farcast_scarf.is_colliding() else Color.BLUE)
+		draw_circle(farcast_head.target_position, 5, Color.RED if  farcast_body.is_colliding() or farcast_head.is_colliding() or farcast_scarf.is_colliding() else Color.BLUE)
+		
+		if shortcast_head.is_colliding() or shortcast_body.is_colliding() or shortcast_scarf.is_colliding():
+			var closest_collision_point = null
+			if shortcast_head.position.distance_to(to_local(shortcast_head.get_collision_point())) < shortcast_head.position.distance_to(to_local(shortcast_body.get_collision_point())):
+				closest_collision_point = to_local(shortcast_head.get_collision_point())
+			else:
+				closest_collision_point = to_local(shortcast_body.get_collision_point())
+			
+			draw_circle(closest_collision_point, 5, Color.LIGHT_GREEN)
+			
+		if farcast_head.is_colliding() or farcast_body.is_colliding() or farcast_scarf.is_colliding():
+			#print(shortcast.get_collider())
+			var closest_collision_point = null
+			var closest_distance = INF
+			if farcast_head.is_colliding():
+				#print("far head: ", farcast_head.get_collider())
+				if farcast_head.position.distance_to(to_local(farcast_head.get_collision_point())) < closest_distance:
+					closest_collision_point = to_local(farcast_head.get_collision_point())
+					closest_distance = farcast_head.position.distance_to(to_local(farcast_head.get_collision_point()))
+			
+			if farcast_scarf.is_colliding():
+				#print("far scarf: ", farcast_scarf.get_collider())
+				if farcast_scarf.position.distance_to(to_local(farcast_scarf.get_collision_point())) < closest_distance:
+					closest_collision_point = to_local(farcast_scarf.get_collision_point())
+					closest_distance = farcast_scarf.position.distance_to(to_local(farcast_scarf.get_collision_point()))
+					
+			if farcast_body.is_colliding():
+				#print("far body: ", farcast_body.get_collider())
+				if farcast_body.position.distance_to(to_local(farcast_body.get_collision_point())) < closest_distance:
+					closest_collision_point = to_local(farcast_body.get_collision_point())
+					closest_distance = farcast_body.position.distance_to(to_local(farcast_body.get_collision_point()))
+			
+			draw_circle(closest_collision_point, 5, Color.SKY_BLUE)
 
 func destroy_self():
 	StateManager.update_health(-100, 0)
