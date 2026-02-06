@@ -5,6 +5,7 @@ class_name snowman
 @onready var head_hitbox: CollisionShape2D = $"Head Hitbox"
 @onready var head_spike_hitbox: CollisionShape2D = $Area2D3/SpikeDamageHitboxHead
 @onready var tilemap: TileMapLayer = %TileMapLayer
+@onready var camera: Camera2D = $Camera2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -320.0
@@ -145,19 +146,19 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
 			is_jumping_off_ice = ice_collision_count > 0
-		elif has_jacket and not has_double_jumped:
-			#target_velocity = -velocity.y
-			target_velocity = -(velocity.y * 1.1)
-			if target_velocity > 100:
-				target_velocity = 200
-				velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
-			has_double_jumped = true
-			is_double_jumping = true
-			time_double_jumping = 0
+	if not is_on_floor() and has_jacket and Input.is_action_just_pressed("double_jump") and not has_double_jumped:
+		#target_velocity = -velocity.y
+		target_velocity = -(velocity.y * 1.1)
+		if target_velocity > 100:
+			target_velocity = 200
+			velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
+		has_double_jumped = true
+		is_double_jumping = true
+		time_double_jumping = 0
 	
 	if is_double_jumping:
 		time_double_jumping += delta
-		if Input.is_action_pressed("ui_accept"):
+		if Input.is_action_pressed("double_jump"):
 			if time_double_jumping > double_jump_length:
 				is_double_jumping = false
 				stomp_y = 0
@@ -430,6 +431,8 @@ func on_one_way_left_collision(body: Node2D) -> void:
 
 func on_enter_wind(body: Node2D) -> void:
 	in_wind_count += 1
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(camera, "zoom", Vector2(1, 1), 0.8)
 
 func on_exit_wind(body: Node2D) -> void:
 	in_wind_count -= 1

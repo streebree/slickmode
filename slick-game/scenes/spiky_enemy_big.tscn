@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://cr46fersqcshr"]
+
+[ext_resource type="Script" uid="uid://c6qojlbrx4o65" path="res://scenes/spiky_enemy.gd" id="1_mlyqp"]
+[ext_resource type="Texture2D" uid="uid://dd8u3ljlc6utd" path="res://assets/art/spritesheets/spiky_enemy.png" id="2_h4wrk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukxvi"]
+atlas = ExtResource("2_h4wrk")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnwof"]
+atlas = ExtResource("2_h4wrk")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyh0m"]
+atlas = ExtResource("2_h4wrk")
+region = Rect2(0, 96, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxtqb"]
+atlas = ExtResource("2_h4wrk")
+region = Rect2(48, 96, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlhox"]
+atlas = ExtResource("2_h4wrk")
+region = Rect2(0, 64, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfmtv"]
+atlas = ExtResource("2_h4wrk")
+region = Rect2(48, 64, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yalji"]
+atlas = ExtResource("2_h4wrk")
+region = Rect2(0, 32, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nu5hc"]
+animations = [{
+"frames": [{
+"duration": 16.0,
+"texture": SubResource("AtlasTexture_ukxvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnwof")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyh0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxtqb")
+}],
+"loop": false,
+"name": &"recover",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlhox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfmtv")
+}],
+"loop": true,
+"name": &"shake_it_off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yalji")
+}],
+"loop": false,
+"name": &"squished",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ukxvi"]
+size = Vector2(35, 12.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnwof"]
+size = Vector2(38.745377, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1lf1"]
+size = Vector2(32, 7.875)
+
+[node name="SpikyEnemyBEEG" type="CharacterBody2D" unique_id=1957662773]
+scale = Vector2(4.839999, 4.839999)
+collision_layer = 96
+collision_mask = 112
+script = ExtResource("1_mlyqp")
+comes_back = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1937417732]
+position = Vector2(0, 2.5)
+sprite_frames = SubResource("SpriteFrames_nu5hc")
+animation = &"recover"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=458603828]
+visible = false
+position = Vector2(1.5, 11.25)
+shape = SubResource("RectangleShape2D_ukxvi")
+
+[node name="Spike Damage Collision" type="Area2D" parent="." unique_id=1248367318]
+visible = false
+position = Vector2(0, 4)
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike Damage Collision" unique_id=1496745926]
+position = Vector2(1, 8)
+scale = Vector2(1.0065718, 1)
+shape = SubResource("RectangleShape2D_rnwof")
+debug_color = Color(0.9677796, 0.09199826, 0.39762312, 0.41960785)
+
+[node name="Stomp Collision" type="Area2D" parent="." unique_id=529953358]
+visible = false
+position = Vector2(0, 4)
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stomp Collision" unique_id=406250458]
+position = Vector2(1, -2)
+shape = SubResource("RectangleShape2D_e1lf1")

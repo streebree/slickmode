@@ -8,6 +8,7 @@ var is_dead = false
 func _ready() -> void:
 	velocity.x = direction * 100
 	velocity.y = 0
+	StateManager.listen("player_death", Callable(self, "on_player_death"))
 
 func _process(delta: float) -> void:
 	if not is_dead:
@@ -25,8 +26,13 @@ func destroy():
 
 func delete_self():
 	await get_tree().create_timer(0.4).timeout
+	StateManager.ignore("player_death", Callable(self, "on_player_death"))
 	call_deferred("queue_free")
 	
 # called by the kill plane if the enemy is out of bounds.
 func destroy_self():
+	StateManager.ignore("player_death", Callable(self, "on_player_death"))
 	call_deferred("queue_free")
+
+func on_player_death(args):
+	destroy_self()

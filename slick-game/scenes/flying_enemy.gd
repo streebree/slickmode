@@ -32,9 +32,9 @@ func _physics_process(delta: float) -> void:
 		
 	if shoot_cooldown_current > 0:
 		shoot_cooldown_current -= delta
-		if shoot_cooldown_current <= 0:
-			shoot()
-			shoot_cooldown_current = shoot_cooldown
+	if player != null and shoot_cooldown_current <= 0:
+		shoot()
+		shoot_cooldown_current = shoot_cooldown
 	
 	if player != null:
 		if player.position < position:
@@ -75,4 +75,10 @@ func destroy_self():
 func on_see_player(body: Node2D) -> void:
 	if "is_player" in body:
 		player = body
+	
+
+
+func on_player_leave(body: Node2D) -> void:
+	if "is_player" in body:
+		player = null
 	

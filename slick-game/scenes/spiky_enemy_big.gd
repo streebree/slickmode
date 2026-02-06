@@ -9,7 +9,6 @@ extends CharacterBody2D
 
 var is_dead = false
 var is_recovering = false
-var health = 5
 
 func _ready() -> void:
 	sprite.animation_finished.connect(on_animation_finished)
@@ -48,11 +47,11 @@ func destroy():
 	self.collision_layer = 0
 	
 	if not comes_back:
-		StateManager.update_score(1000, position)
+		StateManager.update_score(100, position)
 		delete_self()
 	else:
 		# if it comes back, re-enable collision normal size.
-		StateManager.update_score(100, position)
+		StateManager.update_score(30, position)
 		await get_tree().create_timer(1.5).timeout
 		is_recovering = true
 		await get_tree().create_timer(1.5).timeout
@@ -61,16 +60,6 @@ func destroy():
 		#sprite.scale = Vector2(1, 1)
 		#sprite.offset.y = 0
 		self.collision_layer = 112
-		
-		if health == 3:
-			sprite.modulate = Color(0.3, 0.15, 0.0)
-		
-		if health == 1:
-			sprite.modulate = Color(0.5, 0.1, 0.0)
-		
-		health -= 1
-		if health == 1:
-			comes_back = false
 	
 func delete_self():
 	await get_tree().create_timer(0.3).timeout

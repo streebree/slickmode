@@ -1,6 +1,6 @@
 extends Node2D
 
-var enemy = preload("res://scenes/flying_enemy.tscn")
+var enemy = preload("res://scenes/enemy.tscn")
 var spawned_enemy = null
 
 @onready var debug_sprite: Sprite2D = $Sprite2D

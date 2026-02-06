@@ -12,3 +12,7 @@ res://scenes/snowball.tscn
 res://scenes/snowball.gd
 res://scenes/enemy.gd
 res://scenes/snowman.tscn
+res://scenes/flying_enemy_spawner.tscn
+res://scenes/enemy_spawner.gd
+res://scenes/spiky_enemy_big.tscn
+res://scenes/spiky_enemy.gd
