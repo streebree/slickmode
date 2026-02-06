@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://7pdxc61d0xxu"]
 
-[ext_resource type="Texture2D" uid="uid://kb41ex4lb4ht" path="res://assets/art/placeholder/icecreamcone.png" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://bmhupfrg4pevn" path="res://scenes/hud.gd" id="1_oo0fn"]
 [ext_resource type="FontFile" uid="uid://cm7k3bq0r3j0a" path="res://assets/monogram.ttf" id="3_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://de62fqh1gawch" path="res://assets/art/ice_cream.png" id="2_oo0fn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
 font = ExtResource("3_5ysmq")
@@ -18,17 +18,17 @@ script = ExtResource("1_oo0fn")
 [node name="health1" type="Sprite2D" parent="." unique_id=683705566]
 position = Vector2(47, 42)
 scale = Vector2(2, 2)
-texture = ExtResource("1_ahhtf")
+texture = ExtResource("2_oo0fn")
 
 [node name="health2" type="Sprite2D" parent="." unique_id=422010243]
-position = Vector2(78, 42)
+position = Vector2(73, 51)
 scale = Vector2(2, 2)
-texture = ExtResource("1_ahhtf")
+texture = ExtResource("2_oo0fn")
 
 [node name="health3" type="Sprite2D" parent="." unique_id=101570060]
-position = Vector2(111, 42)
+position = Vector2(101, 43)
 scale = Vector2(2, 2)
-texture = ExtResource("1_ahhtf")
+texture = ExtResource("2_oo0fn")
 
 [node name="ScoreLabel" type="Label" parent="." unique_id=332320828]
 offset_left = 559.0

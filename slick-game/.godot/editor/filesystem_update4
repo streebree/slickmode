@@ -1,2 +1,5 @@
 res://scenes/hud.tscn
 res://scenes/main_tile_set.tres
+res://scenes/door.gd
+res://scenes/icecream.tscn
+res://scenes/snowman.gd
