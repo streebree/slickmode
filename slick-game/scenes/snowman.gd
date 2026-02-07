@@ -188,7 +188,7 @@ func start_dash(direction):
 			#sprite.rotation_degrees = -30
 	# Should it affect your y velocity in some way?
 	#velocity.y = 0
-	sprite.modulate = Color(1, 0, 0, 1)
+	#sprite.modulate = Color(1, 0, 0, 1)
 
 func handle_die():
 	StateManager.raise("player_death", null)

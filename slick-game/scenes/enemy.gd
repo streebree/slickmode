@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var damage_collision: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var character_body: CharacterBody2D = $"."
+@onready var die_sound: AudioStreamPlayer2D = $DieSound
 
 var is_dead = false
 var rng: RandomNumberGenerator
@@ -28,6 +29,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func destroy(delta_x):
+	die_sound.play()
 	# When dying, they fly up in the air and to the direction you hit them.
 	if delta_x > 0: 
 		velocity.x = rng.randi_range(350, 400)

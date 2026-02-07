@@ -7,8 +7,8 @@ var spawned_enemy = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if Engine.is_editor_hint():
-		return
+	#if Engine.is_editor_hint():
+		#return
 		
 	#debug_sprite.visible = false
 	spawn_enemy()
