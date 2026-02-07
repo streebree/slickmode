@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://csowo5dv557ok"]
+[gd_scene format=4 uid="uid://c2rea7y817j7g"]
 
 [ext_resource type="Script" uid="uid://cle1idslv4gx8" path="res://node-test.gd" id="1_f18gf"]
 [ext_resource type="TileSet" uid="uid://ioexiochvppf" path="res://scenes/main_tile_set.tres" id="2_gayty"]
@@ -8,8 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://drrwbb1qde3m7" path="res://assets/art/tilesets/windbox.png" id="4_k8gmt"]
 [ext_resource type="Texture2D" uid="uid://br3x4cgwy2nx8" path="res://assets/art/placeholder/background1.png" id="5_k8gmt"]
 [ext_resource type="Texture2D" uid="uid://f806pa0exola" path="res://assets/art/placeholder/background2.png" id="6_7inyv"]
-[ext_resource type="AudioStream" uid="uid://dl75krm64q111" path="res://assets/audio/Snow.wav" id="7_5kqwe"]
+[ext_resource type="AudioStream" uid="uid://bweoljfccwl5c" path="res://assets/audio/Snow2.ogg" id="7_gayty"]
 [ext_resource type="PackedScene" uid="uid://7pdxc61d0xxu" path="res://scenes/hud.tscn" id="8_2bgkt"]
+[ext_resource type="AudioStream" uid="uid://dy2aemlqum3qq" path="res://assets/audio/Cool Snow2.ogg" id="8_gayty"]
 [ext_resource type="PackedScene" uid="uid://c1duoa4rdhgyi" path="res://scenes/level_start.tscn" id="9_6fjde"]
 [ext_resource type="PackedScene" uid="uid://domfe53a2mmqd" path="res://scenes/level_end.tscn" id="10_n07cq"]
 [ext_resource type="PackedScene" uid="uid://bk0d2nat47ssr" path="res://scenes/kill_plane.tscn" id="11_ed4iq"]
@@ -256,8 +257,12 @@ follow_viewport = false
 [node name="Sprite2D3" type="Sprite2D" parent="Parallax2D3" unique_id=1857026633]
 texture = ExtResource("6_7inyv")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1346540891]
-stream = ExtResource("7_5kqwe")
+[node name="SnowMusic" type="AudioStreamPlayer" parent="." unique_id=1346540891]
+stream = ExtResource("7_gayty")
+volume_db = -14.597
+
+[node name="CoolMusic" type="AudioStreamPlayer" parent="." unique_id=937954564]
+stream = ExtResource("8_gayty")
 volume_db = -14.597
 
 [node name="CanvasLayer" parent="." unique_id=67627577 instance=ExtResource("8_2bgkt")]
@@ -363,7 +368,7 @@ position = Vector2(2425, -96)
 position = Vector2(2470, -95)
 
 [node name="Checkpoint4" parent="." unique_id=1268285878 instance=ExtResource("13_vw45c")]
-position = Vector2(2263, -115)
+position = Vector2(2328, -111.99999)
 scale = Vector2(2.88, 2.7999988)
 
 [node name="IceCream3" parent="." unique_id=131282086 instance=ExtResource("12_v32yf")]

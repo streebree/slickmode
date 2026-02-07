@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://ckjpn0vpiwogk" path="res://scenes/snowman.tscn" id="3_prnpl"]
 [ext_resource type="Texture2D" uid="uid://b4nwe3rb8yd41" path="res://assets/art/placeholder/background0.png" id="5_p3lme"]
 [ext_resource type="Texture2D" uid="uid://br3x4cgwy2nx8" path="res://assets/art/placeholder/background1.png" id="6_ag3m5"]
+[ext_resource type="AudioStream" uid="uid://bweoljfccwl5c" path="res://assets/audio/Snow2.ogg" id="7_6xikd"]
 [ext_resource type="Texture2D" uid="uid://f806pa0exola" path="res://assets/art/placeholder/background2.png" id="7_aoiyj"]
-[ext_resource type="AudioStream" uid="uid://dl75krm64q111" path="res://assets/audio/Snow.wav" id="8_ag3m5"]
 [ext_resource type="PackedScene" uid="uid://bs81qvckva4lr" path="res://scenes/enemy.tscn" id="8_aoiyj"]
 [ext_resource type="PackedScene" uid="uid://di0du105wmb17" path="res://scenes/spiky_enemy.tscn" id="9_aoiyj"]
 [ext_resource type="PackedScene" uid="uid://6ctj6mrcdqgc" path="res://scenes/key.tscn" id="13_mdq12"]
@@ -68,7 +68,7 @@ follow_viewport = false
 texture = ExtResource("7_aoiyj")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1346540891]
-stream = ExtResource("8_ag3m5")
+stream = ExtResource("7_6xikd")
 volume_db = -14.597
 
 [node name="Enemy" parent="." unique_id=1106049794 instance=ExtResource("8_aoiyj")]
