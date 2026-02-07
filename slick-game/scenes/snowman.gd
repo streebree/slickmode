@@ -268,14 +268,16 @@ func _physics_process(delta: float) -> void:
 			# dash just ended:
 			sprite.rotation_degrees = 0
 			dash_cooldown_current = dash_cooldown
-			sprite.modulate = Color(0, 1, 1, 0.3)
+			#sprite.modulate = Color(0, 1, 1, 0.3)
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") or (Input.is_action_just_pressed("double_jump") and in_wind_count > 0):
 		#if scarf.is_thrown:
 			#scarf.cancel_scarf()
 			#return
 		
+		if Input.is_action_just_pressed("double_jump") and in_wind_count > 0:
+			flying_sound.play()
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
 			is_jumping_off_ice = ice_collision_count > 0
@@ -657,7 +659,7 @@ func _on_area_2d_2_body_exited(body: Node2D) -> void:
 func on_take_damage(delta_x):
 	StateManager.update_multiplier(-1)
 	damage_cooldown = damage_cooldown_max
-	sprite.modulate = Color(0.5, 0, 0, 0.3)
+	sprite.modulate = Color(0.7, 0, 0, 1.0)
 	velocity.y -= 150
 	if delta_x > 0:
 		velocity.x = -50

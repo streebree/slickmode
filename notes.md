@@ -22,11 +22,11 @@ Icons:
 
 Standing pushing boost in windbox gives extra high jump
 
+Snowball animation
+
 Skybox
 
 Dialog
-
-Controls in the air
 
 Roadside graphic
 

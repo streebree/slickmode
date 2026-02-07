@@ -82,7 +82,7 @@ level_name = "level4"
 position = Vector2(80, -80)
 
 [node name="KillPlane" parent="." unique_id=967972591 instance=ExtResource("11_gsftq")]
-position = Vector2(1144, 499)
+position = Vector2(1704, 3912)
 scale = Vector2(7.6620593, 0.4329524)
 
 [node name="KillPlane2" parent="." unique_id=1838070507 instance=ExtResource("11_gsftq")]
@@ -94,7 +94,7 @@ position = Vector2(-1438.9998, -692.0001)
 scale = Vector2(1.1020579, 3.9529526)
 
 [node name="KillPlane4" parent="." unique_id=1060055471 instance=ExtResource("11_gsftq")]
-position = Vector2(4608.0005, -727)
+position = Vector2(7504, 367.99988)
 scale = Vector2(1.1020579, 3.9529526)
 
 [node name="Area2D2" parent="." unique_id=1376798953 instance=ExtResource("12_3c7mo")]
