@@ -627,10 +627,10 @@ func on_stomp_enter(body: Node2D) -> void:
 		has_double_jumped = false
 		
 		if Input.is_action_pressed("ui_accept"):
-			stomp_y = JUMP_VELOCITY - 30
+			#stomp_y = JUMP_VELOCITY - 30
 			velocity.y = JUMP_VELOCITY - 30
 		else:
-			stomp_y = JUMP_VELOCITY / 2
+			#stomp_y = JUMP_VELOCITY / 2
 			velocity.y = JUMP_VELOCITY / 2
 		
 
