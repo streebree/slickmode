@@ -17,6 +17,14 @@ class_name snowman
 @onready var farcast_scarf: RayCast2D = $AnimatedSprite2D/FarCastScarf
 @onready var shortcast_scarf: RayCast2D = $AnimatedSprite2D/ShortCastScarf
 
+@onready var jump_sound: AudioStreamPlayer2D = $JumpSound
+@onready var damage_sound: AudioStreamPlayer2D = $DamageSound
+@onready var land_sound: AudioStreamPlayer2D = $LandSound
+@onready var dash_sound: AudioStreamPlayer2D = $DashSound
+@onready var bounce_sound: AudioStreamPlayer2D = $BounceSound
+@onready var duck_sound: AudioStreamPlayer2D = $DuckSound
+
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -320.0
 const SPEED_CAP = 150.0
@@ -79,7 +87,10 @@ func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
 	StateManager.listen("take_damage", Callable(self, "on_take_damage"))
 	StateManager.listen("give_abilities", Callable(self, "on_give_abilities"))
+	StateManager.listen("level_start", Callable(self, "on_level_start"))
 	sprite.animation_finished.connect(on_animation_finished)
+	StateManager.listen("entered_vertical_section", Callable(self, "on_entered_vertical_section"))
+	StateManager.listen("exited_vertical_section", Callable(self, "on_exited_vertical_section"))
 	
 	#scarf_link.points = [Vector2.ZERO, Vector2.ZERO]
 	#scarf.hit_something.connect(on_scarf_hit)
@@ -121,6 +132,7 @@ func start_dash(direction):
 	if not can_dash:
 		return
 	
+	dash_sound.play(0.35)
 	dash_duration_current = dash_duration
 	is_scarf_started = false
 	
@@ -143,6 +155,7 @@ func start_dash(direction):
 
 func handle_die():
 	StateManager.raise("player_death", null)
+	#is_scarf_started = false
 	# for now, when you die, you keep your keys
 	#keys_collected = []
 	position = checkpoint_position
@@ -223,6 +236,7 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
 			is_jumping_off_ice = ice_collision_count > 0
+			jump_sound.play()
 	if not is_on_floor() and has_jacket and Input.is_action_just_pressed("double_jump") and not has_double_jumped:
 		
 		sprite.play("cool_jacket_startup")
@@ -230,8 +244,8 @@ func _physics_process(delta: float) -> void:
 		target_velocity = -(velocity.y * 1.1)
 		if target_velocity > 100:
 			target_velocity = 200
-			velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
 			has_double_jumped = true
+			#velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
 		is_double_jumping = true
 		time_double_jumping = 0
 	
@@ -257,7 +271,7 @@ func _physics_process(delta: float) -> void:
 			
 	# Handle wind physics. If you're holding jump, get extra height.
 	if in_wind_count > 0 and not is_on_floor():
-		if Input.is_action_pressed("ui_accept"):
+		if Input.is_action_pressed("ui_accept") or Input.is_action_pressed("double_jump"):
 			velocity.y -= 1000 * delta
 			# Speed cap your vertical speed in the wind, or it gets a little crazy.
 			# Consider taking this out though, if it feels good.
@@ -272,9 +286,11 @@ func _physics_process(delta: float) -> void:
 		
 	# Reset your midair abilities when landing:
 	if was_in_air_last_frame and is_on_floor():
+		land_sound.play(0.05)
 		has_ground_pounded = false
 		has_double_jumped = false
 		is_double_jumping = false
+		was_in_air_last_frame = false
 		
 	# Handle left/right movement.
 	direction = Input.get_axis("ui_left", "ui_right")
@@ -305,6 +321,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_wall() and (is_jumping_off_ice or ice_collision_count > 0):
 		#scarf.reset()
 		velocity.x = -prev_x_velocity
+		bounce_sound.play(0.06)
 		
 	# Handle basic left/right movement input
 	if ice_collision_count == 0 and not scarf.is_thrown:
@@ -323,12 +340,14 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, SPEED_CAP, delta * 400)
 		else:
 			velocity.x = move_toward(velocity.x, -SPEED_CAP, delta * 400)
+	
 			
 	# Set some values about this frame so the next frame can compare how the state changed.
 	prev_x_velocity = velocity.x
 	if not is_on_floor():
 		was_in_air_last_frame = true
 	is_player_on_floor = is_on_floor()
+	
 	
 	
 	# Handle damage cooldowns:
@@ -399,6 +418,8 @@ func update_animation():
 	# Handle ducking animation
 	if Input.is_action_just_pressed("ui_down"):
 		play_shared_anim("duck")
+		duck_sound.play(.2)
+		sprite.play("duck")
 	elif Input.is_action_just_released("ui_down"):
 			if not is_ducked_under_tile:
 				play_shared_anim("duck", true)
@@ -565,6 +586,7 @@ func _on_area_2d_2_body_entered(body: Node2D) -> void:
 		if damage_cooldown <= 0:
 			delta_x_from_enemy_hit = body.position.x - position.x
 			StateManager.update_health(-1, delta_x_from_enemy_hit)
+			damage_sound.play()
 	else:
 		# Else you're dashing so destroy the enemy.
 		body.destroy(body.position.x - position.x)
@@ -598,6 +620,11 @@ func on_give_abilities(abilities):
 	has_jacket = abilities.has_jacket
 	can_dash = abilities.can_dash
 	
+func on_level_start(level_name):
+	if level_name == "level3":
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(camera, "zoom", Vector2(1, 1), 2.0)
+	
 #func take_damage(delta_x_from_enemy_hit):
 	#health -= 1
 	#StateManager.raise("health_update", health)
@@ -614,17 +641,20 @@ func on_spike_damage_enter(body: Node2D) -> void:
 		if damage_cooldown <= 0:
 			#take_damage(delta_x_from_enemy_hit)
 			StateManager.update_health(-1, delta_x_from_enemy_hit)
+			damage_sound.play()
+			
 
 func on_stomp_enter(body: Node2D) -> void:
 	# if you're moving down, destroy the enemy.
 	if velocity.y > 0:
 		body.destroy()
 		has_double_jumped = false
+		
 		if Input.is_action_pressed("ui_accept"):
-			stomp_y = JUMP_VELOCITY - 30
+			#stomp_y = JUMP_VELOCITY - 30
 			velocity.y = JUMP_VELOCITY - 30
 		else:
-			stomp_y = JUMP_VELOCITY / 2
+			#stomp_y = JUMP_VELOCITY / 2
 			velocity.y = JUMP_VELOCITY / 2
 		
 
@@ -645,8 +675,6 @@ func on_one_way_left_collision(body: Node2D) -> void:
 
 func on_enter_wind(body: Node2D) -> void:
 	in_wind_count += 1
-	var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(camera, "zoom", Vector2(1, 1), 0.8)
 
 func on_exit_wind(body: Node2D) -> void:
 	in_wind_count -= 1
@@ -676,3 +704,15 @@ func play_shared_anim(name, is_backwards = false):
 			return
 		"falling":
 			sprite.play("falling") if not has_jacket else sprite.play("cool_falling_start")
+			
+func on_entered_vertical_section(args):
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(camera, "offset:y", -80, 1.0)
+	
+func on_exited_vertical_section(args):
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(camera, "offset:y", 0, 1.0)
+	
+	
+	
+	

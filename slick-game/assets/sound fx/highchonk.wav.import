@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d0nwih8jug6ev"
+path="res://.godot/imported/highchonk.wav-234141d08b0f0fd1f7a0efcd5e1977eb.sample"
+
+[deps]
+
+source_file="res://assets/sound fx/highchonk.wav"
+dest_files=["res://.godot/imported/highchonk.wav-234141d08b0f0fd1f7a0efcd5e1977eb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cbfh3vi32x4s0" path="res://scenes/icecream.gd" id="1_bk6j7"]
 [ext_resource type="Texture2D" uid="uid://de62fqh1gawch" path="res://assets/art/ice_cream.png" id="2_bk6j7"]
+[ext_resource type="AudioStream" uid="uid://up3k8ff8mqrg" path="res://assets/sound fx/droplet.wav" id="3_v2jsa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bk6j7"]
 size = Vector2(9, 16)
@@ -17,5 +18,9 @@ shape = SubResource("RectangleShape2D_bk6j7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1246300091]
 texture = ExtResource("2_bk6j7")
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="." unique_id=1235228223]
+stream = ExtResource("3_v2jsa")
+max_polyphony = 8
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

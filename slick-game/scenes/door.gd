@@ -4,6 +4,8 @@ class_name Door extends RigidBody2D
 @onready var sprite: AnimatedSprite2D = $"AnimatedSprite2D"
 @onready var key_legend: AnimatedSprite2D = $"KeyLegend"
 # Need to reference how many keys the player is holding so that we can update the sprite(s)
+@onready var open_sound_2: AudioStreamPlayer2D = $OpenSound2
+@onready var open_sound: AudioStreamPlayer2D = $OpenSound
 
 var is_unlocked = false
 
@@ -13,6 +15,8 @@ func on_ready():
 	
 func open():
 	key_legend.visible = false
+	open_sound_2.play()
+	open_sound.play()
 	
 	is_unlocked = true
 	sprite.play("unlock")

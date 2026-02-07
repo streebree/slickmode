@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://domfe53a2mmqd" path="res://scenes/level_end.tscn" id="20_bh3d8"]
 [ext_resource type="PackedScene" uid="uid://bk0d2nat47ssr" path="res://scenes/kill_plane.tscn" id="21_2vtak"]
 
-[node name="Node2D" type="Node2D" unique_id=1625689784]
+[node name="Node2D2" type="Node2D" unique_id=1625689784]
 script = ExtResource("1_13o7w")
 level_name = "level2"
 
@@ -68,6 +68,7 @@ texture = ExtResource("10_nywgu")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1346540891]
 stream = ExtResource("11_hk863")
 volume_db = -14.597
+autoplay = true
 
 [node name="CanvasLayer" parent="." unique_id=67627577 instance=ExtResource("18_6ya1w")]
 

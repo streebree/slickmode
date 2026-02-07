@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://c7cf13ifcjjli" path="res://scenes/door.gd" id="1_uvdjg"]
 [ext_resource type="Texture2D" uid="uid://cfwbw4hii62pp" path="res://assets/art/spritesheets/key_door.png" id="2_uvdjg"]
 [ext_resource type="Texture2D" uid="uid://curkeru2fa4sb" path="res://assets/art/spritesheets/key_legend.png" id="3_83dcw"]
+[ext_resource type="AudioStream" uid="uid://daofn521ssbla" path="res://assets/sound fx/punch.wav" id="4_18pbm"]
+[ext_resource type="AudioStream" uid="uid://darntnn4nya3g" path="res://assets/sound fx/key.wav" id="5_q5w8r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvdjg"]
 size = Vector2(10, 32)
@@ -143,5 +145,12 @@ shape = SubResource("RectangleShape2D_83dcw")
 [node name="KeyLegend" type="AnimatedSprite2D" parent="." unique_id=1072774104]
 position = Vector2(11, -12)
 sprite_frames = SubResource("SpriteFrames_j2w5t")
+
+[node name="OpenSound" type="AudioStreamPlayer2D" parent="." unique_id=1134420382]
+stream = ExtResource("4_18pbm")
+
+[node name="OpenSound2" type="AudioStreamPlayer2D" parent="." unique_id=221455400]
+stream = ExtResource("5_q5w8r")
+volume_db = -17.865
 
 [connection signal="body_entered" from="Area2D" to="." method="on_key_entered"]

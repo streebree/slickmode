@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://3dxjkccsuiua"]
+
+[ext_resource type="Script" uid="uid://djqqq2fqckki1" path="res://scenes/camera_up.gd" id="1_v6kb8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48052"]
+
+[node name="Area2D" type="Area2D" unique_id=1632645612]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_v6kb8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1431001533]
+shape = SubResource("RectangleShape2D_48052")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

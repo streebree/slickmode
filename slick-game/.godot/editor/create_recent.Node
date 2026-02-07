@@ -1,5 +1,6 @@
 CollisionShape2D
 Area2D
+AudioStreamPlayer2D
 CharacterBody2D
 AnimatedSprite2D
 RigidBody2D
@@ -11,4 +12,3 @@ CanvasLayer
 AudioStreamPlayer
 Parallax2D
 Camera2D
-TileMapLayer

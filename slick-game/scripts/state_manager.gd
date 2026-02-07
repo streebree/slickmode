@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 		level_timer = 0
 		get_tree().change_scene_to_file(next_level_name)
 
-func start_level(par_time, s_rank, a_rank, b_rank, c_rank, next_level):
+func start_level(par_time, s_rank, a_rank, b_rank, c_rank, next_level, level_name):
 	level_par_time = par_time
 	level_has_started = true
 	level_s_rank = s_rank
@@ -59,6 +59,8 @@ func start_level(par_time, s_rank, a_rank, b_rank, c_rank, next_level):
 	level_b_rank = b_rank
 	level_c_rank = c_rank
 	next_level_name = next_level
+	raise("level_start", level_name)
+	print("Start level", level_name)
 	
 func end_level():
 	if not level_has_started:

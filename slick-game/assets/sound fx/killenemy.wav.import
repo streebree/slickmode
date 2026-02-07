@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://eibvotfdhjr4"
+path="res://.godot/imported/killenemy.wav-1e561943cbf28efece5764795cf55208.sample"
+
+[deps]
+
+source_file="res://assets/sound fx/killenemy.wav"
+dest_files=["res://.godot/imported/killenemy.wav-1e561943cbf28efece5764795cf55208.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
