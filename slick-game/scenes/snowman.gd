@@ -17,6 +17,11 @@ class_name snowman
 @onready var farcast_scarf: RayCast2D = $AnimatedSprite2D/FarCastScarf
 @onready var shortcast_scarf: RayCast2D = $AnimatedSprite2D/ShortCastScarf
 
+@onready var jump_sound: AudioStreamPlayer2D = $JumpSound
+@onready var damage_sound: AudioStreamPlayer2D = $DamageSound
+@onready var land_sound: AudioStreamPlayer2D = $LandSound
+
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -320.0
 const SPEED_CAP = 150.0
@@ -143,6 +148,7 @@ func start_dash(direction):
 
 func handle_die():
 	StateManager.raise("player_death", null)
+	#is_scarf_started = false
 	# for now, when you die, you keep your keys
 	#keys_collected = []
 	position = checkpoint_position
@@ -223,6 +229,7 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
 			is_jumping_off_ice = ice_collision_count > 0
+			jump_sound.play()
 	if not is_on_floor() and has_jacket and Input.is_action_just_pressed("double_jump") and not has_double_jumped:
 		#target_velocity = -velocity.y
 		target_velocity = -(velocity.y * 1.1)
@@ -269,9 +276,11 @@ func _physics_process(delta: float) -> void:
 		
 	# Reset your midair abilities when landing:
 	if was_in_air_last_frame and is_on_floor():
+		land_sound.play(0.05)
 		has_ground_pounded = false
 		has_double_jumped = false
 		is_double_jumping = false
+		was_in_air_last_frame = false
 		
 	# Handle left/right movement.
 	direction = Input.get_axis("ui_left", "ui_right")
@@ -319,12 +328,14 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, SPEED_CAP, delta * 400)
 		else:
 			velocity.x = move_toward(velocity.x, -SPEED_CAP, delta * 400)
+	
 			
 	# Set some values about this frame so the next frame can compare how the state changed.
 	prev_x_velocity = velocity.x
 	if not is_on_floor():
 		was_in_air_last_frame = true
 	is_player_on_floor = is_on_floor()
+	
 	
 	
 	# Handle damage cooldowns:
@@ -596,6 +607,7 @@ func on_stomp_enter(body: Node2D) -> void:
 	if velocity.y > 0:
 		body.destroy()
 		has_double_jumped = false
+		
 		if Input.is_action_pressed("ui_accept"):
 			stomp_y = JUMP_VELOCITY - 30
 			velocity.y = JUMP_VELOCITY - 30

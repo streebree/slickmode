@@ -4,8 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cvx1ecf0scy2n" path="res://assets/art/placeholder/yukidaruma.png" id="1_s1rrw"]
 [ext_resource type="Texture2D" uid="uid://o0djwg5f6kfi" path="res://assets/art/spritesheets/snowman_sheet.png" id="3_o1g3c"]
 [ext_resource type="Texture2D" uid="uid://gn1k873ydlur" path="res://assets/art/scarf_link.png" id="4_v53y5"]
-[ext_resource type="Script" uid="uid://bx4rshvf1x54h" path="res://scenes/scarf.gd" id="5_eg3al"]
+[ext_resource type="Script" path="res://scenes/scarf.gd" id="5_eg3al"]
 [ext_resource type="Texture2D" uid="uid://kn2kfv7qrsw1" path="res://assets/art/spritesheets/scarf_projectile.png" id="5_ksmda"]
+[ext_resource type="AudioStream" uid="uid://d2biqug8ydclp" path="res://assets/sound fx/takedamage2.wav" id="7_8t5k0"]
+[ext_resource type="AudioStream" uid="uid://cvqum4wyx2pei" path="res://assets/sound fx/step.wav" id="8_iulbc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1g3c"]
 atlas = ExtResource("3_o1g3c")
@@ -382,7 +384,7 @@ script = ExtResource("1_j7fvb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=721837144]
 sprite_frames = SubResource("SpriteFrames_j7fvb")
-animation = &"scarf_idle"
+animation = &"scarf_hit"
 autoplay = "idle"
 
 [node name="SpriteMarker" type="Marker2D" parent="AnimatedSprite2D" unique_id=2147407151]
@@ -544,6 +546,20 @@ shape = SubResource("CircleShape2D_34s63")
 
 [node name="ScarfEndMarker" type="Marker2D" parent="ScarfEnd" unique_id=1038968396]
 position = Vector2(0, -2)
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="." unique_id=1830797994]
+stream = ExtResource("7_8t5k0")
+volume_db = -7.46
+max_polyphony = 6
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=488553957]
+stream = ExtResource("8_iulbc")
+max_polyphony = 5
+
+[node name="LandSound" type="AudioStreamPlayer2D" parent="." unique_id=927932973]
+stream = ExtResource("8_iulbc")
+pitch_scale = 0.68
+max_polyphony = 5
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
