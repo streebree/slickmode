@@ -78,7 +78,6 @@ volume_db = -14.597
 [node name="CoolMusic" type="AudioStreamPlayer" parent="." unique_id=937954564]
 stream = ExtResource("8_gayty")
 volume_db = -14.597
-autoplay = true
 
 [node name="CanvasLayer" parent="." unique_id=67627577 instance=ExtResource("8_2bgkt")]
 
