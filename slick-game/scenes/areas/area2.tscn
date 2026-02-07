@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cle1idslv4gx8" path="res://node-test.gd" id="1_13o7w"]
 [ext_resource type="TileSet" uid="uid://ioexiochvppf" path="res://scenes/main_tile_set.tres" id="2_thd2o"]
+[ext_resource type="AudioStream" uid="uid://bweoljfccwl5c" path="res://assets/audio/Snow2.ogg" id="7_4ibi2"]
 [ext_resource type="PackedScene" uid="uid://ckjpn0vpiwogk" path="res://scenes/snowman.tscn" id="7_cqopj"]
 [ext_resource type="Texture2D" uid="uid://b4nwe3rb8yd41" path="res://assets/art/placeholder/background0.png" id="8_rgbjk"]
 [ext_resource type="Texture2D" uid="uid://br3x4cgwy2nx8" path="res://assets/art/placeholder/background1.png" id="9_o0vff"]
 [ext_resource type="Texture2D" uid="uid://f806pa0exola" path="res://assets/art/placeholder/background2.png" id="10_nywgu"]
-[ext_resource type="AudioStream" uid="uid://dl75krm64q111" path="res://assets/audio/Snow.wav" id="11_hk863"]
 [ext_resource type="PackedScene" uid="uid://j6fyafu5ymtk" path="res://scenes/falling_platform.tscn" id="14_b8qy5"]
 [ext_resource type="PackedScene" uid="uid://by1ldxkw8bmvw" path="res://scenes/icecream.tscn" id="16_u0ssx"]
 [ext_resource type="PackedScene" uid="uid://cdxrdmuc2vxdm" path="res://scenes/snowball.tscn" id="16_xr0et"]
@@ -66,7 +66,7 @@ follow_viewport = false
 texture = ExtResource("10_nywgu")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1346540891]
-stream = ExtResource("11_hk863")
+stream = ExtResource("7_4ibi2")
 volume_db = -14.597
 autoplay = true
 

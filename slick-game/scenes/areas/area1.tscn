@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://cle1idslv4gx8" path="res://node-test.gd" id="1_uo65m"]
 [ext_resource type="TileSet" uid="uid://ioexiochvppf" path="res://scenes/main_tile_set.tres" id="2_gbaeq"]
 [ext_resource type="PackedScene" uid="uid://ckjpn0vpiwogk" path="res://scenes/snowman.tscn" id="7_7caxk"]
+[ext_resource type="AudioStream" uid="uid://bweoljfccwl5c" path="res://assets/audio/Snow2.ogg" id="7_gbaeq"]
 [ext_resource type="Texture2D" uid="uid://b4nwe3rb8yd41" path="res://assets/art/placeholder/background0.png" id="8_tiylo"]
 [ext_resource type="Texture2D" uid="uid://br3x4cgwy2nx8" path="res://assets/art/placeholder/background1.png" id="9_rtd5w"]
 [ext_resource type="Texture2D" uid="uid://f806pa0exola" path="res://assets/art/placeholder/background2.png" id="10_2qggf"]
-[ext_resource type="AudioStream" uid="uid://dl75krm64q111" path="res://assets/audio/Snow.wav" id="11_tau6h"]
 [ext_resource type="PackedScene" uid="uid://di0du105wmb17" path="res://scenes/spiky_enemy.tscn" id="13_2a73c"]
 [ext_resource type="PackedScene" uid="uid://ova0ckhtdby8" path="res://scenes/door.tscn" id="14_jk5u6"]
 [ext_resource type="PackedScene" uid="uid://6ctj6mrcdqgc" path="res://scenes/key.tscn" id="15_88qyh"]
@@ -73,7 +73,7 @@ follow_viewport = false
 texture = ExtResource("10_2qggf")
 
 [node name="BackgroundSong" type="AudioStreamPlayer" parent="." unique_id=1346540891]
-stream = ExtResource("11_tau6h")
+stream = ExtResource("7_gbaeq")
 volume_db = -14.597
 autoplay = true
 
