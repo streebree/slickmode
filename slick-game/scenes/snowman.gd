@@ -283,7 +283,8 @@ func _physics_process(delta: float) -> void:
 		
 		sprite.play("cool_jacket_startup")
 		
-		target_velocity = -(velocity.y * 1.1)
+		target_velocity = -(velocity.y * jacket_jump_boost)
+		jacket_jump_boost *= jacket_jump_decay
 		if target_velocity > 100:
 			target_velocity = 200
 			has_high_jumped = true
