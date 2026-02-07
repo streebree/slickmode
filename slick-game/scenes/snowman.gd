@@ -47,6 +47,7 @@ var direction_vertical = 0
 var ice_collision_count = 0
 var prev_x_velocity = 0
 var damage_collision_count = 0
+var prev_y_position = 0
 
 var health = 3
 var max_health = 3
@@ -92,6 +93,10 @@ var stomp_y = 0
 
 # For the jacket ability aquisition
 var is_transitioning = false
+
+var slope_collision_count = 0
+@export var can_become_snowball = false
+var is_in_snowball_mode = false
 
 func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
@@ -334,6 +339,21 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("ui_accept") and velocity.y < 0:
 		velocity.y /= 3.0
 		
+		# Handle snowball activation:
+	if Input.is_action_just_pressed("ui_down") and can_become_snowball and not is_in_snowball_mode:
+		print("start snowball mode")
+		is_in_snowball_mode = true
+		
+		# Handle snowball physics
+	if is_in_snowball_mode and slope_collision_count > 0 and prev_y_position < position.y:
+		print("get more speed")
+		if velocity.x > 0:
+			velocity.x += 600 * delta
+			print("velocity.x ", velocity.x)
+		else:
+			velocity.x -= 600 * delta
+			print("velocity.x ", velocity.x)
+		
 	# Reset your midair abilities when landing:
 	if was_in_air_last_frame and is_on_floor():
 		land_sound.play(0.05)
@@ -376,7 +396,7 @@ func _physics_process(delta: float) -> void:
 		
 	# Handle basic left/right movement input
 	if ice_collision_count == 0 and not scarf.is_thrown:
-		if is_on_floor():
+		if is_on_floor() and not is_in_snowball_mode:
 			velocity.x = 0
 		elif direction:
 			velocity.x += direction * SPEED * delta
@@ -395,6 +415,7 @@ func _physics_process(delta: float) -> void:
 			
 	# Set some values about this frame so the next frame can compare how the state changed.
 	prev_x_velocity = velocity.x
+	prev_y_position = position.y
 	if not is_on_floor():
 		was_in_air_last_frame = true
 	is_player_on_floor = is_on_floor()
@@ -638,13 +659,13 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 func _on_area_2d_2_body_entered(body: Node2D) -> void:
 	print(body)
 	# Only take damage if you're not dashing.
-	if dash_duration_current <= 0:
+	if dash_duration_current <= 0 and not is_in_snowball_mode:
 		if damage_cooldown <= 0:
 			delta_x_from_enemy_hit = body.position.x - position.x
 			StateManager.update_health(-1, delta_x_from_enemy_hit)
 			damage_sound.play()
 	else:
-		# Else you're dashing so destroy the enemy.
+		# Else you're dashing or a snowball so destroy the enemy.
 		body.destroy(body.position.x - position.x)
 		# If you kill an enemy while dashing, you're dash time gets reset so you can chain them.
 		dash_duration_current = dash_duration
@@ -687,6 +708,8 @@ func on_level_start(level_name):
 	#print("health ", health)
 
 func on_spike_damage_enter(body: Node2D) -> void:
+	if is_in_snowball_mode:
+		return
 	# It's difficult to get the enemy to not damage you while you're stomping it. 
 	# Use this hack to check if you're falling down and if the enemy already is dead.
 	if ("is_dead" in body and not body.is_dead) or not "is_dead" in body:
@@ -771,4 +794,9 @@ func on_exited_vertical_section(args):
 	
 	
 	
-	
+
+func on_slope_collision(body: Node2D) -> void:
+	slope_collision_count += 1
+
+func on_slope_leave(body: Node2D) -> void:
+	slope_collision_count -= 1

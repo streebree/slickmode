@@ -675,10 +675,17 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_34s63"]
 radius = 6.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q720n"]
+size = Vector2(20, 23)
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1919126236]
 collision_layer = 641
 collision_mask = 641
+floor_stop_on_slope = false
+floor_max_angle = 1.2653637
+floor_snap_length = 5.5
 script = ExtResource("1_j7fvb")
+can_become_snowball = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=721837144]
 sprite_frames = SubResource("SpriteFrames_j7fvb")
@@ -889,6 +896,14 @@ max_polyphony = 5
 [node name="FlyingSound" type="AudioStreamPlayer2D" parent="." unique_id=1020976679]
 stream = ExtResource("14_gm00g")
 
+[node name="Area2D10" type="Area2D" parent="." unique_id=953220876]
+collision_layer = 16384
+collision_mask = 16384
+
+[node name="SlopeCollision" type="CollisionShape2D" parent="Area2D10" unique_id=1451525371]
+position = Vector2(0, 21.5)
+shape = SubResource("RectangleShape2D_q720n")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
@@ -901,3 +916,5 @@ stream = ExtResource("14_gm00g")
 [connection signal="body_entered" from="Area2D9" to="." method="on_enter_wind"]
 [connection signal="body_exited" from="Area2D9" to="." method="on_exit_wind"]
 [connection signal="body_entered" from="ScarfEnd" to="ScarfEnd" method="on_scarf_area2d_entered"]
+[connection signal="body_entered" from="Area2D10" to="." method="on_slope_collision"]
+[connection signal="body_exited" from="Area2D10" to="." method="on_slope_leave"]

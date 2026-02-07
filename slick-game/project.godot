@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SlickGame"
-run/main_scene="uid://c2rea7y817j7g"
+run/main_scene="uid://bgvb556knrrtn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/stretch_mode=4
 config/icon="res://icon.svg"
@@ -111,6 +111,7 @@ double_jump={
 2d_physics/layer_12="KillPlane"
 2d_physics/layer_13="OneWayLeftOnly"
 2d_physics/layer_14="Wind"
+2d_physics/layer_15="Slope Collision"
 
 [physics]
 
