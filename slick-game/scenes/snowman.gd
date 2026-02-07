@@ -20,6 +20,9 @@ class_name snowman
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
 @onready var damage_sound: AudioStreamPlayer2D = $DamageSound
 @onready var land_sound: AudioStreamPlayer2D = $LandSound
+@onready var dash_sound: AudioStreamPlayer2D = $DashSound
+@onready var bounce_sound: AudioStreamPlayer2D = $BounceSound
+@onready var duck_sound: AudioStreamPlayer2D = $DuckSound
 
 
 const SPEED = 300.0
@@ -126,6 +129,7 @@ func start_dash(direction):
 	if not can_dash:
 		return
 	
+	dash_sound.play(0.35)
 	dash_duration_current = dash_duration
 	is_scarf_started = false
 	
@@ -311,6 +315,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_wall() and (is_jumping_off_ice or ice_collision_count > 0):
 		#scarf.reset()
 		velocity.x = -prev_x_velocity
+		bounce_sound.play(0.06)
 		
 	# Handle basic left/right movement input
 	if ice_collision_count == 0 and not scarf.is_thrown:
@@ -404,6 +409,7 @@ func update_animation():
 		
 	# Handle ducking animation
 	if Input.is_action_just_pressed("ui_down"):
+		duck_sound.play(.2)
 		sprite.play("duck")
 	elif Input.is_action_just_released("ui_down"):
 			if not is_ducked_under_tile:
@@ -553,6 +559,7 @@ func _on_area_2d_2_body_entered(body: Node2D) -> void:
 		if damage_cooldown <= 0:
 			delta_x_from_enemy_hit = body.position.x - position.x
 			StateManager.update_health(-1, delta_x_from_enemy_hit)
+			damage_sound.play()
 	else:
 		# Else you're dashing so destroy the enemy.
 		body.destroy(body.position.x - position.x)
@@ -602,6 +609,8 @@ func on_spike_damage_enter(body: Node2D) -> void:
 		if damage_cooldown <= 0:
 			#take_damage(delta_x_from_enemy_hit)
 			StateManager.update_health(-1, delta_x_from_enemy_hit)
+			damage_sound.play()
+			
 
 func on_stomp_enter(body: Node2D) -> void:
 	# if you're moving down, destroy the enemy.

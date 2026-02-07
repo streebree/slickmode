@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://domfe53a2mmqd"]
 
 [ext_resource type="Script" uid="uid://dq8s0s202n1x5" path="res://scenes/level_end.gd" id="1_muv60"]
+[ext_resource type="AudioStream" uid="uid://ceb8w8nmx1jaw" path="res://assets/sound fx/endlevel.wav" id="2_07sjm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4v5w"]
 
@@ -12,5 +13,9 @@ script = ExtResource("1_muv60")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2085674945]
 shape = SubResource("RectangleShape2D_j4v5w")
+
+[node name="EndSound" type="AudioStreamPlayer2D" parent="." unique_id=954741538]
+stream = ExtResource("2_07sjm")
+max_polyphony = 5
 
 [connection signal="body_entered" from="." to="." method="on_player_entered"]

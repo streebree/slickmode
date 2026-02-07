@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1770425143
+::res://::1770427242
 export_presets.cfg::TextFile::-1::1769978498::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::8342535290686898148::1769730058::1770412523::1::::<><><>0<>0<>88142689a169cd0b04c6b9956ed7f080<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 node-test.gd::GDScript::5554769272489494879::1770182895::0::1::::<>Node2D<><>0<>0<><>::
@@ -48,36 +48,43 @@ spiky_enemy.png::CompressedTexture2D::7439217982125835153::1770243775::177041252
 tileset_1.png::CompressedTexture2D::8587113139955166361::1770412443::1770422062::1::::<><><>0<>0<>d79271520aeeaba85b8a97887cc57f05<>res://.godot/imported/tileset_1.png-454910ff58004862e13788ba6a55e75b.ctex::
 ::res://assets/audio/::1770412524
 Snow.wav::AudioStreamWAV::7999239699832132262::1770243775::1770412524::1::::<><><>0<>0<>43f073173d5cbee8ba4a858792162904<>res://.godot/imported/Snow.wav-6e7573002330b9d74546c76500cf1780.sample::
-::res://assets/sound fx/::1770425984
-bash.wav::AudioStreamWAV::5074358016009106308::1770425984::1770425985::1::::<><><>0<>0<>9370c2c1d4f292d3618be92094f5f351<>res://.godot/imported/bash.wav-faa534499b29d2fdfa542561ca74cd3b.sample::
-big buildup.wav::AudioStreamWAV::2536198652898494350::1770425984::1770425985::1::::<><><>0<>0<>fe485163707a1082b8b22059e1431c79<>res://.godot/imported/big buildup.wav-2712e65adcc94b232bd1ce99254473c0.sample::
-big droplet.wav::AudioStreamWAV::5512625023915694835::1770425984::1770425985::1::::<><><>0<>0<>0bbae3b3a7a66b7dacf1837b159bf812<>res://.godot/imported/big droplet.wav-094fb8cd7fe721a3b866b6e303da096f.sample::
-danger.wav::AudioStreamWAV::3402128443294020621::1770425984::1770425985::1::::<><><>0<>0<>fc4707b1e8dc15c02657db6a486cf9b6<>res://.godot/imported/danger.wav-ccfdb30e18268795d7df5bd751977ec9.sample::
-droplet.wav::AudioStreamWAV::1436462214074398040::1770425984::1770425985::1::::<><><>0<>0<>9101b19f40915a097a108ce6e37aca3e<>res://.godot/imported/droplet.wav-381b8ef6267715fd9a7b8cb9b4c33b52.sample::
-endlevel.wav::AudioStreamWAV::5057705821849597754::1770425984::1770425985::1::::<><><>0<>0<>134889708279bc7ede66f3893143d2f7<>res://.godot/imported/endlevel.wav-849a248c0e047a8d6fb5ec63e342e00c.sample::
-killenemy1.wav::AudioStreamWAV::8969939967037916181::1770425984::1770425985::1::::<><><>0<>0<>034f0d1a53a410684fe4a127ad245179<>res://.godot/imported/killenemy1.wav-899e403bfd5e5fa77990620ef241ea74.sample::
-killenemy.wav::AudioStreamWAV::297369380159035211::1770425984::1770425985::1::::<><><>0<>0<>0449642e966605c890589721aa5f345c<>res://.godot/imported/killenemy.wav-1e561943cbf28efece5764795cf55208.sample::
-punch low.wav::AudioStreamWAV::1220840010865259247::1770425984::1770425985::1::::<><><>0<>0<>a7df50b3ad996880f6053907264da148<>res://.godot/imported/punch low.wav-ef2cfe2aacc83e608e7911332ed7ecca.sample::
-punch.wav::AudioStreamWAV::7188491758537043626::1770425984::1770425985::1::::<><><>0<>0<>7d8a0f89440915d779f53a26888b9391<>res://.godot/imported/punch.wav-a5218c09871edd3f62dbe2b518d949f9.sample::
-scarf pull.wav::AudioStreamWAV::5347753932539319339::1770425984::1770425985::1::::<><><>0<>0<>2861b291100a74b6b1c6e0d48ca09aa3<>res://.godot/imported/scarf pull.wav-73c32859a6ec5eb382942909584ef542.sample::
-scarf throw.wav::AudioStreamWAV::3127229737077963481::1770425984::1770425985::1::::<><><>0<>0<>4ce462609d106e61736a144149630c7a<>res://.godot/imported/scarf throw.wav-1a46e054f59f333c34b092435cc090e1.sample::
-shimmer.wav::AudioStreamWAV::8402732755630946972::1770425984::1770425985::1::::<><><>0<>0<>cd96003a7fb400b9cb4429b193d8d4db<>res://.godot/imported/shimmer.wav-4c936f16d6a7d4e0d257d61190419144.sample::
-step.wav::AudioStreamWAV::6281074455517142548::1770425984::1770425985::1::::<><><>0<>0<>5cb184f2e4d323c65d5699d944fb28df<>res://.godot/imported/step.wav-5e3a95a096e9edbdbb0fac38c8bd49f5.sample::
-takedamage2.wav::AudioStreamWAV::9056940576972238405::1770425984::1770425985::1::::<><><>0<>0<>05c6c622757093c016feedbf3d846c67<>res://.godot/imported/takedamage2.wav-447030f9bb91e034b556c4f065c90e65.sample::
-takedamage.wav::AudioStreamWAV::7239449119897824383::1770425984::1770425985::1::::<><><>0<>0<>dc05e13e42adbfb7246b6af9bca87aa2<>res://.godot/imported/takedamage.wav-07a1a3fd02d4c71f5137b4f836f0be69.sample::
+::res://assets/sound fx/::1770430022
+bash.wav::AudioStreamWAV::5074358016009106308::1770430022::1770425985::1::::<><><>0<>0<>9370c2c1d4f292d3618be92094f5f351<>res://.godot/imported/bash.wav-faa534499b29d2fdfa542561ca74cd3b.sample::
+big buildup.wav::AudioStreamWAV::2536198652898494350::1770430022::1770425985::1::::<><><>0<>0<>fe485163707a1082b8b22059e1431c79<>res://.godot/imported/big buildup.wav-2712e65adcc94b232bd1ce99254473c0.sample::
+big droplet.wav::AudioStreamWAV::5512625023915694835::1770430022::1770425985::1::::<><><>0<>0<>0bbae3b3a7a66b7dacf1837b159bf812<>res://.godot/imported/big droplet.wav-094fb8cd7fe721a3b866b6e303da096f.sample::
+bounce1.wav::AudioStreamWAV::4626371800518319527::1770430022::1770430023::1::::<><><>0<>0<>1c46664216e2c463670355991d48474d<>res://.godot/imported/bounce1.wav-cc488195e3eab420bea17e58db2bdc3a.sample::
+bounce2.wav::AudioStreamWAV::2274640426179533069::1770430022::1770430023::1::::<><><>0<>0<>5b6bc20b72baf92b93cfaaec0a32e2dd<>res://.godot/imported/bounce2.wav-721fb43f39410a9ac5f09671626fee4f.sample::
+bounce.wav::AudioStreamWAV::777136009424602925::1770430022::1770430023::1::::<><><>0<>0<>d5338b4c43fd180aaa79ea6f56600e19<>res://.godot/imported/bounce.wav-67fd22672c4288715341a7cafaa77be2.sample::
+chonk.wav::AudioStreamWAV::6030238163569710395::1770430022::1770430023::1::::<><><>0<>0<>423829ec6fba493526f22e07cd4aabb8<>res://.godot/imported/chonk.wav-8f1320fc5825ccf51ab3b41f2c1c5a62.sample::
+danger.wav::AudioStreamWAV::3402128443294020621::1770430022::1770425985::1::::<><><>0<>0<>fc4707b1e8dc15c02657db6a486cf9b6<>res://.godot/imported/danger.wav-ccfdb30e18268795d7df5bd751977ec9.sample::
+droplet.wav::AudioStreamWAV::1436462214074398040::1770430022::1770425985::1::::<><><>0<>0<>9101b19f40915a097a108ce6e37aca3e<>res://.godot/imported/droplet.wav-381b8ef6267715fd9a7b8cb9b4c33b52.sample::
+endlevel.wav::AudioStreamWAV::5057705821849597754::1770430022::1770425985::1::::<><><>0<>0<>134889708279bc7ede66f3893143d2f7<>res://.godot/imported/endlevel.wav-849a248c0e047a8d6fb5ec63e342e00c.sample::
+highchonk.wav::AudioStreamWAV::8942170532102905321::1770430022::1770430023::1::::<><><>0<>0<>376eb6b933b7c42a0234875c1a2aff4a<>res://.godot/imported/highchonk.wav-234141d08b0f0fd1f7a0efcd5e1977eb.sample::
+key.wav::AudioStreamWAV::7195180428110429614::1770430022::1770430023::1::::<><><>0<>0<>63ad467821fceaa33a4c7efa76af7c8e<>res://.godot/imported/key.wav-9596fb2fafea8d12419cc3b40ab561d0.sample::
+killenemy1.wav::AudioStreamWAV::8969939967037916181::1770430022::1770425985::1::::<><><>0<>0<>034f0d1a53a410684fe4a127ad245179<>res://.godot/imported/killenemy1.wav-899e403bfd5e5fa77990620ef241ea74.sample::
+killenemy.wav::AudioStreamWAV::297369380159035211::1770430022::1770425985::1::::<><><>0<>0<>0449642e966605c890589721aa5f345c<>res://.godot/imported/killenemy.wav-1e561943cbf28efece5764795cf55208.sample::
+punch low.wav::AudioStreamWAV::1220840010865259247::1770430022::1770425985::1::::<><><>0<>0<>a7df50b3ad996880f6053907264da148<>res://.godot/imported/punch low.wav-ef2cfe2aacc83e608e7911332ed7ecca.sample::
+punch.wav::AudioStreamWAV::7188491758537043626::1770430022::1770425985::1::::<><><>0<>0<>7d8a0f89440915d779f53a26888b9391<>res://.godot/imported/punch.wav-a5218c09871edd3f62dbe2b518d949f9.sample::
+scarf pull.wav::AudioStreamWAV::5347753932539319339::1770430022::1770425985::1::::<><><>0<>0<>2861b291100a74b6b1c6e0d48ca09aa3<>res://.godot/imported/scarf pull.wav-73c32859a6ec5eb382942909584ef542.sample::
+scarf throw.wav::AudioStreamWAV::3127229737077963481::1770430022::1770425985::1::::<><><>0<>0<>4ce462609d106e61736a144149630c7a<>res://.godot/imported/scarf throw.wav-1a46e054f59f333c34b092435cc090e1.sample::
+shimmer.wav::AudioStreamWAV::8402732755630946972::1770430022::1770425985::1::::<><><>0<>0<>cd96003a7fb400b9cb4429b193d8d4db<>res://.godot/imported/shimmer.wav-4c936f16d6a7d4e0d257d61190419144.sample::
+smallchonk.wav::AudioStreamWAV::8646538668650286879::1770430022::1770430023::1::::<><><>0<>0<>73b365c22cb8e39216834241ad117fa3<>res://.godot/imported/smallchonk.wav-9403834d817d76f2ee0f015119083b2b.sample::
+step.wav::AudioStreamWAV::6281074455517142548::1770430022::1770425985::1::::<><><>0<>0<>5cb184f2e4d323c65d5699d944fb28df<>res://.godot/imported/step.wav-5e3a95a096e9edbdbb0fac38c8bd49f5.sample::
+takedamage2.wav::AudioStreamWAV::9056940576972238405::1770430022::1770425985::1::::<><><>0<>0<>05c6c622757093c016feedbf3d846c67<>res://.godot/imported/takedamage2.wav-447030f9bb91e034b556c4f065c90e65.sample::
+takedamage.wav::AudioStreamWAV::7239449119897824383::1770430022::1770425985::1::::<><><>0<>0<>dc05e13e42adbfb7246b6af9bca87aa2<>res://.godot/imported/takedamage.wav-07a1a3fd02d4c71f5137b4f836f0be69.sample::
 ::res://builds/::1769974448
 ::res://builds/web/::1770412523
 index.apple-touch-icon.png::CompressedTexture2D::9222392499013473673::1769978498::1770412523::1::::<><><>0<>0<>dae0e46b2ecb339327da908bfdde5c8c<>res://.godot/imported/index.apple-touch-icon.png-829bd6566b1ab329ce6e0fe101c50e36.ctex::
 index.icon.png::CompressedTexture2D::5768469280307871083::1769978498::1770412523::1::::<><><>0<>0<>73dcbea4b95305d0ae2d60c7cbd45fd4<>res://.godot/imported/index.icon.png-1d537cdb021c40f184d1277d96fd0f0f.ctex::
 index.png::CompressedTexture2D::9200499753421803491::1769978498::1770412523::1::::<><><>0<>0<>a5b785023fbcad06184f792d49f259a8<>res://.godot/imported/index.png-2770f543c84e6b55d99f3bb624b49866.ctex::
-::res://scenes/::1770424727
+::res://scenes/::1770428525
 audio_stream_player.gd::GDScript::5203256897184605574::1770412466::0::1::::<>AudioStreamPlayer<><>0<>0<><>::
 checkpoint.gd::GDScript::755968495355341894::1770412466::0::1::::<>Area2D<><>0<>0<><>::
 checkpoint.tscn::PackedScene::3041524387675618771::1770412466::0::1::::<><><>0<>0<><>::uid://k1gxqodl5c3g::::res://scenes/checkpoint.gd
 door.gd::GDScript::7023364618159171242::1770412443::0::1::::Door<>RigidBody2D<><>0<>0<><>::
 door.tscn::PackedScene::1026040509453633789::1770412443::0::1::::<><><>0<>0<><>::uid://c7cf13ifcjjli::::res://scenes/door.gd<>uid://cfwbw4hii62pp::::res://assets/art/spritesheets/key_door.png<>uid://curkeru2fa4sb::::res://assets/art/spritesheets/key_legend.png
-enemy.gd::GDScript::8057497524603206419::1770412466::0::1::::<>CharacterBody2D<><>0<>0<><>::
-enemy.tscn::PackedScene::3719552656138476043::1770422055::0::1::::<><><>0<>0<><>::uid://dm2d2o56k7nkl::::res://scenes/enemy.gd<>uid://1fd77yb8fop5::::res://assets/art/spritesheets/enemy_sheet.png
+enemy.gd::GDScript::8057497524603206419::1770428001::0::1::::<>CharacterBody2D<><>0<>0<><>::
+enemy.tscn::PackedScene::3719552656138476043::1770428324::0::1::::<><><>0<>0<><>::uid://dm2d2o56k7nkl::::res://scenes/enemy.gd<>uid://1fd77yb8fop5::::res://assets/art/spritesheets/enemy_sheet.png<>uid://d02duopgpeh4p::::res://assets/sound fx/killenemy1.wav
 enemy_spawner.gd::GDScript::6278165294052270304::1770422055::0::1::::<>Node2D<><>0<>1<><>::
 enemy_spawner.tscn::PackedScene::1046222884710704261::1770422055::0::1::::<><><>0<>0<><>::uid://cvpgp2x6qmk61::::res://scenes/enemy_spawner.gd<>uid://1fd77yb8fop5::::res://assets/art/spritesheets/enemy_sheet.png
 falling_platform.gd::GDScript::5717631635260995289::1770412443::0::1::::<>RigidBody2D<><>0<>0<><>::
@@ -88,8 +95,8 @@ flying_enemy_spawner.gd::GDScript::2244960502454384336::1770422053::0::1::::<>No
 flying_enemy_spawner.tscn::PackedScene::485214009066787816::1770422053::0::1::::<><><>0<>0<><>::uid://cvpgp2x6qmk61::::res://scenes/enemy_spawner.gd<>uid://bsnurv8bf02um::::res://assets/art/placeholder/flyingenemy.png
 hud.gd::GDScript::3244378867582197807::1770412466::0::1::::<>CanvasLayer<><>0<>0<><>::
 hud.tscn::PackedScene::2277232041088022134::1770412443::0::1::::<><><>0<>0<><>::uid://bmhupfrg4pevn::::res://scenes/hud.gd<>uid://cm7k3bq0r3j0a::::res://assets/monogram.ttf<>uid://de62fqh1gawch::::res://assets/art/ice_cream.png
-icecream.gd::GDScript::4853828237631235161::1770412466::0::1::::<>Area2D<><>0<>0<><>::
-icecream.tscn::PackedScene::4125301221442408040::1770412443::0::1::::<><><>0<>0<><>::uid://cbfh3vi32x4s0::::res://scenes/icecream.gd<>uid://de62fqh1gawch::::res://assets/art/ice_cream.png
+icecream.gd::GDScript::4853828237631235161::1770428525::0::1::::<>Area2D<><>0<>0<><>::
+icecream.tscn::PackedScene::4125301221442408040::1770428525::0::1::::<><><>0<>0<><>::uid://cbfh3vi32x4s0::::res://scenes/icecream.gd<>uid://de62fqh1gawch::::res://assets/art/ice_cream.png<>uid://up3k8ff8mqrg::::res://assets/sound fx/droplet.wav
 key.gd::GDScript::1743389553807384021::1770412466::0::1::::<>Area2D<><>0<>0<><>::
 key.tscn::PackedScene::2181154250831549286::1770412443::0::1::::<><><>0<>0<><>::uid://y3rmvff1tauv::::res://scenes/key.gd<>uid://0ckvy7okr51o::::res://assets/art/key.png
 kill_plane.gd::GDScript::6376260422155641434::1770412466::0::1::::<>Area2D<><>0<>0<><>::
@@ -104,14 +111,14 @@ score_text.gd::GDScript::9156670874553078962::1770412466::0::1::::<>Node2D<><>0<
 score_text.tscn::PackedScene::6537439387430216796::1770412466::0::1::::<><><>0<>0<><>::uid://d3ptbcn8jygv7::::res://scenes/score_text.gd
 snowball.gd::GDScript::5044245355903320750::1770412443::0::1::::<>CharacterBody2D<><>0<>0<><>::
 snowball.tscn::PackedScene::5031926794206512742::1770412443::0::1::::<><><>0<>0<><>::uid://cd4p8psv0qonm::::res://scenes/snowball.gd<>uid://du6u6pgh7gdb0::::res://assets/art/placeholder/snowball.png
-snowman.gd::GDScript::3187315447413407566::1770424727::0::1::::snowman<>CharacterBody2D<><>0<>0<><>::
-snowman.tscn::PackedScene::5494244519983074014::1770424727::0::1::::<><><>0<>0<><>::uid://bln7vcorjgofm::::res://scenes/snowman.gd<>uid://cvx1ecf0scy2n::::res://assets/art/placeholder/yukidaruma.png<>uid://o0djwg5f6kfi::::res://assets/art/spritesheets/snowman_sheet.png<>uid://gn1k873ydlur::::res://assets/art/scarf_link.png<>res://scenes/scarf.gd<>uid://kn2kfv7qrsw1::::res://assets/art/spritesheets/scarf_projectile.png
+snowman.gd::GDScript::3187315447413407566::1770427833::0::1::::snowman<>CharacterBody2D<><>0<>0<><>::
+snowman.tscn::PackedScene::5494244519983074014::1770428312::0::1::::<><><>0<>0<><>::uid://bln7vcorjgofm::::res://scenes/snowman.gd<>uid://cvx1ecf0scy2n::::res://assets/art/placeholder/yukidaruma.png<>uid://o0djwg5f6kfi::::res://assets/art/spritesheets/snowman_sheet.png<>uid://gn1k873ydlur::::res://assets/art/scarf_link.png<>res://scenes/scarf.gd<>uid://kn2kfv7qrsw1::::res://assets/art/spritesheets/scarf_projectile.png<>uid://d2biqug8ydclp::::res://assets/sound fx/takedamage2.wav<>uid://cvqum4wyx2pei::::res://assets/sound fx/step.wav<>uid://cigqyxg3gk588::::res://assets/sound fx/scarf pull.wav
 spiky_enemy.gd::GDScript::6982592254379988012::1770422053::0::1::::<>CharacterBody2D<><>0<>0<><>::
 spiky_enemy.tscn::PackedScene::7772601516511603928::1770412443::0::1::::<><><>0<>0<><>::uid://c6qojlbrx4o65::::res://scenes/spiky_enemy.gd<>uid://dd8u3ljlc6utd::::res://assets/art/spritesheets/spiky_enemy.png
 spiky_enemy_big.gd::GDScript::8347567042047909942::1770422053::0::1::::<>CharacterBody2D<><>0<>0<><>::
 spiky_enemy_big.tscn::PackedScene::6027810057040165335::1770422053::0::1::::<><><>0<>0<><>::uid://c6qojlbrx4o65::::res://scenes/spiky_enemy.gd<>uid://dd8u3ljlc6utd::::res://assets/art/spritesheets/spiky_enemy.png
-::res://scenes/areas/::1770422055
-area1.tscn::PackedScene::7108799775482697177::1770422055::0::1::::<><><>0<>0<><>::uid://cle1idslv4gx8::::res://node-test.gd<>uid://ioexiochvppf::::res://scenes/main_tile_set.tres<>uid://ckjpn0vpiwogk::::res://scenes/snowman.tscn<>uid://b4nwe3rb8yd41::::res://assets/art/placeholder/background0.png<>uid://br3x4cgwy2nx8::::res://assets/art/placeholder/background1.png<>uid://f806pa0exola::::res://assets/art/placeholder/background2.png<>uid://dl75krm64q111::::res://assets/audio/Snow.wav<>uid://di0du105wmb17::::res://scenes/spiky_enemy.tscn<>uid://ova0ckhtdby8::::res://scenes/door.tscn<>uid://6ctj6mrcdqgc::::res://scenes/key.tscn<>uid://by1ldxkw8bmvw::::res://scenes/icecream.tscn<>uid://bjllpyn7o184f::::res://scenes/checkpoint.tscn<>uid://o52exufl3vht::::res://scenes/enemy_spawner.tscn<>uid://7pdxc61d0xxu::::res://scenes/hud.tscn<>uid://c1duoa4rdhgyi::::res://scenes/level_start.tscn<>uid://domfe53a2mmqd::::res://scenes/level_end.tscn<>uid://bk0d2nat47ssr::::res://scenes/kill_plane.tscn
+::res://scenes/areas/::1770429239
+area1.tscn::PackedScene::7108799775482697177::1770429239::0::1::::<><><>0<>0<><>::uid://cle1idslv4gx8::::res://node-test.gd<>uid://ioexiochvppf::::res://scenes/main_tile_set.tres<>uid://ckjpn0vpiwogk::::res://scenes/snowman.tscn<>uid://b4nwe3rb8yd41::::res://assets/art/placeholder/background0.png<>uid://br3x4cgwy2nx8::::res://assets/art/placeholder/background1.png<>uid://f806pa0exola::::res://assets/art/placeholder/background2.png<>uid://dl75krm64q111::::res://assets/audio/Snow.wav<>uid://di0du105wmb17::::res://scenes/spiky_enemy.tscn<>uid://ova0ckhtdby8::::res://scenes/door.tscn<>uid://6ctj6mrcdqgc::::res://scenes/key.tscn<>uid://by1ldxkw8bmvw::::res://scenes/icecream.tscn<>uid://bjllpyn7o184f::::res://scenes/checkpoint.tscn<>uid://o52exufl3vht::::res://scenes/enemy_spawner.tscn<>uid://7pdxc61d0xxu::::res://scenes/hud.tscn<>uid://c1duoa4rdhgyi::::res://scenes/level_start.tscn<>uid://domfe53a2mmqd::::res://scenes/level_end.tscn<>uid://bk0d2nat47ssr::::res://scenes/kill_plane.tscn
 area2.tscn::PackedScene::8647562947326667336::1770422055::0::1::::<><><>0<>0<><>::uid://cle1idslv4gx8::::res://node-test.gd<>uid://ioexiochvppf::::res://scenes/main_tile_set.tres<>uid://ckjpn0vpiwogk::::res://scenes/snowman.tscn<>uid://b4nwe3rb8yd41::::res://assets/art/placeholder/background0.png<>uid://br3x4cgwy2nx8::::res://assets/art/placeholder/background1.png<>uid://f806pa0exola::::res://assets/art/placeholder/background2.png<>uid://dl75krm64q111::::res://assets/audio/Snow.wav<>uid://j6fyafu5ymtk::::res://scenes/falling_platform.tscn<>uid://by1ldxkw8bmvw::::res://scenes/icecream.tscn<>uid://cdxrdmuc2vxdm::::res://scenes/snowball.tscn<>uid://bjllpyn7o184f::::res://scenes/checkpoint.tscn<>uid://cr46fersqcshr::::res://scenes/spiky_enemy_big.tscn<>uid://g6bny3qfqfd5::::res://scenes/flying_enemy_spawner.tscn<>uid://7pdxc61d0xxu::::res://scenes/hud.tscn<>uid://c1duoa4rdhgyi::::res://scenes/level_start.tscn<>uid://domfe53a2mmqd::::res://scenes/level_end.tscn<>uid://bk0d2nat47ssr::::res://scenes/kill_plane.tscn
 area.tscn::PackedScene::6362690409761645594::1770412443::0::1::::<><><>0<>0<><>::uid://cle1idslv4gx8::::res://node-test.gd<>uid://ioexiochvppf::::res://scenes/main_tile_set.tres<>uid://ckjpn0vpiwogk::::res://scenes/snowman.tscn<>uid://b4nwe3rb8yd41::::res://assets/art/placeholder/background0.png<>uid://br3x4cgwy2nx8::::res://assets/art/placeholder/background1.png<>uid://f806pa0exola::::res://assets/art/placeholder/background2.png<>uid://dl75krm64q111::::res://assets/audio/Snow.wav<>uid://bs81qvckva4lr::::res://scenes/enemy.tscn<>uid://di0du105wmb17::::res://scenes/spiky_enemy.tscn<>uid://6ctj6mrcdqgc::::res://scenes/key.tscn<>uid://ova0ckhtdby8::::res://scenes/door.tscn<>uid://by1ldxkw8bmvw::::res://scenes/icecream.tscn<>uid://bjllpyn7o184f::::res://scenes/checkpoint.tscn<>uid://7pdxc61d0xxu::::res://scenes/hud.tscn<>uid://c1duoa4rdhgyi::::res://scenes/level_start.tscn<>uid://domfe53a2mmqd::::res://scenes/level_end.tscn<>uid://bk0d2nat47ssr::::res://scenes/kill_plane.tscn
 ::res://scripts/::1770171366

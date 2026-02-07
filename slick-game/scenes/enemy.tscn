@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dm2d2o56k7nkl" path="res://scenes/enemy.gd" id="1_ihwpr"]
 [ext_resource type="Texture2D" uid="uid://1fd77yb8fop5" path="res://assets/art/spritesheets/enemy_sheet.png" id="2_md0e3"]
+[ext_resource type="AudioStream" uid="uid://d02duopgpeh4p" path="res://assets/sound fx/killenemy1.wav" id="3_4ra3w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ra3w"]
 atlas = ExtResource("2_md0e3")
@@ -93,3 +94,8 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=278372736]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_cejb6")
+
+[node name="DieSound" type="AudioStreamPlayer2D" parent="." unique_id=191366230]
+stream = ExtResource("3_4ra3w")
+volume_db = -12.429
+max_polyphony = 8

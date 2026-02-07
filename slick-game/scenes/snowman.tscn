@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://kn2kfv7qrsw1" path="res://assets/art/spritesheets/scarf_projectile.png" id="5_ksmda"]
 [ext_resource type="AudioStream" uid="uid://d2biqug8ydclp" path="res://assets/sound fx/takedamage2.wav" id="7_8t5k0"]
 [ext_resource type="AudioStream" uid="uid://cvqum4wyx2pei" path="res://assets/sound fx/step.wav" id="8_iulbc"]
+[ext_resource type="AudioStream" uid="uid://lcpk06cdajn6" path="res://assets/sound fx/bounce.wav" id="9_b8r2s"]
+[ext_resource type="AudioStream" uid="uid://dvgph1i2fdqep" path="res://assets/sound fx/smallchonk.wav" id="9_eq3t3"]
+[ext_resource type="AudioStream" uid="uid://cigqyxg3gk588" path="res://assets/sound fx/scarf pull.wav" id="9_iulbc"]
+[ext_resource type="AudioStream" uid="uid://d0nwih8jug6ev" path="res://assets/sound fx/highchonk.wav" id="10_no5s5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1g3c"]
 atlas = ExtResource("3_o1g3c")
@@ -551,13 +555,35 @@ position = Vector2(0, -2)
 stream = ExtResource("7_8t5k0")
 volume_db = -7.46
 max_polyphony = 6
+panning_strength = 0.0
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=488553957]
 stream = ExtResource("8_iulbc")
+pitch_scale = 1.83
+max_polyphony = 5
+
+[node name="JumpSoundOther" type="AudioStreamPlayer2D" parent="." unique_id=1860688804]
+stream = ExtResource("9_b8r2s")
 max_polyphony = 5
 
 [node name="LandSound" type="AudioStreamPlayer2D" parent="." unique_id=927932973]
 stream = ExtResource("8_iulbc")
+pitch_scale = 0.58
+max_polyphony = 5
+
+[node name="DashSound" type="AudioStreamPlayer2D" parent="." unique_id=1366749973]
+stream = ExtResource("9_iulbc")
+volume_db = -7.018
+pitch_scale = 0.68
+max_polyphony = 5
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="." unique_id=1041021384]
+stream = ExtResource("10_no5s5")
+max_polyphony = 5
+
+[node name="DuckSound" type="AudioStreamPlayer2D" parent="." unique_id=387459784]
+stream = ExtResource("9_eq3t3")
+volume_db = 5.933
 pitch_scale = 0.68
 max_polyphony = 5
 

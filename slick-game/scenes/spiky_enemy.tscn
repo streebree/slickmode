@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c6qojlbrx4o65" path="res://scenes/spiky_enemy.gd" id="1_ukxvi"]
 [ext_resource type="Texture2D" uid="uid://dd8u3ljlc6utd" path="res://assets/art/spritesheets/spiky_enemy.png" id="2_ukxvi"]
+[ext_resource type="AudioStream" uid="uid://cr6de2urgfxfn" path="res://assets/sound fx/chonk.wav" id="3_rnwof"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ukxvi"]
 atlas = ExtResource("2_ukxvi")
@@ -121,3 +122,7 @@ collision_mask = 64
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stomp Collision" unique_id=406250458]
 position = Vector2(1, -2)
 shape = SubResource("RectangleShape2D_e1lf1")
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="." unique_id=493493410]
+stream = ExtResource("3_rnwof")
+pitch_scale = 0.78
