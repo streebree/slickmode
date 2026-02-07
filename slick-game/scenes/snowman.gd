@@ -17,6 +17,9 @@ class_name snowman
 @onready var farcast_scarf: RayCast2D = $AnimatedSprite2D/FarCastScarf
 @onready var shortcast_scarf: RayCast2D = $AnimatedSprite2D/ShortCastScarf
 
+@onready var jacket: Jacket = %Jacket
+@onready var discarded_hat = %DiscardedHat
+
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
 @onready var damage_sound: AudioStreamPlayer2D = $DamageSound
 @onready var land_sound: AudioStreamPlayer2D = $LandSound
@@ -68,11 +71,14 @@ var previous_health = StateManager.maxHealth
 var was_in_air_last_frame = false
 
 var has_ground_pounded = false
-var has_double_jumped = false
-var is_double_jumping = false
+var has_high_jumped = false
+var is_jacket_jump_active = false
 var target_velocity = 0
-var time_double_jumping = 0
-var double_jump_length = 1.0
+var time_jacket_jumping = 0
+var jacket_jump_length = 1.0
+var jacket_jump_count = 0
+var jacket_jump_boost = 1.25
+var jacket_jump_decay = 0.75
 
 var in_wind_count = 0
 
@@ -83,11 +89,14 @@ var shake_frames = 3
 var shake_counter = 0
 var stomp_y = 0
 
+# For the jacket ability aquisition
+var is_transitioning = false
+
 func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
 	StateManager.listen("take_damage", Callable(self, "on_take_damage"))
 	StateManager.listen("give_abilities", Callable(self, "on_give_abilities"))
-	StateManager.listen("level_start", Callable(self, "on_level_start"))
+	#StateManager.listen("level_start", Callable(self, "on_level_start"))
 	sprite.animation_finished.connect(on_animation_finished)
 	StateManager.listen("entered_vertical_section", Callable(self, "on_entered_vertical_section"))
 	StateManager.listen("exited_vertical_section", Callable(self, "on_exited_vertical_section"))
@@ -96,6 +105,33 @@ func _ready() -> void:
 	#scarf.hit_something.connect(on_scarf_hit)
 	scarf.visible = false
 	scarf_link.visible = false
+	
+	if jacket:
+		jacket.got_jacket.connect(on_got_jacket)
+	
+func on_got_jacket():
+	pass
+	# Move snowman to jacket position
+	global_position = jacket.global_position
+	
+	# Freeze snowman position in place (set transition active flag)
+	## Return gravity once flag is set to false
+	is_transitioning = true
+	sprite.play("cool_transform")
+	
+	# Manually call camera tween
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(camera, "zoom", Vector2(1, 1), 2.0)
+	
+	# Deley for a second (let it sink in)
+	await get_tree().create_timer(1).timeout
+	has_jacket = true
+	
+	# Set transition active flag to false
+	is_transitioning = false
+	
+	# Play hat falling animation
+	discarded_hat.play("sad_hat_fall")
 	
 #func start_scarf_throw():
 	#is_scarf_started = true
@@ -171,6 +207,12 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 		
+	if is_transitioning:
+		velocity.x = 0
+		velocity.y = 0
+		move_and_slide()
+		return
+		
 	# Update scarf link during animation
 	#if scarf.is_thrown:
 		#update_scarflink()
@@ -203,7 +245,7 @@ func _physics_process(delta: float) -> void:
 			# if you're holding down, do a fast fall
 			elif Input.is_action_pressed("ui_down"):
 				multiplier = 1
-		if not is_double_jumping: 
+		if not is_jacket_jump_active: 
 			velocity += get_gravity() * multiplier * delta
 		if velocity.y > 500:
 			velocity.y = 500
@@ -237,27 +279,27 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 			is_jumping_off_ice = ice_collision_count > 0
 			jump_sound.play()
-	if not is_on_floor() and has_jacket and Input.is_action_just_pressed("double_jump") and not has_double_jumped:
+	if not is_on_floor() and has_jacket and Input.is_action_just_pressed("double_jump") and not has_high_jumped:
 		
 		sprite.play("cool_jacket_startup")
 		
 		target_velocity = -(velocity.y * 1.1)
 		if target_velocity > 100:
 			target_velocity = 200
-			has_double_jumped = true
+			has_high_jumped = true
 			#velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
-		is_double_jumping = true
-		time_double_jumping = 0
+		is_jacket_jump_active = true
+		time_jacket_jumping = 0
 	
-	if is_double_jumping:
-		time_double_jumping += delta
+	if is_jacket_jump_active:
+		time_jacket_jumping += delta
 		if Input.is_action_pressed("double_jump"):
-			if time_double_jumping > double_jump_length:
-				is_double_jumping = false
+			if time_jacket_jumping > jacket_jump_length:
+				is_jacket_jump_active = false
 				sprite.play("cool_close_jacket")
 				stomp_y = 0
 			else:
-				var distance = (time_double_jumping / double_jump_length) * 2 * absf(target_velocity)
+				var distance = (time_jacket_jumping / jacket_jump_length) * 2 * absf(target_velocity)
 				velocity.y = move_toward(-target_velocity, target_velocity, distance)
 				# This stomp_y hack is a way to make the stomp bounce still work 
 				# while you're hovering. The above line overwrites the normal stomp
@@ -267,7 +309,7 @@ func _physics_process(delta: float) -> void:
 					stomp_y /= 1.1
 
 		else:
-			is_double_jumping = false
+			is_jacket_jump_active = false
 			
 	# Handle wind physics. If you're holding jump, get extra height.
 	if in_wind_count > 0 and not is_on_floor():
@@ -288,8 +330,8 @@ func _physics_process(delta: float) -> void:
 	if was_in_air_last_frame and is_on_floor():
 		land_sound.play(0.05)
 		has_ground_pounded = false
-		has_double_jumped = false
-		is_double_jumping = false
+		has_high_jumped = false
+		is_jacket_jump_active = false
 		was_in_air_last_frame = false
 		
 	# Handle left/right movement.
@@ -384,14 +426,17 @@ func update_animation():
 	#if scarf.is_thrown or sprite.animation == "scarf_startup":
 		#return
 		
+	if Input.is_action_just_pressed("double_jump"):
+		sprite.play("cool_jacket_startup")
+		
 	if not is_ducked_under_tile:
 		# Handle jumping animation
-		if velocity.y < (0 if not is_double_jumping else -50): # Buffer the jacket animation for "feel"
+		if velocity.y < (0 if not is_jacket_jump_active else -50): # Buffer the jacket animation for "feel"
 			#print("y velocity: ", velocity.y)
-			if not has_double_jumped:
+			if not has_high_jumped:
 				if sprite.animation != "jump" and sprite.animation != "cool_jump":
 					play_shared_anim("jump")
-		elif (velocity.y > 0 or not is_on_floor()) and not is_double_jumping:
+		elif (velocity.y > 0 or not is_on_floor()) and not is_jacket_jump_active:
 			if sprite.animation != "falling" and not (sprite.animation == "cool_falling" or sprite.animation == "cool_falling_start" or sprite.animation == "cool_close_jacket"):
 				play_shared_anim("falling")
 		elif velocity.y == 0 and (sprite.animation == "falling" or sprite.animation == "cool_falling"):
@@ -419,7 +464,7 @@ func update_animation():
 	if Input.is_action_just_pressed("ui_down"):
 		play_shared_anim("duck")
 		duck_sound.play(.2)
-		sprite.play("duck")
+		play_shared_anim("duck")
 	elif Input.is_action_just_released("ui_down"):
 			if not is_ducked_under_tile:
 				play_shared_anim("duck", true)
@@ -447,6 +492,9 @@ func update_animation():
 				sprite.play_backwards("lean")
 
 func on_animation_finished():
+	if is_transitioning:
+		return
+		
 	if sprite.animation == "cool_falling_start":
 		sprite.play("cool_falling")
 		
@@ -648,7 +696,7 @@ func on_stomp_enter(body: Node2D) -> void:
 	# if you're moving down, destroy the enemy.
 	if velocity.y > 0:
 		body.destroy()
-		has_double_jumped = false
+		has_high_jumped = false
 		
 		if Input.is_action_pressed("ui_accept"):
 			#stomp_y = JUMP_VELOCITY - 30
@@ -680,7 +728,7 @@ func on_exit_wind(body: Node2D) -> void:
 	in_wind_count -= 1
 	# Leaving the wind gives you a refreshed double jump.
 	if in_wind_count == 0:
-		has_double_jumped = false
+		has_high_jumped = false
 
 func play_shared_anim(name, is_backwards = false):
 	match name:

@@ -1,14 +1,16 @@
-@tool
 extends Node2D
 
 @export var enemy: PackedScene = preload("res://scenes/enemy.tscn")
 var spawned_enemy = null
 
-@onready var debug_sprite: Sprite2D = $Sprite2D
+#@onready var debug_sprite: Sprite2D = $Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	debug_sprite.visible = false
+	if Engine.is_editor_hint():
+		return
+		
+	#debug_sprite.visible = false
 	spawn_enemy()
 	StateManager.listen("player_death", Callable(self, "on_player_death"))
 

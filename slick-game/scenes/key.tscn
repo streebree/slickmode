@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://darntnn4nya3g" path="res://assets/sound fx/key.wav" id="3_wy8tx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fttkb"]
-size = Vector2(4, 12)
+size = Vector2(12, 15)
 
 [node name="Area2D" type="Area2D" unique_id=1909080289]
 collision_layer = 128
@@ -16,7 +16,7 @@ script = ExtResource("1_fttkb")
 texture = ExtResource("2_fttkb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=670348075]
-position = Vector2(-1, 1)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_fttkb")
 
 [node name="CollectSound" type="AudioStreamPlayer2D" parent="." unique_id=2003322580]

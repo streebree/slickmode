@@ -4,7 +4,6 @@ extends CharacterBody2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var damage_collision: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var character_body: CharacterBody2D = $"."
-@onready var die_sound: AudioStreamPlayer2D = $DieSound
 
 var is_dead = false
 var rng: RandomNumberGenerator
@@ -36,7 +35,6 @@ func destroy(delta_x):
 		velocity.x = rng.randi_range(-350, -400)
 	velocity.y = rng.randi_range(-250, -125)
 	is_dead = true
-	die_sound.play()
 	
 	StateManager.update_score(50, position)
 	
