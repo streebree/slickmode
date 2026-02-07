@@ -287,7 +287,8 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 			is_jumping_off_ice = ice_collision_count > 0
 			jump_sound.play()
-	if not is_on_floor() and has_jacket and Input.is_action_just_pressed("double_jump") and not has_high_jumped:
+	if not is_on_floor() and has_jacket and Input.is_action_just_pressed("double_jump") and not has_high_jumped and not is_in_snowball_mode:
+		
 		
 		sprite.play("cool_jacket_startup")
 		flying_sound.play()
