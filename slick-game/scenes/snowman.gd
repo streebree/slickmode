@@ -23,6 +23,7 @@ class_name snowman
 @onready var dash_sound: AudioStreamPlayer2D = $DashSound
 @onready var bounce_sound: AudioStreamPlayer2D = $BounceSound
 @onready var duck_sound: AudioStreamPlayer2D = $DuckSound
+@onready var flying_sound: AudioStreamPlayer2D = $FlyingSound
 
 
 const SPEED = 300.0
@@ -132,7 +133,7 @@ func start_dash(direction):
 	if not can_dash:
 		return
 	
-	dash_sound.play(0.35)
+	dash_sound.play()
 	dash_duration_current = dash_duration
 	is_scarf_started = false
 	
@@ -198,7 +199,7 @@ func _physics_process(delta: float) -> void:
 		var multiplier = 0.8
 		# If you're falling and you're holding jump, do a slower fall.
 		if velocity.y > 0:
-			if Input.is_action_pressed("ui_accept"):
+			if Input.is_action_pressed("ui_accept") or Input.is_action_pressed("double_jump"):
 				multiplier = 0.6
 			# if you're holding down, do a fast fall
 			elif Input.is_action_pressed("ui_down"):
@@ -240,14 +241,17 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor() and has_jacket and Input.is_action_just_pressed("double_jump") and not has_double_jumped:
 		
 		sprite.play("cool_jacket_startup")
+		flying_sound.play()
 		
-		target_velocity = -(velocity.y * 1.1)
-		if target_velocity > 100:
-			target_velocity = 200
-			has_double_jumped = true
-			#velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
-		is_double_jumping = true
-		time_double_jumping = 0
+		# Don't actually do the "flutter" mechanics in wind or it limits your vertical height:
+		if in_wind_count == 0:
+			target_velocity = -(velocity.y * 1.1)
+			if target_velocity > 100:
+				target_velocity = 200
+				has_double_jumped = true
+				#velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
+			is_double_jumping = true
+			time_double_jumping = 0
 	
 	if is_double_jumping:
 		time_double_jumping += delta
@@ -269,9 +273,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			is_double_jumping = false
 			
-	# Handle wind physics. If you're holding jump, get extra height.
+	# Handle wind physics. If you're holding doublejump, get extra height.
 	if in_wind_count > 0 and not is_on_floor():
-		if Input.is_action_pressed("ui_accept") or Input.is_action_pressed("double_jump"):
+		if Input.is_action_pressed("double_jump"):
 			velocity.y -= 1000 * delta
 			# Speed cap your vertical speed in the wind, or it gets a little crazy.
 			# Consider taking this out though, if it feels good.
@@ -291,6 +295,7 @@ func _physics_process(delta: float) -> void:
 		has_double_jumped = false
 		is_double_jumping = false
 		was_in_air_last_frame = false
+		flying_sound.stop()
 		
 	# Handle left/right movement.
 	direction = Input.get_axis("ui_left", "ui_right")
@@ -418,7 +423,7 @@ func update_animation():
 	# Handle ducking animation
 	if Input.is_action_just_pressed("ui_down"):
 		play_shared_anim("duck")
-		duck_sound.play(.2)
+		duck_sound.play()
 		sprite.play("duck")
 	elif Input.is_action_just_released("ui_down"):
 			if not is_ducked_under_tile:

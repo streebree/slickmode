@@ -5,14 +5,15 @@
 [ext_resource type="Texture2D" uid="uid://c7jxrytp8kcju" path="res://assets/art/spritesheets/snowman_cool_sheet.png" id="2_eg3al"]
 [ext_resource type="Texture2D" uid="uid://o0djwg5f6kfi" path="res://assets/art/spritesheets/snowman_sheet.png" id="3_o1g3c"]
 [ext_resource type="Texture2D" uid="uid://gn1k873ydlur" path="res://assets/art/scarf_link.png" id="4_v53y5"]
-[ext_resource type="Script" uid="uid://bx4rshvf1x54h" path="res://scenes/scarf.gd" id="5_eg3al"]
+[ext_resource type="Script" path="res://scenes/scarf.gd" id="5_eg3al"]
 [ext_resource type="Texture2D" uid="uid://kn2kfv7qrsw1" path="res://assets/art/spritesheets/scarf_projectile.png" id="5_ksmda"]
 [ext_resource type="AudioStream" uid="uid://d2biqug8ydclp" path="res://assets/sound fx/takedamage2.wav" id="7_8t5k0"]
 [ext_resource type="AudioStream" uid="uid://cvqum4wyx2pei" path="res://assets/sound fx/step.wav" id="8_iulbc"]
-[ext_resource type="AudioStream" uid="uid://lcpk06cdajn6" path="res://assets/sound fx/bounce.wav" id="9_b8r2s"]
-[ext_resource type="AudioStream" uid="uid://dvgph1i2fdqep" path="res://assets/sound fx/smallchonk.wav" id="9_eq3t3"]
-[ext_resource type="AudioStream" uid="uid://cigqyxg3gk588" path="res://assets/sound fx/scarf pull.wav" id="9_iulbc"]
+[ext_resource type="AudioStream" uid="uid://dw6lb8f4feylg" path="res://assets/sound fx/jump2.wav" id="10_gm00g"]
 [ext_resource type="AudioStream" uid="uid://d0nwih8jug6ev" path="res://assets/sound fx/highchonk.wav" id="10_no5s5"]
+[ext_resource type="AudioStream" uid="uid://gh1lg6ui12bw" path="res://assets/sound fx/dash1.wav" id="11_gm00g"]
+[ext_resource type="AudioStream" uid="uid://dk37gm5e2ac3j" path="res://assets/sound fx/duck2.wav" id="13_q720n"]
+[ext_resource type="AudioStream" uid="uid://204v8vvstp75" path="res://assets/sound fx/fly4.wav" id="14_gm00g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iceyc"]
 atlas = ExtResource("2_eg3al")
@@ -809,8 +810,7 @@ pitch_scale = 1.83
 max_polyphony = 5
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1860688804]
-stream = ExtResource("9_b8r2s")
-pitch_scale = 1.22
+stream = ExtResource("10_gm00g")
 attenuation = 0.73204297
 max_polyphony = 5
 
@@ -820,9 +820,7 @@ pitch_scale = 0.58
 max_polyphony = 5
 
 [node name="DashSound" type="AudioStreamPlayer2D" parent="." unique_id=1366749973]
-stream = ExtResource("9_iulbc")
-volume_db = -7.018
-pitch_scale = 0.68
+stream = ExtResource("11_gm00g")
 max_polyphony = 5
 
 [node name="BounceSound" type="AudioStreamPlayer2D" parent="." unique_id=1041021384]
@@ -830,10 +828,11 @@ stream = ExtResource("10_no5s5")
 max_polyphony = 5
 
 [node name="DuckSound" type="AudioStreamPlayer2D" parent="." unique_id=387459784]
-stream = ExtResource("9_eq3t3")
-volume_db = 5.933
-pitch_scale = 0.68
+stream = ExtResource("13_q720n")
 max_polyphony = 5
+
+[node name="FlyingSound" type="AudioStreamPlayer2D" parent="." unique_id=1020976679]
+stream = ExtResource("14_gm00g")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
