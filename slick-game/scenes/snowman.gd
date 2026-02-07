@@ -224,12 +224,14 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 			is_jumping_off_ice = ice_collision_count > 0
 	if not is_on_floor() and has_jacket and Input.is_action_just_pressed("double_jump") and not has_double_jumped:
-		#target_velocity = -velocity.y
+		
+		sprite.play("cool_jacket_startup")
+		
 		target_velocity = -(velocity.y * 1.1)
 		if target_velocity > 100:
 			target_velocity = 200
 			velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
-		has_double_jumped = true
+			has_double_jumped = true
 		is_double_jumping = true
 		time_double_jumping = 0
 	
@@ -238,6 +240,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("double_jump"):
 			if time_double_jumping > double_jump_length:
 				is_double_jumping = false
+				sprite.play("cool_close_jacket")
 				stomp_y = 0
 			else:
 				var distance = (time_double_jumping / double_jump_length) * 2 * absf(target_velocity)
@@ -359,64 +362,82 @@ func update_animation():
 	elif looking_direction < 0:
 		sprite.flip_h = true
 		
-	if scarf.is_thrown or sprite.animation == "scarf_startup":
-		return
+	#if scarf.is_thrown or sprite.animation == "scarf_startup":
+		#return
 		
 	if not is_ducked_under_tile:
 		# Handle jumping animation
-		if velocity.y < 0:
-			if sprite.animation != "jump":
-				sprite.play("jump")
-		elif velocity.y > 0:
-			if sprite.animation != "falling":
-				sprite.play("falling")
-		elif velocity.y == 0 and sprite.animation == "falling":
+		if velocity.y < (0 if not is_double_jumping else -50): # Buffer the jacket animation for "feel"
+			#print("y velocity: ", velocity.y)
+			if not has_double_jumped:
+				if sprite.animation != "jump" and sprite.animation != "cool_jump":
+					play_shared_anim("jump")
+		elif (velocity.y > 0 or not is_on_floor()) and not is_double_jumping:
+			if sprite.animation != "falling" and not (sprite.animation == "cool_falling" or sprite.animation == "cool_falling_start" or sprite.animation == "cool_close_jacket"):
+				play_shared_anim("falling")
+		elif velocity.y == 0 and (sprite.animation == "falling" or sprite.animation == "cool_falling"):
 				if  Input.is_action_pressed("ui_down"):
-					sprite.play("duck")
+					play_shared_anim("duck")
 				else:
-					sprite.play("landing")
+					play_shared_anim("landing")
 					
 		# Handle dashing animation
 		if not sprite.animation == "duck":
 			if abs(velocity.x) > 175:
-				sprite.play("dash")
+				play_shared_anim("dash")
 				sprite.stop()
 				sprite.frame = 0
 			elif abs(velocity.x) <= 175 and abs(velocity.x) > 160:
-				sprite.play("dash")
+				play_shared_anim("dash")
 				sprite.stop()
 				sprite.frame = 1
 			elif abs(velocity.x) <= 160 and abs(velocity.x) > 150:
-				sprite.play("dash")
+				play_shared_anim("dash")
 				sprite.stop()
 				sprite.frame = 2
 		
 	# Handle ducking animation
 	if Input.is_action_just_pressed("ui_down"):
-		sprite.play("duck")
+		play_shared_anim("duck")
 	elif Input.is_action_just_released("ui_down"):
 			if not is_ducked_under_tile:
-				sprite.play_backwards("duck")
+				play_shared_anim("duck", true)
 			else:
 				return
 	elif Input.is_action_pressed("ui_down"):
 		if sprite.animation == "dash" and is_player_on_floor: # To handle ducking when landing out of a dash
-			sprite.play("duck")
+			play_shared_anim("duck")
 		return # return regardless so that the lean is not triggered when player should be ducking
 	elif not Input.is_anything_pressed() and not is_ducked_under_tile and sprite.animation == "duck":
-		sprite.play_backwards("duck")
+		play_shared_anim("duck", true)
 		
-	# Handle left/right movement input on ground
+	
 	if is_player_on_floor:
-		if (Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right")) or (Input.is_action_just_pressed("ui_right") and not Input.is_action_pressed("ui_left")):
-				if not sprite.animation == "dash":
-					sprite.play("lean")
-				else:
-					sprite.frame = 2 # the last frame of dash is the same as the last frame of lean
-		if (Input.is_action_just_released("ui_left") and not Input.is_action_pressed("ui_right")) or (Input.is_action_just_released("ui_right") and not Input.is_action_pressed("ui_left")):
-			sprite.play_backwards("lean")
+		if sprite.animation == "cool_hover":
+			sprite.play("cool_close_jacket")
+		if not has_jacket:
+			# Handle left/right movement input on ground
+			if (Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right")) or (Input.is_action_just_pressed("ui_right") and not Input.is_action_pressed("ui_left")):
+					if not sprite.animation == "dash":
+						sprite.play("lean")
+					else:
+						sprite.frame = 2 # the last frame of dash is the same as the last frame of lean
+			if (Input.is_action_just_released("ui_left") and not Input.is_action_pressed("ui_right")) or (Input.is_action_just_released("ui_right") and not Input.is_action_pressed("ui_left")):
+				sprite.play_backwards("lean")
 
 func on_animation_finished():
+	if sprite.animation == "cool_falling_start":
+		sprite.play("cool_falling")
+		
+	if sprite.animation == "cool_jacket_startup":
+		sprite.play("cool_hover")
+		
+	if sprite.animation == "cool_close_jacket":
+		if velocity.y == 0 and sprite.animation != "idle":
+			play_shared_anim("idle")
+		if velocity.y > 0 or not is_on_floor():
+			play_shared_anim("falling")
+		
 	#if sprite.animation == "scarf_startup":
 		#if not check_shortcast():
 			#scarf.throw(looking_direction)
@@ -431,16 +452,18 @@ func on_animation_finished():
 	#if scarf.is_thrown:
 		#return
 	
-	if not Input.is_anything_pressed() or sprite.animation == "scarf_return":
+	if not Input.is_anything_pressed(): # or sprite.animation == "scarf_return":
 		if is_ducked_under_tile:
 			return
 		elif sprite.animation == "duck":
-			sprite.play_backwards("duck")
+			play_shared_anim("duck", true)
 		
 		if velocity.y == 0 and sprite.animation != "idle":
-			sprite.play("idle")
+			play_shared_anim("idle")
 		
 	if (sprite.animation == "duck" and not Input.is_action_pressed("ui_down")) or (sprite.animation == "landing"):
+		if has_jacket:
+			return
 		if (Input.is_action_pressed("ui_right")) or (Input.is_action_pressed("ui_left")):
 			sprite.play("lean")
 			
@@ -630,3 +653,26 @@ func on_exit_wind(body: Node2D) -> void:
 	# Leaving the wind gives you a refreshed double jump.
 	if in_wind_count == 0:
 		has_double_jumped = false
+
+func play_shared_anim(name, is_backwards = false):
+	match name:
+		"idle":
+			sprite.play("idle") if not has_jacket else sprite.play("cool_idle")
+			return
+		"jump":
+			sprite.play("jump") if not has_jacket else sprite.play("cool_jump")
+			return
+		"dash":
+			sprite.play("dash") if not has_jacket else sprite.play("cool_dash")
+			return
+		"duck":
+			if not is_backwards:
+				sprite.play("duck") if not has_jacket else sprite.play("cool_duck")
+			else:
+				sprite.play_backwards("duck") if not has_jacket else sprite.play("cool_duck_backwards")
+			return
+		"landing":
+			sprite.play("landing") if not has_jacket else sprite.play("cool_landing")
+			return
+		"falling":
+			sprite.play("falling") if not has_jacket else sprite.play("cool_falling_start")
