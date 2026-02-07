@@ -18,3 +18,8 @@ func _ready() -> void:
 			has_jacket = true,
 			can_dash = true
 		})
+	elif level_name == "level4":
+		StateManager.raise("give_abilities", {
+			has_jacket = true,
+			can_dash = true
+		})
