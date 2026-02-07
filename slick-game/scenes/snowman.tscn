@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cvx1ecf0scy2n" path="res://assets/art/placeholder/yukidaruma.png" id="1_s1rrw"]
 [ext_resource type="Texture2D" uid="uid://o0djwg5f6kfi" path="res://assets/art/spritesheets/snowman_sheet.png" id="3_o1g3c"]
 [ext_resource type="Texture2D" uid="uid://gn1k873ydlur" path="res://assets/art/scarf_link.png" id="4_v53y5"]
-[ext_resource type="Script" path="res://scenes/scarf.gd" id="5_eg3al"]
+[ext_resource type="Script" uid="uid://bx4rshvf1x54h" path="res://scenes/scarf.gd" id="5_eg3al"]
 [ext_resource type="Texture2D" uid="uid://kn2kfv7qrsw1" path="res://assets/art/spritesheets/scarf_projectile.png" id="5_ksmda"]
 [ext_resource type="AudioStream" uid="uid://d2biqug8ydclp" path="res://assets/sound fx/takedamage2.wav" id="7_8t5k0"]
 [ext_resource type="AudioStream" uid="uid://cvqum4wyx2pei" path="res://assets/sound fx/step.wav" id="8_iulbc"]
@@ -557,13 +557,15 @@ volume_db = -7.46
 max_polyphony = 6
 panning_strength = 0.0
 
-[node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=488553957]
+[node name="JumpSound_abd" type="AudioStreamPlayer2D" parent="." unique_id=488553957]
 stream = ExtResource("8_iulbc")
 pitch_scale = 1.83
 max_polyphony = 5
 
-[node name="JumpSoundOther" type="AudioStreamPlayer2D" parent="." unique_id=1860688804]
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1860688804]
 stream = ExtResource("9_b8r2s")
+pitch_scale = 1.22
+attenuation = 0.73204297
 max_polyphony = 5
 
 [node name="LandSound" type="AudioStreamPlayer2D" parent="." unique_id=927932973]

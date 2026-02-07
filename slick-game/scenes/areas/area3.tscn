@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://c2jtv0srqvglh"]
+[gd_scene format=4 uid="uid://c2rea7y817j7g"]
 
 [ext_resource type="Script" uid="uid://cle1idslv4gx8" path="res://node-test.gd" id="1_f18gf"]
 [ext_resource type="TileSet" uid="uid://ioexiochvppf" path="res://scenes/main_tile_set.tres" id="2_gayty"]
@@ -15,9 +15,13 @@
 [ext_resource type="PackedScene" uid="uid://bjllpyn7o184f" path="res://scenes/checkpoint.tscn" id="13_vw45c"]
 [ext_resource type="PackedScene" uid="uid://di0du105wmb17" path="res://scenes/spiky_enemy.tscn" id="14_pv444"]
 [ext_resource type="PackedScene" uid="uid://o52exufl3vht" path="res://scenes/enemy_spawner.tscn" id="15_rfkwo"]
-[ext_resource type="PackedScene" uid="uid://3dxjkccsuiua" path="res://scenes/camera_up.tscn" id="16_ue5hg"]
+[ext_resource type="PackedScene" path="res://scenes/camera_up.tscn" id="16_ue5hg"]
 [ext_resource type="PackedScene" uid="uid://ova0ckhtdby8" path="res://scenes/door.tscn" id="17_sy3ys"]
 [ext_resource type="PackedScene" uid="uid://6ctj6mrcdqgc" path="res://scenes/key.tscn" id="18_f18gf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f18gf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gayty"]
 
 [node name="Node2D2" type="Node2D" unique_id=1625689784]
 script = ExtResource("1_f18gf")
@@ -207,22 +211,32 @@ scale = Vector2(13.479999, 57.543835)
 
 [node name="KeyDoor" parent="." unique_id=969152275 instance=ExtResource("17_sy3ys")]
 position = Vector2(2672, -1632)
+collision_mask = 529
+physics_material_override = SubResource("PhysicsMaterial_f18gf")
 door_name = "door21"
 
 [node name="KeyDoor2" parent="." unique_id=1084576118 instance=ExtResource("17_sy3ys")]
 position = Vector2(2704, -1632)
+collision_mask = 529
+physics_material_override = SubResource("PhysicsMaterial_gayty")
 door_name = "door22"
 
 [node name="KeyDoor3" parent="." unique_id=851567462 instance=ExtResource("17_sy3ys")]
 position = Vector2(2736, -1632)
+collision_mask = 529
+physics_material_override = SubResource("PhysicsMaterial_gayty")
 door_name = "door23"
 
 [node name="KeyDoor4" parent="." unique_id=1139774743 instance=ExtResource("17_sy3ys")]
 position = Vector2(2768, -1632)
+collision_mask = 529
+physics_material_override = SubResource("PhysicsMaterial_gayty")
 door_name = "door24"
 
 [node name="KeyDoor5" parent="." unique_id=27023558 instance=ExtResource("17_sy3ys")]
 position = Vector2(2800, -1632)
+collision_mask = 529
+physics_material_override = SubResource("PhysicsMaterial_gayty")
 door_name = "door25"
 
 [node name="Area2D10" parent="." unique_id=1849527857 instance=ExtResource("18_f18gf")]
