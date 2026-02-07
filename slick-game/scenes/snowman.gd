@@ -87,7 +87,10 @@ func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
 	StateManager.listen("take_damage", Callable(self, "on_take_damage"))
 	StateManager.listen("give_abilities", Callable(self, "on_give_abilities"))
+	StateManager.listen("level_start", Callable(self, "on_level_start"))
 	sprite.animation_finished.connect(on_animation_finished)
+	StateManager.listen("entered_vertical_section", Callable(self, "on_entered_vertical_section"))
+	StateManager.listen("exited_vertical_section", Callable(self, "on_exited_vertical_section"))
 	
 	#scarf_link.points = [Vector2.ZERO, Vector2.ZERO]
 	#scarf.hit_something.connect(on_scarf_hit)
@@ -239,7 +242,7 @@ func _physics_process(delta: float) -> void:
 		target_velocity = -(velocity.y * 1.1)
 		if target_velocity > 100:
 			target_velocity = 200
-			velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
+			#velocity.y = 2000 # I don't know why, but this make the first part of the double jump feel nicer
 		has_double_jumped = true
 		is_double_jumping = true
 		time_double_jumping = 0
@@ -265,7 +268,7 @@ func _physics_process(delta: float) -> void:
 			
 	# Handle wind physics. If you're holding jump, get extra height.
 	if in_wind_count > 0 and not is_on_floor():
-		if Input.is_action_pressed("ui_accept"):
+		if Input.is_action_pressed("ui_accept") or Input.is_action_pressed("double_jump"):
 			velocity.y -= 1000 * delta
 			# Speed cap your vertical speed in the wind, or it gets a little crazy.
 			# Consider taking this out though, if it feels good.
@@ -593,6 +596,11 @@ func on_give_abilities(abilities):
 	has_jacket = abilities.has_jacket
 	can_dash = abilities.can_dash
 	
+func on_level_start(level_name):
+	if level_name == "level3":
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(camera, "zoom", Vector2(1, 1), 2.0)
+	
 #func take_damage(delta_x_from_enemy_hit):
 	#health -= 1
 	#StateManager.raise("health_update", health)
@@ -643,11 +651,21 @@ func on_one_way_left_collision(body: Node2D) -> void:
 
 func on_enter_wind(body: Node2D) -> void:
 	in_wind_count += 1
-	var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(camera, "zoom", Vector2(1, 1), 0.8)
 
 func on_exit_wind(body: Node2D) -> void:
 	in_wind_count -= 1
 	# Leaving the wind gives you a refreshed double jump.
 	if in_wind_count == 0:
 		has_double_jumped = false
+
+func on_entered_vertical_section(args):
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(camera, "offset:y", -80, 1.0)
+	
+func on_exited_vertical_section(args):
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(camera, "offset:y", 0, 1.0)
+	
+	
+	
+	

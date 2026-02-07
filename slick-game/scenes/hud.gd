@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var multiplierLabel: Label = $MultiplierLabel
 @onready var timerLabel: Label = $TimerLabel
 @onready var levelResultsLabel: Label = $LevelResultsLabel
+@onready var continue_label: Label = $ContinueLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,5 +43,5 @@ func on_level_timer_update(value):
 	timerLabel.text = "%02d:%02d.%02d" % [minutes, seconds, milliseconds]
 	
 func on_level_end(results):
-	print("got results:", results.score, " ", results.time_bonus)
 	levelResultsLabel.text = "YOU WIN!\nScore: %0.0f\nTime bonus: %0.0f\nFINAL SCORE: %0.0f\nRank: %s" % [results.score, results.time_bonus, results.final_score, results.rank]
+	continue_label.text = "Press Enter/Start to Continue"

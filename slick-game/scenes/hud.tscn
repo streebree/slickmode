@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://7pdxc61d0xxu"]
 
 [ext_resource type="Script" uid="uid://bmhupfrg4pevn" path="res://scenes/hud.gd" id="1_oo0fn"]
-[ext_resource type="FontFile" uid="uid://cm7k3bq0r3j0a" path="res://assets/monogram.ttf" id="3_5ysmq"]
 [ext_resource type="Texture2D" uid="uid://de62fqh1gawch" path="res://assets/art/ice_cream.png" id="2_oo0fn"]
+[ext_resource type="FontFile" uid="uid://cm7k3bq0r3j0a" path="res://assets/monogram.ttf" id="3_5ysmq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
 font = ExtResource("3_5ysmq")
@@ -71,3 +71,19 @@ grow_horizontal = 2
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_oo0fn")
 horizontal_alignment = 1
+
+[node name="ContinueLabel" type="Label" parent="." unique_id=1195214577]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 73.0
+offset_top = 76.0
+offset_right = 194.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_oo0fn")
+horizontal_alignment = 2
+vertical_alignment = 2
