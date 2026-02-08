@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bfdahldmb68v4" path="res://assets/art/placeholder/icecream.png" id="5_k1mlc"]
 [ext_resource type="Texture2D" uid="uid://dulwq7vx8afn2" path="res://assets/art/tilesets/tileset_1.png" id="6_3l4e8"]
 [ext_resource type="Texture2D" uid="uid://oe4uhh0hbrve" path="res://assets/art/placeholder/wind.png" id="7_l2ry5"]
+[ext_resource type="Texture2D" uid="uid://c5t5jwd0xjs58" path="res://assets/art/tilesets/background_ice.png" id="8_k1mlc"]
 [ext_resource type="Texture2D" uid="uid://drrwbb1qde3m7" path="res://assets/art/tilesets/windbox.png" id="8_s6q82"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_3l4e8"]
@@ -226,7 +227,6 @@ texture = ExtResource("6_3l4e8")
 1:3/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:3/1 = 1
 1:3/1/flip_h = true
-1:3/1/modulate = Color(0.48962224, 0.48962224, 0.48962218, 1)
 1:3/1/z_index = 2
 1:3/1/physics_layer_7/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8, -8, -8)
 1:3/2 = 2
@@ -256,6 +256,10 @@ texture = ExtResource("7_l2ry5")
 0:0/animation_frame_3/duration = 1.0
 0:0/0 = 0
 0:0/0/physics_layer_7/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wkdqr"]
+texture = ExtResource("8_k1mlc")
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k1mlc"]
 texture = ExtResource("8_s6q82")
@@ -302,4 +306,5 @@ sources/2 = SubResource("TileSetAtlasSource_ydapt")
 sources/5 = SubResource("TileSetAtlasSource_l2ry5")
 sources/6 = SubResource("TileSetAtlasSource_s6q82")
 sources/8 = SubResource("TileSetAtlasSource_k1mlc")
+sources/7 = SubResource("TileSetAtlasSource_wkdqr")
 pattern_0 = SubResource("TileMapPattern_3l4e8")

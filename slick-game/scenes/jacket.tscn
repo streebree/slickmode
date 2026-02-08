@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cn7nsxqd7v75u" path="res://assets/art/jacket.png" id="1_qfe0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2umj"]
-size = Vector2(29, 22)
+size = Vector2(29, 225)
 
 [node name="Jacket" type="Area2D" unique_id=621545329]
 collision_layer = 128
@@ -15,7 +15,7 @@ script = ExtResource("1_q2umj")
 texture = ExtResource("1_qfe0r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=898167802]
-position = Vector2(-0.5, 2)
+position = Vector2(-0.5, 4.5)
 shape = SubResource("RectangleShape2D_q2umj")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
