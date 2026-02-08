@@ -23,3 +23,10 @@ func _ready() -> void:
 			has_jacket = true,
 			can_dash = true
 		})
+	elif level_name =="level_end":
+		print("ending level")
+		StateManager.raise("give_abilities", {
+			has_jacket = true,
+			can_dash = true,
+			disabled = true
+		})

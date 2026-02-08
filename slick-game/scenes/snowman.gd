@@ -90,6 +90,7 @@ var shake_origin_position = null
 var shake_frames = 3
 var shake_counter = 0
 var stomp_y = 0
+var is_disabled = false
 
 # For the jacket ability aquisition
 var is_transitioning = false
@@ -102,7 +103,7 @@ func _ready() -> void:
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
 	StateManager.listen("take_damage", Callable(self, "on_take_damage"))
 	StateManager.listen("give_abilities", Callable(self, "on_give_abilities"))
-	#StateManager.listen("level_start", Callable(self, "on_level_start"))
+	StateManager.listen("level_start", Callable(self, "on_level_start"))
 	sprite.animation_finished.connect(on_animation_finished)
 	StateManager.listen("entered_vertical_section", Callable(self, "on_entered_vertical_section"))
 	StateManager.listen("exited_vertical_section", Callable(self, "on_exited_vertical_section"))
@@ -219,6 +220,12 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 		
+	if is_disabled:
+		velocity.x = 0
+		velocity.y = 1000 * delta
+		move_and_slide()
+		return
+		
 	# Update scarf link during animation
 	#if scarf.is_thrown:
 		#update_scarflink()
@@ -288,8 +295,6 @@ func _physics_process(delta: float) -> void:
 			is_jumping_off_ice = ice_collision_count > 0
 			jump_sound.play()
 	if not is_on_floor() and has_jacket and Input.is_action_just_pressed("double_jump") and not has_high_jumped and not is_in_snowball_mode:
-		
-		
 		sprite.play("cool_jacket_startup")
 		flying_sound.play()
 		
@@ -349,10 +354,10 @@ func _physics_process(delta: float) -> void:
 	if is_in_snowball_mode and slope_collision_count > 0 and prev_y_position < position.y:
 		print("get more speed")
 		if velocity.x > 0:
-			velocity.x += 600 * delta
+			velocity.x += 50 * delta
 			print("velocity.x ", velocity.x)
 		else:
-			velocity.x -= 600 * delta
+			velocity.x -= 50 * delta
 			print("velocity.x ", velocity.x)
 		
 	# Reset your midair abilities when landing:
@@ -406,8 +411,16 @@ func _physics_process(delta: float) -> void:
 	
 	# If you're dashing, the speed cap is a little higher.
 	var current_speed_cap = SPEED_CAP + EXTRA_DASH_SPEED if dash_duration > 0 else SPEED_CAP
+	# Snowball mode has the highest speed cap
+	if is_in_snowball_mode:
+		current_speed_cap = 1000
+		if absf(velocity.x) > current_speed_cap:
+			if velocity.x > 0:
+				velocity.x = move_toward(velocity.x, SPEED_CAP, delta * 400)
+			else:
+				velocity.x = move_toward(velocity.x, -SPEED_CAP, delta * 400)
 	# Cap the speed, but change it slowly.
-	if absf(velocity.x) > SPEED_CAP:
+	elif absf(velocity.x) > SPEED_CAP:
 		if velocity.x > 0:
 			velocity.x = move_toward(velocity.x, SPEED_CAP, delta * 400)
 		else:
@@ -697,9 +710,14 @@ func on_health_update(health):
 func on_give_abilities(abilities):
 	has_jacket = abilities.has_jacket
 	can_dash = abilities.can_dash
+	# This disabled property is just used during the final cutscene.
+	if "disabled" in abilities:
+		is_disabled = abilities.disabled
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
+		tween.tween_property(camera, "zoom", Vector2(0.5, 0.5), 10.0)
 	
 func on_level_start(level_name):
-	if level_name == "level3":
+	if level_name == "level4":
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(camera, "zoom", Vector2(1, 1), 2.0)
 	
