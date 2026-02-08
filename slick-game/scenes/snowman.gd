@@ -347,18 +347,14 @@ func _physics_process(delta: float) -> void:
 		
 		# Handle snowball activation:
 	if Input.is_action_just_pressed("ui_down") and can_become_snowball and not is_in_snowball_mode:
-		print("start snowball mode")
 		is_in_snowball_mode = true
 		
 		# Handle snowball physics
 	if is_in_snowball_mode and slope_collision_count > 0 and prev_y_position < position.y:
-		print("get more speed")
 		if velocity.x > 0:
 			velocity.x += 50 * delta
-			print("velocity.x ", velocity.x)
 		else:
 			velocity.x -= 50 * delta
-			print("velocity.x ", velocity.x)
 		
 	# Reset your midair abilities when landing:
 	if was_in_air_last_frame and is_on_floor():
@@ -371,7 +367,6 @@ func _physics_process(delta: float) -> void:
 		
 	# Handle left/right movement.
 	direction = Input.get_axis("ui_left", "ui_right")
-	#print("hello direction: ", direction)
 	
 	# Remember which direction you're looking for dash calculations
 	if absf(direction) != 0:
@@ -671,7 +666,6 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 # Enemy collision
 func _on_area_2d_2_body_entered(body: Node2D) -> void:
-	print(body)
 	# Only take damage if you're not dashing.
 	if dash_duration_current <= 0 and not is_in_snowball_mode:
 		if damage_cooldown <= 0:
@@ -710,6 +704,7 @@ func on_health_update(health):
 func on_give_abilities(abilities):
 	has_jacket = abilities.has_jacket
 	can_dash = abilities.can_dash
+	can_become_snowball = abilities.can_be_snowball
 	# This disabled property is just used during the final cutscene.
 	if "disabled" in abilities:
 		is_disabled = abilities.disabled
