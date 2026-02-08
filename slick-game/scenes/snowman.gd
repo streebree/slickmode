@@ -17,7 +17,8 @@ class_name snowman
 @onready var farcast_scarf: RayCast2D = $AnimatedSprite2D/FarCastScarf
 @onready var shortcast_scarf: RayCast2D = $AnimatedSprite2D/ShortCastScarf
 
-@onready var snowball_face: Sprite2D = $SnowballFace
+@onready var snowball_body: RigidBody2D = $SnowballFace
+@onready var snowball_face: Sprite2D = $SnowballFace/Sprite2D
 
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
 @onready var damage_sound: AudioStreamPlayer2D = $DamageSound
@@ -240,6 +241,8 @@ func handle_die():
 	damage_cooldown = 0
 
 func _physics_process(delta: float) -> void:
+	snowball_body.global_position = global_position
+	
 	if StateManager.level_has_ended:
 		velocity.x = 0
 		velocity.y = 0

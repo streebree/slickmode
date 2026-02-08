@@ -966,6 +966,7 @@ texture = ExtResource("17_2huu6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SnowballFace" unique_id=127435954]
 shape = SubResource("CircleShape2D_fmcf6")
+disabled = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
