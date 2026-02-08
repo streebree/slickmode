@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4nwe3rb8yd41" path="res://assets/art/placeholder/background0.png" id="4_u2mas"]
 [ext_resource type="Texture2D" uid="uid://br3x4cgwy2nx8" path="res://assets/art/placeholder/background1.png" id="5_avyb6"]
 [ext_resource type="Texture2D" uid="uid://f806pa0exola" path="res://assets/art/placeholder/background2.png" id="6_j2bgl"]
-[ext_resource type="AudioStream" uid="uid://bweoljfccwl5c" path="res://assets/audio/Snow2.ogg" id="7_erutf"]
+[ext_resource type="AudioStream" uid="uid://c4p2bxcftandn" path="res://assets/audio/Snow intro.ogg" id="7_vqo57"]
 [ext_resource type="PackedScene" uid="uid://7pdxc61d0xxu" path="res://scenes/hud.tscn" id="8_y3rpr"]
 [ext_resource type="PackedScene" uid="uid://domfe53a2mmqd" path="res://scenes/level_end.tscn" id="10_bccb0"]
 [ext_resource type="PackedScene" uid="uid://bk0d2nat47ssr" path="res://scenes/kill_plane.tscn" id="11_si85y"]
@@ -60,8 +60,9 @@ follow_viewport = false
 texture = ExtResource("6_j2bgl")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1346540891]
-stream = ExtResource("7_erutf")
+stream = ExtResource("7_vqo57")
 volume_db = -14.597
+autoplay = true
 
 [node name="CanvasLayer" parent="." unique_id=67627577 instance=ExtResource("8_y3rpr")]
 

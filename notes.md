@@ -43,6 +43,10 @@ You give up the jacket and are happy to just be yourself; snow.
 
 You finish the level; new scene: you're all alone in a field, zooming out, fade out.
 
+make the rock music only start when you get the powerup. beforehand it's silent.
+
+fade out at the end. and go to the title screen.
+
 
 
 
