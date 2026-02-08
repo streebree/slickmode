@@ -21,5 +21,6 @@ shape = SubResource("RectangleShape2D_fttkb")
 
 [node name="CollectSound" type="AudioStreamPlayer2D" parent="." unique_id=2003322580]
 stream = ExtResource("3_wy8tx")
+volume_db = -9.348
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

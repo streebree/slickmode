@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://c1duoa4rdhgyi" path="res://scenes/level_start.tscn" id="9_cocvt"]
 [ext_resource type="PackedScene" uid="uid://domfe53a2mmqd" path="res://scenes/level_end.tscn" id="10_m7iv3"]
 [ext_resource type="PackedScene" uid="uid://bk0d2nat47ssr" path="res://scenes/kill_plane.tscn" id="11_gsftq"]
-[ext_resource type="PackedScene" uid="uid://by1ldxkw8bmvw" path="res://scenes/icecream.tscn" id="12_3c7mo"]
 [ext_resource type="PackedScene" uid="uid://bdu3q13ouklky" path="res://scenes/snowball_power.tscn" id="12_a0gg5"]
 [ext_resource type="Texture2D" uid="uid://yytnqgqmlufk" path="res://assets/art/background/sky.png" id="12_hlb5a"]
 [ext_resource type="Texture2D" uid="uid://cxcugdwl71nrr" path="res://assets/art/background/skybox_background.png" id="13_a0gg5"]
@@ -21,7 +20,7 @@
 
 [node name="Node2D2" type="Node2D" unique_id=1625689784]
 script = ExtResource("1_a0gg5")
-level_name = "level3"
+level_name = "level4"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=977616795]
 unique_name_in_owner = true
@@ -76,9 +75,6 @@ scale = Vector2(1.1020579, 3.9529526)
 [node name="KillPlane4" parent="." unique_id=1060055471 instance=ExtResource("11_gsftq")]
 position = Vector2(7504, 367.99988)
 scale = Vector2(1.1020579, 3.9529526)
-
-[node name="Area2D2" parent="." unique_id=1376798953 instance=ExtResource("12_3c7mo")]
-position = Vector2(-4, -186)
 
 [node name="Checkpoint" parent="." unique_id=221122544 instance=ExtResource("13_posi2")]
 position = Vector2(-281, -74)

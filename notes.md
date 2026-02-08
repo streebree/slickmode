@@ -55,6 +55,9 @@ Bugs:
 Snowman becomes cool when pushing m on ground when you can't be cool guy yet.
 
 
+You play as a snowman who wants to become slick. You see a sign that says "Slick Road Ahead," and your journey begins.
+
+
 
 
 
