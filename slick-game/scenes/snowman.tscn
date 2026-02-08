@@ -910,6 +910,7 @@ position = Vector2(0, 21.5)
 shape = SubResource("RectangleShape2D_q720n")
 
 [node name="DialogBox" type="Panel" parent="." unique_id=400464864]
+visible = false
 offset_left = -60.0
 offset_top = -78.0
 offset_right = 60.0
