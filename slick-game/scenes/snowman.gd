@@ -18,6 +18,7 @@ class_name snowman
 @onready var shortcast_scarf: RayCast2D = $AnimatedSprite2D/ShortCastScarf
 
 @onready var jacket: Jacket = %Jacket
+@onready var snowball: SnowballPower = %Snowball
 @onready var discarded_hat = %DiscardedHat
 
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
@@ -115,6 +116,9 @@ func _ready() -> void:
 	
 	if jacket:
 		jacket.got_jacket.connect(on_got_jacket)
+		
+	if snowball:
+		snowball.got_snowball.connect(on_got_snowball)
 	
 func on_got_jacket():
 	pass
@@ -139,6 +143,26 @@ func on_got_jacket():
 	
 	# Play hat falling animation
 	discarded_hat.play("sad_hat_fall")
+
+func on_got_snowball():
+	# Move snowman to snowball position
+	global_position = jacket.global_position
+	
+	# Freeze snowman position in place (set transition active flag)
+	## Return gravity once flag is set to false
+	is_transitioning = true
+	sprite.play("snowball_transform")
+	
+	# Manually call camera tween
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(camera, "zoom", Vector2(1, 1), 2.0)
+	
+	# Deley for a second (let it sink in)
+	await get_tree().create_timer(1).timeout
+	is_in_snowball_mode = true
+	
+	# Set transition active flag to false
+	is_transitioning = false
 	
 #func start_scarf_throw():
 	#is_scarf_started = true
@@ -344,12 +368,11 @@ func _physics_process(delta: float) -> void:
 	# Letting go of jump makes you stop moving upward.
 	if Input.is_action_just_released("ui_accept") and velocity.y < 0:
 		velocity.y /= 3.0
+	
+	## Handle snowball activation:
+	#if Input.is_action_just_pressed("ui_down") and can_become_snowball and not is_in_snowball_mode:
 		
-		# Handle snowball activation:
-	if Input.is_action_just_pressed("ui_down") and can_become_snowball and not is_in_snowball_mode:
-		is_in_snowball_mode = true
-		
-		# Handle snowball physics
+	# Handle snowball physics	
 	if is_in_snowball_mode and slope_collision_count > 0 and prev_y_position < position.y:
 		if velocity.x > 0:
 			velocity.x += 50 * delta
@@ -456,6 +479,9 @@ func _physics_process(delta: float) -> void:
 	#queue_redraw()
 
 func update_animation():
+	if is_in_snowball_mode:
+		return
+	
 	# Handle sprite change when pressing left or right.
 	if looking_direction > 0:
 		sprite.flip_h = false

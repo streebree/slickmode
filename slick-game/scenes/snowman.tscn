@@ -6,8 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bbyv65qnjas40" path="res://assets/art/spritesheets/snowman_cool_change.png" id="3_gm00g"]
 [ext_resource type="Texture2D" uid="uid://o0djwg5f6kfi" path="res://assets/art/spritesheets/snowman_sheet.png" id="3_o1g3c"]
 [ext_resource type="Texture2D" uid="uid://gn1k873ydlur" path="res://assets/art/scarf_link.png" id="4_v53y5"]
-[ext_resource type="Script" path="res://scenes/scarf.gd" id="5_eg3al"]
+[ext_resource type="Script" uid="uid://bx4rshvf1x54h" path="res://scenes/scarf.gd" id="5_eg3al"]
 [ext_resource type="Texture2D" uid="uid://kn2kfv7qrsw1" path="res://assets/art/spritesheets/scarf_projectile.png" id="5_ksmda"]
+[ext_resource type="Texture2D" uid="uid://d2qgwi6nyuty2" path="res://assets/art/spritesheets/snowman_snowballl_change.png" id="6_ia1kk"]
 [ext_resource type="AudioStream" uid="uid://d2biqug8ydclp" path="res://assets/sound fx/takedamage2.wav" id="7_8t5k0"]
 [ext_resource type="AudioStream" uid="uid://cvqum4wyx2pei" path="res://assets/sound fx/step.wav" id="8_iulbc"]
 [ext_resource type="AudioStream" uid="uid://dw6lb8f4feylg" path="res://assets/sound fx/jump2.wav" id="10_gm00g"]
@@ -15,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://gh1lg6ui12bw" path="res://assets/sound fx/dash1.wav" id="11_gm00g"]
 [ext_resource type="AudioStream" uid="uid://dk37gm5e2ac3j" path="res://assets/sound fx/duck2.wav" id="13_q720n"]
 [ext_resource type="AudioStream" uid="uid://204v8vvstp75" path="res://assets/sound fx/fly4.wav" id="14_gm00g"]
+[ext_resource type="Texture2D" uid="uid://cs24xpkggkke4" path="res://assets/art/snowball_face.png" id="17_2huu6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iceyc"]
 atlas = ExtResource("2_eg3al")
@@ -255,6 +257,26 @@ region = Rect2(0, 216, 36, 36)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4xwc0"]
 atlas = ExtResource("3_o1g3c")
 region = Rect2(36, 216, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vm0ss"]
+atlas = ExtResource("6_ia1kk")
+region = Rect2(0, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjhws"]
+atlas = ExtResource("6_ia1kk")
+region = Rect2(68, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1k2p"]
+atlas = ExtResource("6_ia1kk")
+region = Rect2(136, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yeq70"]
+atlas = ExtResource("6_ia1kk")
+region = Rect2(204, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ow7wu"]
+atlas = ExtResource("6_ia1kk")
+region = Rect2(272, 0, 68, 68)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j7fvb"]
 animations = [{
@@ -565,6 +587,26 @@ animations = [{
 "loop": false,
 "name": &"scarf_startup",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vm0ss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjhws")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_o1k2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yeq70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ow7wu")
+}],
+"loop": false,
+"name": &"snowball_transform",
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ksmda"]
@@ -689,8 +731,10 @@ can_become_snowball = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=721837144]
 sprite_frames = SubResource("SpriteFrames_j7fvb")
-animation = &"cool_jacket_startup"
+animation = &"snowball_transform"
 autoplay = "idle"
+frame = 4
+frame_progress = 1.0
 
 [node name="SpriteMarker" type="Marker2D" parent="AnimatedSprite2D" unique_id=2147407151]
 visible = false
@@ -903,6 +947,9 @@ collision_mask = 16384
 [node name="SlopeCollision" type="CollisionShape2D" parent="Area2D10" unique_id=1451525371]
 position = Vector2(0, 21.5)
 shape = SubResource("RectangleShape2D_q720n")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1819818178]
+texture = ExtResource("17_2huu6")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
