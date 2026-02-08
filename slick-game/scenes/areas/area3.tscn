@@ -4,16 +4,19 @@
 [ext_resource type="TileSet" uid="uid://ioexiochvppf" path="res://scenes/main_tile_set.tres" id="2_gayty"]
 [ext_resource type="Texture2D" uid="uid://dulwq7vx8afn2" path="res://assets/art/tilesets/tileset_1.png" id="3_b040y"]
 [ext_resource type="PackedScene" uid="uid://ckjpn0vpiwogk" path="res://scenes/snowman.tscn" id="3_xic1v"]
-[ext_resource type="Texture2D" uid="uid://b4nwe3rb8yd41" path="res://assets/art/placeholder/background0.png" id="4_b040y"]
 [ext_resource type="Texture2D" uid="uid://drrwbb1qde3m7" path="res://assets/art/tilesets/windbox.png" id="4_k8gmt"]
-[ext_resource type="Texture2D" uid="uid://br3x4cgwy2nx8" path="res://assets/art/placeholder/background1.png" id="5_k8gmt"]
-[ext_resource type="Texture2D" uid="uid://f806pa0exola" path="res://assets/art/placeholder/background2.png" id="6_7inyv"]
+[ext_resource type="Texture2D" uid="uid://yytnqgqmlufk" path="res://assets/art/background/sky.png" id="6_5kqwe"]
+[ext_resource type="Texture2D" uid="uid://cxcugdwl71nrr" path="res://assets/art/background/skybox_background.png" id="7_2bgkt"]
 [ext_resource type="AudioStream" uid="uid://bweoljfccwl5c" path="res://assets/audio/Snow2.ogg" id="7_gayty"]
 [ext_resource type="PackedScene" uid="uid://7pdxc61d0xxu" path="res://scenes/hud.tscn" id="8_2bgkt"]
+[ext_resource type="Texture2D" uid="uid://bb7s2ilggrukv" path="res://assets/art/background/skybox_foreground.png" id="8_6fjde"]
 [ext_resource type="AudioStream" uid="uid://dy2aemlqum3qq" path="res://assets/audio/Cool Snow2.ogg" id="8_gayty"]
 [ext_resource type="PackedScene" uid="uid://c1duoa4rdhgyi" path="res://scenes/level_start.tscn" id="9_6fjde"]
+[ext_resource type="Texture2D" uid="uid://dn31mlr0h6he6" path="res://assets/art/background/skybox_middle.png" id="9_n07cq"]
+[ext_resource type="Texture2D" uid="uid://du4n8d6nk36rx" path="res://assets/art/background/skybox_forground_cloud.png" id="10_6fjde"]
 [ext_resource type="PackedScene" uid="uid://domfe53a2mmqd" path="res://scenes/level_end.tscn" id="10_n07cq"]
 [ext_resource type="PackedScene" uid="uid://bk0d2nat47ssr" path="res://scenes/kill_plane.tscn" id="11_ed4iq"]
+[ext_resource type="Texture2D" uid="uid://shfpeoqsckt5" path="res://assets/art/background/skybox_forground_cloud_bottom.png" id="11_n07cq"]
 [ext_resource type="PackedScene" uid="uid://by1ldxkw8bmvw" path="res://scenes/icecream.tscn" id="12_v32yf"]
 [ext_resource type="PackedScene" uid="uid://bjllpyn7o184f" path="res://scenes/checkpoint.tscn" id="13_vw45c"]
 [ext_resource type="PackedScene" uid="uid://di0du105wmb17" path="res://scenes/spiky_enemy.tscn" id="14_pv444"]
@@ -222,40 +225,61 @@ tile_set = SubResource("TileSet_2bgkt")
 [node name="CharacterBody2D" parent="." unique_id=1919126236 instance=ExtResource("3_xic1v")]
 position = Vector2(-347, -70)
 
-[node name="Parallax2D" type="Parallax2D" parent="." unique_id=2142179580]
+[node name="Sky" type="Parallax2D" parent="." unique_id=2142179580]
 z_index = -5
 scroll_scale = Vector2(0, 0)
-scroll_offset = Vector2(-449, -101)
-repeat_size = Vector2(480, 0)
+scroll_offset = Vector2(-449, -99.12)
+repeat_size = Vector2(640, 360)
 repeat_times = 3
-follow_viewport = false
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=21092772]
+[node name="Sprite2D" type="Sprite2D" parent="Sky" unique_id=21092772]
 z_index = -1
-position = Vector2(68, -368)
-texture = ExtResource("4_b040y")
+texture = ExtResource("6_5kqwe")
 
-[node name="Parallax2D2" type="Parallax2D" parent="." unique_id=25685127]
+[node name="Background" type="Parallax2D" parent="." unique_id=25685127]
 z_index = -2
 scroll_scale = Vector2(0.01, 0.01)
 scroll_offset = Vector2(-449, -101)
-repeat_size = Vector2(480, 0)
-repeat_times = 3
+repeat_size = Vector2(640, 0)
+repeat_times = 16
 follow_viewport = false
 
-[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D2" unique_id=1741634255]
-texture = ExtResource("5_k8gmt")
+[node name="Sprite2D2" type="Sprite2D" parent="Background" unique_id=1741634255]
+texture_repeat = 2
+texture = ExtResource("7_2bgkt")
 
-[node name="Parallax2D3" type="Parallax2D" parent="." unique_id=1511427124]
+[node name="Middle" type="Parallax2D" parent="." unique_id=1511427124]
+z_index = -2
+scroll_offset = Vector2(0, -32.7)
+repeat_size = Vector2(640, 0)
+repeat_times = 14
+follow_viewport = false
+
+[node name="Sprite2D3" type="Sprite2D" parent="Middle" unique_id=1857026633]
+texture = ExtResource("9_n07cq")
+
+[node name="Foreground" type="Parallax2D" parent="." unique_id=463207900]
 z_index = -1
-scroll_scale = Vector2(0.1, 0.01)
-scroll_offset = Vector2(-449, -101)
-repeat_size = Vector2(480, 0)
-repeat_times = 3
-follow_viewport = false
+scroll_offset = Vector2(0, -52.395)
+repeat_size = Vector2(640, 0)
+repeat_times = 11
 
-[node name="Sprite2D3" type="Sprite2D" parent="Parallax2D3" unique_id=1857026633]
-texture = ExtResource("6_7inyv")
+[node name="Sprite2D" type="Sprite2D" parent="Foreground" unique_id=540957936]
+texture = ExtResource("8_6fjde")
+
+[node name="Foreground2" type="Parallax2D" parent="." unique_id=961184668]
+z_index = -1
+repeat_size = Vector2(640, 0)
+repeat_times = 13
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground2" unique_id=523180900]
+position = Vector2(0, -24)
+texture = ExtResource("10_6fjde")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Foreground2" unique_id=673019720]
+position = Vector2(0, 476.7475)
+scale = Vector2(1, 1.7819306)
+texture = ExtResource("11_n07cq")
 
 [node name="SnowMusic" type="AudioStreamPlayer" parent="." unique_id=1346540891]
 stream = ExtResource("7_gayty")
