@@ -1,14 +1,14 @@
-AnimatedSprite2D
+CanvasLayer
 Label
+AudioStreamPlayer2D
+AnimatedSprite2D
 Sprite2D
 Camera2D
 CollisionShape2D
 Area2D
-AudioStreamPlayer2D
 CharacterBody2D
 RigidBody2D
 StaticBody2D
 Node2D
-CanvasLayer
 AudioStreamPlayer
 Parallax2D
