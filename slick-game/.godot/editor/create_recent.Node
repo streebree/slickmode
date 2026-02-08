@@ -1,4 +1,6 @@
+Label
 Sprite2D
+Camera2D
 CollisionShape2D
 Area2D
 AudioStreamPlayer2D
@@ -7,8 +9,6 @@ AnimatedSprite2D
 RigidBody2D
 StaticBody2D
 Node2D
-Label
 CanvasLayer
 AudioStreamPlayer
 Parallax2D
-Camera2D

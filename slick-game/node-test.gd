@@ -28,9 +28,9 @@ func _ready() -> void:
 			can_be_snowball = false
 		})
 	elif level_name =="level_end":
-		print("ending level")
 		StateManager.raise("give_abilities", {
 			has_jacket = true,
 			can_dash = true,
 			disabled = true
 		})
+	
