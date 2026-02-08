@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://6ctj6mrcdqgc" path="res://scenes/key.tscn" id="18_f18gf"]
 [ext_resource type="PackedScene" uid="uid://b7xwj0p3jdxjo" path="res://scenes/jacket.tscn" id="21_b040y"]
 [ext_resource type="Texture2D" uid="uid://c6g14n26h2rdh" path="res://assets/art/spritesheets/hat_falling.png" id="23_5kqwe"]
+[ext_resource type="FontFile" uid="uid://cm7k3bq0r3j0a" path="res://assets/monogram.ttf" id="29_v32yf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7inyv"]
 texture = ExtResource("3_b040y")
@@ -215,6 +216,10 @@ animations = [{
 "name": &"sad_hat_fall",
 "speed": 10.0
 }]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vw45c"]
+font = ExtResource("29_v32yf")
+font_size = 22
 
 [node name="Node2D2" type="Node2D" unique_id=1625689784]
 script = ExtResource("1_f18gf")
@@ -554,3 +559,11 @@ texture = ExtResource("10_6fjde")
 position = Vector2(0, 476.7475)
 scale = Vector2(1, 1.7819306)
 texture = ExtResource("11_n07cq")
+
+[node name="Label" type="Label" parent="." unique_id=331902997]
+offset_left = -48.0
+offset_top = -88.0
+offset_right = 43.0
+offset_bottom = -65.0
+text = "RB/M to Fly"
+label_settings = SubResource("LabelSettings_vw45c")

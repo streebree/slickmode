@@ -21,8 +21,13 @@
 [ext_resource type="PackedScene" uid="uid://domfe53a2mmqd" path="res://scenes/level_end.tscn" id="20_1gp8r"]
 [ext_resource type="Texture2D" uid="uid://shfpeoqsckt5" path="res://assets/art/background/skybox_forground_cloud_bottom.png" id="20_1x5ci"]
 [ext_resource type="PackedScene" uid="uid://bk0d2nat47ssr" path="res://scenes/kill_plane.tscn" id="21_vancl"]
+[ext_resource type="FontFile" uid="uid://cm7k3bq0r3j0a" path="res://assets/monogram.ttf" id="22_xuthv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gbaeq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pvu2i"]
+font = ExtResource("22_xuthv")
+font_size = 22
 
 [node name="Node2D" type="Node2D" unique_id=1625689784]
 script = ExtResource("1_uo65m")
@@ -350,3 +355,11 @@ texture = ExtResource("19_xuthv")
 position = Vector2(0, 476.7475)
 scale = Vector2(1, 1.7819306)
 texture = ExtResource("20_1x5ci")
+
+[node name="Label" type="Label" parent="." unique_id=1752736492]
+offset_left = -183.0
+offset_top = 29.0
+offset_right = -92.0
+offset_bottom = 52.0
+text = "B/Shift to Dash"
+label_settings = SubResource("LabelSettings_pvu2i")
