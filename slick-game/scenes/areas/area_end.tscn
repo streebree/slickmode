@@ -154,8 +154,7 @@ offset_left = -397.0
 offset_top = -173.0
 offset_right = 95.0
 offset_bottom = -147.0
-text = "You feel better knowing the slickness
-will always be a part of you..."
+text = "You realize that your own snow was the slickest thing about you all along..."
 label_settings = SubResource("LabelSettings_q1qxc")
 script = ExtResource("16_q1qxc")
 metadata/_edit_use_anchors_ = true
