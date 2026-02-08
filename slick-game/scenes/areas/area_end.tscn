@@ -150,12 +150,15 @@ scale = Vector2(1, 1.7819306)
 texture = ExtResource("14_j2bgl")
 
 [node name="Label" type="Label" parent="." unique_id=566407421]
-offset_left = -397.0
-offset_top = -173.0
-offset_right = 95.0
-offset_bottom = -147.0
-text = "You realize that your own snow was the slickest thing about you all along..."
+offset_left = -418.0
+offset_top = -206.0
+offset_right = 74.0
+offset_bottom = -131.0
+text = "You realize that your own snow
+was the slickest thing about
+you all along..."
 label_settings = SubResource("LabelSettings_q1qxc")
+horizontal_alignment = 1
 script = ExtResource("16_q1qxc")
 metadata/_edit_use_anchors_ = true
 
