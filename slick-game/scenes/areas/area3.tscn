@@ -225,65 +225,6 @@ tile_set = SubResource("TileSet_2bgkt")
 [node name="CharacterBody2D" parent="." unique_id=1919126236 instance=ExtResource("3_xic1v")]
 position = Vector2(-347, -70)
 
-[node name="Sky" type="Parallax2D" parent="." unique_id=2142179580]
-z_index = -5
-scroll_scale = Vector2(0, 0)
-scroll_offset = Vector2(-449, -99.12)
-repeat_size = Vector2(640, 360)
-repeat_times = 3
-
-[node name="Sprite2D" type="Sprite2D" parent="Sky" unique_id=21092772]
-z_index = -1
-texture = ExtResource("6_5kqwe")
-
-[node name="Background" type="Parallax2D" parent="." unique_id=25685127]
-z_index = -2
-scroll_scale = Vector2(0.01, 0.01)
-scroll_offset = Vector2(-449, -101)
-repeat_size = Vector2(640, 0)
-repeat_times = 16
-follow_viewport = false
-
-[node name="Sprite2D2" type="Sprite2D" parent="Background" unique_id=1741634255]
-texture_repeat = 2
-texture = ExtResource("7_2bgkt")
-
-[node name="Middle" type="Parallax2D" parent="." unique_id=1511427124]
-z_index = -2
-scroll_scale = Vector2(0.5, 0)
-scroll_offset = Vector2(0, -32.7)
-repeat_size = Vector2(640, 0)
-repeat_times = 14
-follow_viewport = false
-
-[node name="Sprite2D3" type="Sprite2D" parent="Middle" unique_id=1857026633]
-texture = ExtResource("9_n07cq")
-
-[node name="Foreground" type="Parallax2D" parent="." unique_id=463207900]
-z_index = -1
-scroll_scale = Vector2(0.7, 0)
-scroll_offset = Vector2(0, -52.395)
-repeat_size = Vector2(640, 0)
-repeat_times = 11
-
-[node name="Sprite2D" type="Sprite2D" parent="Foreground" unique_id=540957936]
-texture = ExtResource("8_6fjde")
-
-[node name="Foreground2" type="Parallax2D" parent="." unique_id=961184668]
-z_index = -1
-scroll_scale = Vector2(1, 0)
-repeat_size = Vector2(640, 0)
-repeat_times = 13
-
-[node name="Sprite2D" type="Sprite2D" parent="Foreground2" unique_id=523180900]
-position = Vector2(0, -24)
-texture = ExtResource("10_6fjde")
-
-[node name="Sprite2D2" type="Sprite2D" parent="Foreground2" unique_id=673019720]
-position = Vector2(0, 476.7475)
-scale = Vector2(1, 1.7819306)
-texture = ExtResource("11_n07cq")
-
 [node name="SnowMusic" type="AudioStreamPlayer" parent="." unique_id=1346540891]
 stream = ExtResource("7_gayty")
 volume_db = -14.597
@@ -532,3 +473,65 @@ z_index = -1
 position = Vector2(-279, -72)
 sprite_frames = SubResource("SpriteFrames_frxfh")
 animation = &"sad_hat_fall"
+
+[node name="Sky" type="Parallax2D" parent="." unique_id=1092340531]
+z_index = -9
+scroll_scale = Vector2(0, 0)
+scroll_offset = Vector2(-449, -99.12)
+repeat_size = Vector2(640, 360)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Sky" unique_id=302988330]
+z_index = -1
+texture = ExtResource("6_5kqwe")
+
+[node name="Background" type="Parallax2D" parent="." unique_id=528729507]
+z_index = -7
+scroll_scale = Vector2(0.02, 0)
+scroll_offset = Vector2(-449, -40)
+repeat_size = Vector2(640, 0)
+repeat_times = 16
+follow_viewport = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="Background" unique_id=754511655]
+texture_repeat = 2
+texture = ExtResource("7_2bgkt")
+
+[node name="Middle" type="Parallax2D" parent="." unique_id=1815242515]
+z_index = -6
+scroll_scale = Vector2(0.04, 0)
+scroll_offset = Vector2(0, -100)
+repeat_size = Vector2(640, 0)
+repeat_times = 14
+follow_viewport = false
+
+[node name="Sprite2D3" type="Sprite2D" parent="Middle" unique_id=2146955493]
+texture = ExtResource("9_n07cq")
+
+[node name="Foreground" type="Parallax2D" parent="." unique_id=424163792]
+z_index = -5
+scroll_scale = Vector2(0.07, 0)
+scroll_offset = Vector2(0, 50)
+repeat_size = Vector2(640, 0)
+repeat_times = 11
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground" unique_id=1530898111]
+texture = ExtResource("8_6fjde")
+
+[node name="Foreground2" type="Parallax2D" parent="." unique_id=1576644676]
+z_index = -4
+scroll_scale = Vector2(0.04, 0)
+scroll_offset = Vector2(0, 100)
+repeat_size = Vector2(640, 0)
+repeat_times = 13
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground2" unique_id=1051012750]
+position = Vector2(0, -24)
+texture = ExtResource("10_6fjde")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Foreground2" unique_id=446981152]
+position = Vector2(0, 476.7475)
+scale = Vector2(1, 1.7819306)
+texture = ExtResource("11_n07cq")
