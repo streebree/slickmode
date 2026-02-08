@@ -27,6 +27,8 @@ class_name snowman
 @onready var bounce_sound: AudioStreamPlayer2D = $BounceSound
 @onready var duck_sound: AudioStreamPlayer2D = $DuckSound
 @onready var flying_sound: AudioStreamPlayer2D = $FlyingSound
+@onready var dialog_box: Panel = $DialogBox
+@onready var dialog_label: Label = $DialogBox/MarginContainer/Label
 
 
 const SPEED = 300.0
@@ -704,19 +706,32 @@ func on_health_update(health):
 func on_give_abilities(abilities):
 	has_jacket = abilities.has_jacket
 	can_dash = abilities.can_dash
+	print("give abilities")
 	if "can_become_snowball" in abilities:
+		print("become snowball", abilities.can_be_snowball)
 		can_become_snowball = abilities.can_be_snowball
+	else:
+		can_become_snowball = false
+		
 	# This disabled property is just used during the final cutscene.
 	if "disabled" in abilities:
 		is_disabled = abilities.disabled
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
 		tween.tween_property(camera, "zoom", Vector2(0.5, 0.5), 10.0)
+		
+	if "level_1_start" in abilities:
+		dialog_box.visible = true
+		dialog_label.text = "I'm tired of dweebin' out\nwith these herbs."
+		await get_tree().create_timer(4.0).timeout
+		dialog_label.text = "I must begin my journey\nto become slick."
+		await get_tree().create_timer(4.0).timeout
+		dialog_box.visible = false
 	
 func on_level_start(level_name):
 	if level_name == "level4":
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(camera, "zoom", Vector2(1, 1), 2.0)
-	
+
 #func take_damage(delta_x_from_enemy_hit):
 	#health -= 1
 	#StateManager.raise("health_update", health)

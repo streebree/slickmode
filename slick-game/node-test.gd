@@ -7,7 +7,8 @@ func _ready() -> void:
 		StateManager.raise("give_abilities", {
 			has_jacket = false,
 			can_dash = true,
-			can_be_snowball = false
+			can_be_snowball = false,
+			level_1_start = true
 		})
 	elif level_name == "level2":
 		StateManager.raise("give_abilities", {

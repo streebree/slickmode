@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://gh1lg6ui12bw" path="res://assets/sound fx/dash1.wav" id="11_gm00g"]
 [ext_resource type="AudioStream" uid="uid://dk37gm5e2ac3j" path="res://assets/sound fx/duck2.wav" id="13_q720n"]
 [ext_resource type="AudioStream" uid="uid://204v8vvstp75" path="res://assets/sound fx/fly4.wav" id="14_gm00g"]
+[ext_resource type="FontFile" uid="uid://cm7k3bq0r3j0a" path="res://assets/monogram.ttf" id="16_fmcf6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iceyc"]
 atlas = ExtResource("2_eg3al")
@@ -678,6 +679,10 @@ radius = 6.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q720n"]
 size = Vector2(20, 23)
 
+[sub_resource type="LabelSettings" id="LabelSettings_ia1kk"]
+font = ExtResource("16_fmcf6")
+font_size = 12
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1919126236]
 collision_layer = 641
 collision_mask = 641
@@ -903,6 +908,24 @@ collision_mask = 16384
 [node name="SlopeCollision" type="CollisionShape2D" parent="Area2D10" unique_id=1451525371]
 position = Vector2(0, 21.5)
 shape = SubResource("RectangleShape2D_q720n")
+
+[node name="DialogBox" type="Panel" parent="." unique_id=400464864]
+offset_left = -60.0
+offset_top = -78.0
+offset_right = 60.0
+offset_bottom = -25.0
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogBox" unique_id=385229333]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 53.0
+
+[node name="Label" type="Label" parent="DialogBox/MarginContainer" unique_id=727350271]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_ia1kk")
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 2
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
