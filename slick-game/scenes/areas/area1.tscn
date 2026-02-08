@@ -361,5 +361,5 @@ offset_left = -183.0
 offset_top = 29.0
 offset_right = -92.0
 offset_bottom = 52.0
-text = "B/Shift to Dash"
+text = "X/Shift to Dash"
 label_settings = SubResource("LabelSettings_pvu2i")

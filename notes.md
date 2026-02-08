@@ -12,15 +12,11 @@ Start in a field with other snowmen behind you. You're tired of being like them.
 
 
 
-Title screen
-
 "Slick Road Ahead" Big letters, press start/space.
 
 Icons:
     Icecream for icons
     title screen image for splashscreen
-
-Standing pushing boost in windbox gives extra high jump
 
 Snowball animation
 
@@ -55,6 +51,8 @@ fade out at the end. and go to the title screen.
 
 
 
+Bugs:
+Snowman becomes cool when pushing m on ground when you can't be cool guy yet.
 
 
 
