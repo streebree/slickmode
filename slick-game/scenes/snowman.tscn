@@ -6,8 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bbyv65qnjas40" path="res://assets/art/spritesheets/snowman_cool_change.png" id="3_gm00g"]
 [ext_resource type="Texture2D" uid="uid://o0djwg5f6kfi" path="res://assets/art/spritesheets/snowman_sheet.png" id="3_o1g3c"]
 [ext_resource type="Texture2D" uid="uid://gn1k873ydlur" path="res://assets/art/scarf_link.png" id="4_v53y5"]
-[ext_resource type="Script" path="res://scenes/scarf.gd" id="5_eg3al"]
+[ext_resource type="Script" uid="uid://bx4rshvf1x54h" path="res://scenes/scarf.gd" id="5_eg3al"]
 [ext_resource type="Texture2D" uid="uid://kn2kfv7qrsw1" path="res://assets/art/spritesheets/scarf_projectile.png" id="5_ksmda"]
+[ext_resource type="Texture2D" uid="uid://d2qgwi6nyuty2" path="res://assets/art/spritesheets/snowman_snowballl_change.png" id="6_ia1kk"]
 [ext_resource type="AudioStream" uid="uid://d2biqug8ydclp" path="res://assets/sound fx/takedamage2.wav" id="7_8t5k0"]
 [ext_resource type="AudioStream" uid="uid://cvqum4wyx2pei" path="res://assets/sound fx/step.wav" id="8_iulbc"]
 [ext_resource type="AudioStream" uid="uid://dw6lb8f4feylg" path="res://assets/sound fx/jump2.wav" id="10_gm00g"]
@@ -16,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://dk37gm5e2ac3j" path="res://assets/sound fx/duck2.wav" id="13_q720n"]
 [ext_resource type="AudioStream" uid="uid://204v8vvstp75" path="res://assets/sound fx/fly4.wav" id="14_gm00g"]
 [ext_resource type="FontFile" uid="uid://cm7k3bq0r3j0a" path="res://assets/monogram.ttf" id="16_fmcf6"]
+[ext_resource type="Texture2D" uid="uid://cs24xpkggkke4" path="res://assets/art/snowball_face.png" id="17_2huu6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iceyc"]
 atlas = ExtResource("2_eg3al")
@@ -256,6 +258,26 @@ region = Rect2(0, 216, 36, 36)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4xwc0"]
 atlas = ExtResource("3_o1g3c")
 region = Rect2(36, 216, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vm0ss"]
+atlas = ExtResource("6_ia1kk")
+region = Rect2(0, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjhws"]
+atlas = ExtResource("6_ia1kk")
+region = Rect2(68, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1k2p"]
+atlas = ExtResource("6_ia1kk")
+region = Rect2(136, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yeq70"]
+atlas = ExtResource("6_ia1kk")
+region = Rect2(204, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ow7wu"]
+atlas = ExtResource("6_ia1kk")
+region = Rect2(272, 0, 68, 68)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j7fvb"]
 animations = [{
@@ -566,6 +588,26 @@ animations = [{
 "loop": false,
 "name": &"scarf_startup",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vm0ss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjhws")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_o1k2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yeq70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ow7wu")
+}],
+"loop": false,
+"name": &"snowball_transform",
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ksmda"]
@@ -677,7 +719,9 @@ animations = [{
 radius = 6.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q720n"]
-size = Vector2(20, 23)
+size = Vector2(27, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fmcf6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ia1kk"]
 font = ExtResource("16_fmcf6")
@@ -694,8 +738,10 @@ can_become_snowball = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=721837144]
 sprite_frames = SubResource("SpriteFrames_j7fvb")
-animation = &"cool_jacket_startup"
+animation = &"snowball_transform"
 autoplay = "idle"
+frame = 4
+frame_progress = 1.0
 
 [node name="SpriteMarker" type="Marker2D" parent="AnimatedSprite2D" unique_id=2147407151]
 visible = false
@@ -838,6 +884,7 @@ position = Vector2(1, 4.5)
 shape = SubResource("RectangleShape2D_no5s5")
 
 [node name="ScarfLink" type="Line2D" parent="." unique_id=1388003466]
+visible = false
 show_behind_parent = true
 z_index = -1
 texture_repeat = 2
@@ -866,39 +913,47 @@ shape = SubResource("CircleShape2D_34s63")
 position = Vector2(0, -2)
 
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="." unique_id=1830797994]
+visible = false
 stream = ExtResource("7_8t5k0")
 volume_db = -7.46
 max_polyphony = 6
 panning_strength = 0.0
 
 [node name="JumpSound_abd" type="AudioStreamPlayer2D" parent="." unique_id=488553957]
+visible = false
 stream = ExtResource("8_iulbc")
 pitch_scale = 1.83
 max_polyphony = 5
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1860688804]
+visible = false
 stream = ExtResource("10_gm00g")
 attenuation = 0.73204297
 max_polyphony = 5
 
 [node name="LandSound" type="AudioStreamPlayer2D" parent="." unique_id=927932973]
+visible = false
 stream = ExtResource("13_q720n")
 pitch_scale = 0.26
 max_polyphony = 5
 
 [node name="DashSound" type="AudioStreamPlayer2D" parent="." unique_id=1366749973]
+visible = false
 stream = ExtResource("11_gm00g")
 max_polyphony = 5
 
 [node name="BounceSound" type="AudioStreamPlayer2D" parent="." unique_id=1041021384]
+visible = false
 stream = ExtResource("10_no5s5")
 max_polyphony = 5
 
 [node name="DuckSound" type="AudioStreamPlayer2D" parent="." unique_id=387459784]
+visible = false
 stream = ExtResource("13_q720n")
 max_polyphony = 5
 
 [node name="FlyingSound" type="AudioStreamPlayer2D" parent="." unique_id=1020976679]
+visible = false
 stream = ExtResource("14_gm00g")
 
 [node name="Area2D10" type="Area2D" parent="." unique_id=953220876]
@@ -906,7 +961,7 @@ collision_layer = 16384
 collision_mask = 16384
 
 [node name="SlopeCollision" type="CollisionShape2D" parent="Area2D10" unique_id=1451525371]
-position = Vector2(0, 21.5)
+position = Vector2(0.5, 30)
 shape = SubResource("RectangleShape2D_q720n")
 
 [node name="DialogBox" type="Panel" parent="." unique_id=400464864]
@@ -927,6 +982,14 @@ label_settings = SubResource("LabelSettings_ia1kk")
 horizontal_alignment = 1
 clip_text = true
 text_overrun_behavior = 2
+[node name="SnowballFace" type="RigidBody2D" parent="." unique_id=1076098558]
+
+[node name="Sprite2D" type="Sprite2D" parent="SnowballFace" unique_id=1339070704]
+texture = ExtResource("17_2huu6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SnowballFace" unique_id=127435954]
+shape = SubResource("CircleShape2D_fmcf6")
+disabled = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
