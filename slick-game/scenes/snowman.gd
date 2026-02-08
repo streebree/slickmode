@@ -17,9 +17,7 @@ class_name snowman
 @onready var farcast_scarf: RayCast2D = $AnimatedSprite2D/FarCastScarf
 @onready var shortcast_scarf: RayCast2D = $AnimatedSprite2D/ShortCastScarf
 
-@onready var jacket: Jacket = %Jacket
-@onready var snowball: SnowballPower = %Snowball
-@onready var discarded_hat = %DiscardedHat
+@onready var snowball_face: Sprite2D = $SnowballFace
 
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
 @onready var damage_sound: AudioStreamPlayer2D = $DamageSound
@@ -93,6 +91,10 @@ var shake_counter = 0
 var stomp_y = 0
 var is_disabled = false
 
+var jacket: Jacket = null
+var snowball: SnowballPower = null
+var discarded_hat = null
+
 # For the jacket ability aquisition
 var is_transitioning = false
 
@@ -100,7 +102,13 @@ var slope_collision_count = 0
 @export var can_become_snowball = false
 var is_in_snowball_mode = false
 
-func _ready() -> void:
+func _ready() -> void:	
+	snowball_face.visible = false
+	
+	jacket = get_node_or_null("%Jacket")
+	snowball = get_node_or_null("%Snowball")
+	discarded_hat = get_node_or_null("%DiscardedHat")
+	
 	StateManager.listen("health_update", Callable(self, "on_health_update"))
 	StateManager.listen("take_damage", Callable(self, "on_take_damage"))
 	StateManager.listen("give_abilities", Callable(self, "on_give_abilities"))
@@ -146,7 +154,7 @@ func on_got_jacket():
 
 func on_got_snowball():
 	# Move snowman to snowball position
-	global_position = jacket.global_position
+	global_position = snowball.global_position
 	
 	# Freeze snowman position in place (set transition active flag)
 	## Return gravity once flag is set to false
@@ -556,6 +564,9 @@ func update_animation():
 				sprite.play_backwards("lean")
 
 func on_animation_finished():
+	if sprite.animation == "snowball_transform":
+		snowball_face.visible = true
+	
 	if is_transitioning:
 		return
 		

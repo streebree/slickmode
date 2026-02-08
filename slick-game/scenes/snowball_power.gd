@@ -11,6 +11,9 @@ func _ready() -> void:
 	pass
 
 func _on_body_entered(body: Node2D) -> void:
+	if not body.name == "CharacterBody2D":
+		return
+		
 	if not is_a_snowball:
 		got_snowball.emit()
 		sprite.visible = false

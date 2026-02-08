@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://domfe53a2mmqd" path="res://scenes/level_end.tscn" id="10_m7iv3"]
 [ext_resource type="PackedScene" uid="uid://bk0d2nat47ssr" path="res://scenes/kill_plane.tscn" id="11_gsftq"]
 [ext_resource type="PackedScene" uid="uid://by1ldxkw8bmvw" path="res://scenes/icecream.tscn" id="12_3c7mo"]
+[ext_resource type="PackedScene" uid="uid://bdu3q13ouklky" path="res://scenes/snowball_power.tscn" id="12_a0gg5"]
 [ext_resource type="Texture2D" uid="uid://yytnqgqmlufk" path="res://assets/art/background/sky.png" id="12_hlb5a"]
 [ext_resource type="Texture2D" uid="uid://cxcugdwl71nrr" path="res://assets/art/background/skybox_background.png" id="13_a0gg5"]
 [ext_resource type="PackedScene" uid="uid://bjllpyn7o184f" path="res://scenes/checkpoint.tscn" id="13_posi2"]
@@ -29,7 +30,7 @@ tile_map_data = PackedByteArray("AADu//3/BQACAAAAAADt//3/BQACAAAAAADs//3/BQABAAA
 tile_set = ExtResource("2_y8oc2")
 
 [node name="CharacterBody2D" parent="." unique_id=1919126236 instance=ExtResource("3_3btnx")]
-position = Vector2(-288, -72)
+position = Vector2(-309.73, -89.35)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1346540891]
 stream = ExtResource("7_5o8i8")
@@ -151,6 +152,10 @@ position = Vector2(3880, 1080)
 
 [node name="EnemySpawner22" parent="." unique_id=1163030222 instance=ExtResource("14_6rmr4")]
 position = Vector2(3960, 1088)
+
+[node name="Snowball" parent="." unique_id=597794857 instance=ExtResource("12_a0gg5")]
+unique_name_in_owner = true
+position = Vector2(-209, -97)
 
 [node name="Sky" type="Parallax2D" parent="." unique_id=1386912876]
 z_index = -9
