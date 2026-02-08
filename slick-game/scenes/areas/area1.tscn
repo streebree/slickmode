@@ -302,8 +302,8 @@ texture = ExtResource("15_4wjgx")
 
 [node name="Background" type="Parallax2D" parent="." unique_id=514442926]
 z_index = -7
-scroll_scale = Vector2(0.01, 0.01)
-scroll_offset = Vector2(-449, -101)
+scroll_scale = Vector2(0.02, 0)
+scroll_offset = Vector2(-449, -40)
 repeat_size = Vector2(640, 0)
 repeat_times = 16
 follow_viewport = false
@@ -314,7 +314,8 @@ texture = ExtResource("16_uo65m")
 
 [node name="Middle" type="Parallax2D" parent="." unique_id=1518634223]
 z_index = -6
-scroll_offset = Vector2(0, -32.7)
+scroll_scale = Vector2(0.04, 0)
+scroll_offset = Vector2(0, -100)
 repeat_size = Vector2(640, 0)
 repeat_times = 14
 follow_viewport = false
@@ -324,17 +325,22 @@ texture = ExtResource("17_pvu2i")
 
 [node name="Foreground" type="Parallax2D" parent="." unique_id=211329611]
 z_index = -5
-scroll_offset = Vector2(0, -52.395)
+scroll_scale = Vector2(0.07, 0)
+scroll_offset = Vector2(0, 50)
 repeat_size = Vector2(640, 0)
 repeat_times = 11
+follow_viewport = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Foreground" unique_id=287133075]
 texture = ExtResource("18_fod1i")
 
 [node name="Foreground2" type="Parallax2D" parent="." unique_id=163589211]
 z_index = -4
+scroll_scale = Vector2(0.04, 0)
+scroll_offset = Vector2(0, 100)
 repeat_size = Vector2(640, 0)
 repeat_times = 13
+follow_viewport = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Foreground2" unique_id=1084841301]
 position = Vector2(0, -24)
