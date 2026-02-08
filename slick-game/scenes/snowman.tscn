@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bbyv65qnjas40" path="res://assets/art/spritesheets/snowman_cool_change.png" id="3_gm00g"]
 [ext_resource type="Texture2D" uid="uid://o0djwg5f6kfi" path="res://assets/art/spritesheets/snowman_sheet.png" id="3_o1g3c"]
 [ext_resource type="Texture2D" uid="uid://gn1k873ydlur" path="res://assets/art/scarf_link.png" id="4_v53y5"]
-[ext_resource type="Script" uid="uid://bx4rshvf1x54h" path="res://scenes/scarf.gd" id="5_eg3al"]
+[ext_resource type="Script" path="res://scenes/scarf.gd" id="5_eg3al"]
 [ext_resource type="Texture2D" uid="uid://kn2kfv7qrsw1" path="res://assets/art/spritesheets/scarf_projectile.png" id="5_ksmda"]
 [ext_resource type="Texture2D" uid="uid://d2qgwi6nyuty2" path="res://assets/art/spritesheets/snowman_snowballl_change.png" id="6_ia1kk"]
 [ext_resource type="AudioStream" uid="uid://d2biqug8ydclp" path="res://assets/sound fx/takedamage2.wav" id="7_8t5k0"]
@@ -721,11 +721,11 @@ radius = 6.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q720n"]
 size = Vector2(27, 4)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fmcf6"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_ia1kk"]
 font = ExtResource("16_fmcf6")
 font_size = 12
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fmcf6"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1919126236]
 collision_layer = 641
@@ -982,6 +982,7 @@ label_settings = SubResource("LabelSettings_ia1kk")
 horizontal_alignment = 1
 clip_text = true
 text_overrun_behavior = 2
+
 [node name="SnowballFace" type="RigidBody2D" parent="." unique_id=1076098558]
 
 [node name="Sprite2D" type="Sprite2D" parent="SnowballFace" unique_id=1339070704]

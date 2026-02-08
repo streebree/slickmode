@@ -504,7 +504,7 @@ func update_animation():
 	#if scarf.is_thrown or sprite.animation == "scarf_startup":
 		#return
 		
-	if Input.is_action_just_pressed("double_jump"):
+	if Input.is_action_just_pressed("double_jump") and has_jacket:
 		sprite.play("cool_jacket_startup")
 		
 	if not is_ducked_under_tile:
