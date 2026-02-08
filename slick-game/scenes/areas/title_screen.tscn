@@ -2,32 +2,21 @@
 
 [ext_resource type="Script" uid="uid://cle1idslv4gx8" path="res://node-test.gd" id="1_q3w81"]
 [ext_resource type="TileSet" uid="uid://ioexiochvppf" path="res://scenes/main_tile_set.tres" id="2_up8l4"]
+[ext_resource type="Texture2D" uid="uid://dteppwc1nsw1t" path="res://assets/art/title.png" id="7_0xcb6"]
 [ext_resource type="AudioStream" uid="uid://c4p2bxcftandn" path="res://assets/audio/Snow intro.ogg" id="7_sjoxd"]
 [ext_resource type="PackedScene" uid="uid://7pdxc61d0xxu" path="res://scenes/hud.tscn" id="8_0xcb6"]
 [ext_resource type="Script" uid="uid://bpnshjkr3kl6c" path="res://scenes/areas/title_screen_camera.gd" id="8_40twv"]
-[ext_resource type="FontFile" uid="uid://cm7k3bq0r3j0a" path="res://assets/monogram.ttf" id="8_mfb7h"]
+[ext_resource type="Texture2D" uid="uid://c13114ed24r8v" path="res://assets/art/subtitle.png" id="8_o2evf"]
 [ext_resource type="Texture2D" uid="uid://o0djwg5f6kfi" path="res://assets/art/spritesheets/snowman_sheet.png" id="10_q3w81"]
 [ext_resource type="Texture2D" uid="uid://yytnqgqmlufk" path="res://assets/art/background/sky.png" id="11_qqkxj"]
 [ext_resource type="Texture2D" uid="uid://c7jxrytp8kcju" path="res://assets/art/spritesheets/snowman_cool_sheet.png" id="11_th68q"]
 [ext_resource type="Texture2D" uid="uid://cxcugdwl71nrr" path="res://assets/art/background/skybox_background.png" id="12_sjoxd"]
 [ext_resource type="Texture2D" uid="uid://bbyv65qnjas40" path="res://assets/art/spritesheets/snowman_cool_change.png" id="12_xixil"]
-[ext_resource type="Texture2D" uid="uid://dn31mlr0h6he6" path="res://assets/art/background/skybox_middle.png" id="13_0xcb6"]
 [ext_resource type="Texture2D" uid="uid://cvx1ecf0scy2n" path="res://assets/art/placeholder/yukidaruma.png" id="13_e20g2"]
 [ext_resource type="Texture2D" uid="uid://bb7s2ilggrukv" path="res://assets/art/background/skybox_foreground.png" id="14_o2evf"]
 [ext_resource type="Texture2D" uid="uid://du4n8d6nk36rx" path="res://assets/art/background/skybox_forground_cloud.png" id="15_6u2sb"]
 [ext_resource type="Texture2D" uid="uid://shfpeoqsckt5" path="res://assets/art/background/skybox_forground_cloud_bottom.png" id="16_cr1ue"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_mfb7h"]
-font = ExtResource("8_mfb7h")
-font_size = 48
-outline_size = 3
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_q3w81"]
-font = ExtResource("8_mfb7h")
-font_size = 32
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://clits0p684u13" path="res://assets/art/cloud.png" id="18_6u2sb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iceyc"]
 atlas = ExtResource("11_th68q")
@@ -587,8 +576,7 @@ level_name = "title_screen"
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=977616795]
 unique_name_in_owner = true
 position = Vector2(473, -86)
-scale = Vector2(4, 4.037)
-tile_map_data = PackedByteArray("AADH/00ABQABAAEAAADH/04ABQABAAEAAADH/08ABQABAAEAAADH/1AABQABAAEAAADH/1EABQABAAEAAADH/1IABQABAAEAAADH/1MABQABAAEAAADH/1QABQABAAEAAADH/1UABQABAAEAAADI/00ABQABAAEAAADI/04ABQABAAEAAADI/08ABQABAAEAAADI/1AABQABAAEAAADI/1EABQABAAEAAADI/1IABQABAAEAAADI/1MABQABAAEAAADI/1QABQABAAEAAADI/1UABQABAAEAAADJ/00ABQABAAEAAADJ/04ABQABAAEAAADJ/08ABQABAAEAAADJ/1AABQABAAEAAADJ/1EABQABAAEAAADJ/1IABQABAAEAAADJ/1MABQABAAEAAADJ/1QABQABAAEAAADJ/1UABQABAAEAAADK/00ABQABAAEAAADK/04ABQABAAEAAADK/08ABQABAAEAAADK/1AABQABAAEAAADK/1EABQABAAEAAADK/1IABQABAAEAAADK/1MABQABAAEAAADK/1QABQABAAEAAADK/1UABQABAAEAAADL/00ABQABAAEAAADL/04ABQABAAEAAADL/08ABQABAAEAAADL/1AABQABAAEAAADL/1EABQABAAEAAADL/1IABQABAAEAAADL/1MABQABAAEAAADL/1QABQABAAEAAADL/1UABQABAAEAAADC/00ABQABAAEAAADC/04ABQABAAEAAADC/08ABQABAAEAAADC/1AABQABAAEAAADC/1EABQABAAEAAADC/1IABQABAAEAAADC/1MABQABAAEAAADC/1QABQABAAEAAADC/1UABQABAAEAAADD/00ABQABAAEAAADD/04ABQABAAEAAADD/08ABQABAAEAAADD/1AABQABAAEAAADD/1EABQABAAEAAADD/1IABQABAAEAAADD/1MABQABAAEAAADD/1QABQABAAEAAADD/1UABQABAAEAAADE/00ABQABAAEAAADE/04ABQABAAEAAADE/08ABQABAAEAAADE/1AABQABAAEAAADE/1EABQABAAEAAADE/1IABQABAAEAAADE/1MABQABAAEAAADE/1QABQABAAEAAADE/1UABQABAAEAAADF/00ABQABAAEAAADF/04ABQABAAEAAADF/08ABQABAAEAAADF/1AABQABAAEAAADF/1EABQABAAEAAADF/1IABQABAAEAAADF/1MABQABAAEAAADF/1QABQABAAEAAADF/1UABQABAAEAAADG/00ABQABAAEAAADG/04ABQABAAEAAADG/08ABQABAAEAAADG/1AABQABAAEAAADG/1EABQABAAEAAADG/1IABQABAAEAAADG/1MABQABAAEAAADG/1QABQABAAEAAADG/1UABQABAAEAAAD1/wMABQAAAAAAAAD1/wQABQABAAEAAAD1/wUABQABAAIAAAD2/wMABQABAAAAAAD2/wQABQABAAEAAAD2/wUABQABAAIAAAD3/wMABQABAAAAAAD3/wQABQABAAEAAAD3/wUABQABAAIAAADy/wMABQAAAAEAAADy/wQABQAAAAIAAADy/wUABQAAAAIAAADz/wMABQABAAEAAADz/wQABQABAAIAAADz/wUABQABAAIAAAD0/wMABQACAAEAAAD0/wQABQABAAEAAAD0/wUABQABAAIAAADy/wIABQAAAAAAAADz/wIABQABAAAAAAD0/wIABQACAAAAAADz/wAABQADAAIAAADz/wEABQADAAMAAAD0/wAABQAEAAIAAAD0/wEABQAEAAMAAAD4/wMABQABAAAAAAD4/wQABQABAAEAAAD4/wUABQABAAIAAAD5/wMABQABAAAAAAD5/wQABQABAAEAAAD5/wUABQABAAIAAAD6/wMABQACAAAAAAD6/wQABQACAAEAAAD6/wUABQACAAIAAAA=")
+tile_map_data = PackedByteArray("AADH/00ABQABAAEAAADH/04ABQABAAEAAADH/08ABQABAAEAAADH/1AABQABAAEAAADH/1EABQABAAEAAADH/1IABQABAAEAAADH/1MABQABAAEAAADH/1QABQABAAEAAADH/1UABQABAAEAAADI/00ABQABAAEAAADI/04ABQABAAEAAADI/08ABQABAAEAAADI/1AABQABAAEAAADI/1EABQABAAEAAADI/1IABQABAAEAAADI/1MABQABAAEAAADI/1QABQABAAEAAADI/1UABQABAAEAAADJ/00ABQABAAEAAADJ/04ABQABAAEAAADJ/08ABQABAAEAAADJ/1AABQABAAEAAADJ/1EABQABAAEAAADJ/1IABQABAAEAAADJ/1MABQABAAEAAADJ/1QABQABAAEAAADJ/1UABQABAAEAAADK/00ABQABAAEAAADK/04ABQABAAEAAADK/08ABQABAAEAAADK/1AABQABAAEAAADK/1EABQABAAEAAADK/1IABQABAAEAAADK/1MABQABAAEAAADK/1QABQABAAEAAADK/1UABQABAAEAAADL/00ABQABAAEAAADL/04ABQABAAEAAADL/08ABQABAAEAAADL/1AABQABAAEAAADL/1EABQABAAEAAADL/1IABQABAAEAAADL/1MABQABAAEAAADL/1QABQABAAEAAADL/1UABQABAAEAAADC/00ABQABAAEAAADC/04ABQABAAEAAADC/08ABQABAAEAAADC/1AABQABAAEAAADC/1EABQABAAEAAADC/1IABQABAAEAAADC/1MABQABAAEAAADC/1QABQABAAEAAADC/1UABQABAAEAAADD/00ABQABAAEAAADD/04ABQABAAEAAADD/08ABQABAAEAAADD/1AABQABAAEAAADD/1EABQABAAEAAADD/1IABQABAAEAAADD/1MABQABAAEAAADD/1QABQABAAEAAADD/1UABQABAAEAAADE/00ABQABAAEAAADE/04ABQABAAEAAADE/08ABQABAAEAAADE/1AABQABAAEAAADE/1EABQABAAEAAADE/1IABQABAAEAAADE/1MABQABAAEAAADE/1QABQABAAEAAADE/1UABQABAAEAAADF/00ABQABAAEAAADF/04ABQABAAEAAADF/08ABQABAAEAAADF/1AABQABAAEAAADF/1EABQABAAEAAADF/1IABQABAAEAAADF/1MABQABAAEAAADF/1QABQABAAEAAADF/1UABQABAAEAAADG/00ABQABAAEAAADG/04ABQABAAEAAADG/08ABQABAAEAAADG/1AABQABAAEAAADG/1EABQABAAEAAADG/1IABQABAAEAAADG/1MABQABAAEAAADG/1QABQABAAEAAADG/1UABQABAAEAAADY/wsABQABAAAAAADY/wwABQABAAEAAADZ/wsABQABAAAAAADZ/wwABQABAAEAAADa/wsABQABAAAAAADa/wwABQABAAEAAADb/wsABQABAAAAAADb/wwABQABAAEAAADc/woABQAAAAAAAADc/wsABQAAAAEAAADc/wwABQAAAAEAAADd/woABQABAAAAAADd/wsABQABAAEAAADd/wwABQABAAIAAADe/woABQABAAAAAADe/wsABQABAAEAAADe/wwABQABAAEAAADW/wsABQABAAAAAADW/wwABQABAAEAAADW/w0ABQABAAEAAADX/wsABQABAAAAAADX/wwABQABAAEAAADX/w0ABQABAAIAAADY/w0ABQABAAIAAADZ/w0ABQABAAIAAADa/w0ABQABAAIAAADb/w0ABQABAAEAAADc/w0ABQAAAAEAAADd/w0ABQABAAIAAADe/w0ABQABAAEAAADd/wgABQAEAAIAAADd/wkABQAEAAMAAADc/wgABQADAAIAAADc/wkABQADAAMAAADU/wsABQABAAAAAADU/wwABQABAAEAAADU/w0ABQABAAEAAADV/wsABQABAAAAAADV/wwABQABAAEAAADV/w0ABQABAAEAAADe/w4ABQABAAEAAADd/w4ABQABAAEAAADc/w4ABQABAAEAAADb/w4ABQABAAEAAADa/w4ABQABAAEAAADZ/w4ABQABAAEAAADY/w4ABQABAAEAAADX/w4ABQABAAEAAADW/w4ABQABAAEAAADV/w4ABQABAAEAAADU/w4ABQABAAEAAADf/w4ABQABAAEAAADf/w0ABQABAAEAAADf/wwABQABAAEAAADf/wsABQABAAEAAADf/woABQACAAAAAADT/wsABQABAAAAAADT/wwABQABAAEAAADT/w0ABQABAAEAAADT/w4ABQABAAEAAADS/wwABQAAAAEAAADS/w0ABQAAAAEAAADS/w4ABQAAAAEAAADS/wsABQAAAAAAAAA=")
 tile_set = ExtResource("2_up8l4")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1346540891]
@@ -600,37 +588,30 @@ autoplay = true
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2099100601]
-position = Vector2(-85, 23)
+position = Vector2(-153, 70)
 scale = Vector2(0.7371215, 1.0099709)
+zoom = Vector2(3.26, 3.26)
 script = ExtResource("8_40twv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=550703905]
 visible = false
-position = Vector2(-163, 34)
+position = Vector2(-163.25, 34)
 scale = Vector2(4.953, 5)
 texture = ExtResource("10_q3w81")
 region_enabled = true
 region_rect = Rect2(44, 183, 23, 33)
 
-[node name="Label" type="Label" parent="." unique_id=1086259129]
-offset_left = -148.0
-offset_top = -118.0
-offset_right = 140.0
-offset_bottom = -80.0
-text = "Slick Road Ahead"
-label_settings = SubResource("LabelSettings_mfb7h")
+[node name="Label" type="Sprite2D" parent="." unique_id=1395449693]
+position = Vector2(-214, 38)
+texture = ExtResource("7_0xcb6")
 
-[node name="Label2" type="Label" parent="." unique_id=1501063482]
-offset_left = -78.0
-offset_top = 61.0
-offset_right = 228.0
-offset_bottom = 99.0
-text = "Press Start/Enter"
-label_settings = SubResource("LabelSettings_q3w81")
+[node name="Label2" type="Sprite2D" parent="." unique_id=1319997290]
+position = Vector2(-199, 73)
+texture = ExtResource("8_o2evf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=111477794]
-position = Vector2(-172, 30)
-scale = Vector2(5, 5)
+position = Vector2(-124, 74)
+scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_qqkxj")
 animation = &"idle"
 autoplay = "idle"
@@ -675,63 +656,74 @@ position = Vector2(0, 4)
 target_position = Vector2(24, 0)
 collision_mask = 20
 
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=957311198]
+z_index = -6
+position = Vector2(-143, 78)
+texture = ExtResource("11_qqkxj")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=2101759495]
+z_index = -2
+position = Vector2(107, 114)
+texture = ExtResource("14_o2evf")
+flip_h = true
+
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=145413847]
+z_index = -2
+position = Vector2(-533, 114)
+texture = ExtResource("14_o2evf")
+flip_h = true
+
 [node name="Sky" type="Parallax2D" parent="." unique_id=2016296126]
 z_index = -9
+scale = Vector2(-1, 1)
 scroll_scale = Vector2(0, 0)
-scroll_offset = Vector2(-449, -99.12)
+scroll_offset = Vector2(-317, -34)
 repeat_size = Vector2(640, 360)
 repeat_times = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="Sky" unique_id=957311198]
-z_index = -1
-texture = ExtResource("11_qqkxj")
-
 [node name="Background" type="Parallax2D" parent="." unique_id=304635989]
 z_index = -7
+scale = Vector2(-1, 1)
 scroll_scale = Vector2(0.02, 0)
-scroll_offset = Vector2(-449, -40)
+scroll_offset = Vector2(-317, 25.119995)
 repeat_size = Vector2(640, 0)
 repeat_times = 16
 follow_viewport = false
 
 [node name="Sprite2D2" type="Sprite2D" parent="Background" unique_id=607738564]
 texture_repeat = 2
+scale = Vector2(-1, 1)
 texture = ExtResource("12_sjoxd")
-
-[node name="Middle" type="Parallax2D" parent="." unique_id=321945096]
-z_index = -6
-scroll_scale = Vector2(0.04, 0)
-repeat_size = Vector2(640, 0)
-repeat_times = 14
-follow_viewport = false
-
-[node name="Sprite2D3" type="Sprite2D" parent="Middle" unique_id=144890318]
-texture = ExtResource("13_0xcb6")
 
 [node name="Foreground" type="Parallax2D" parent="." unique_id=306662917]
 z_index = -5
+scale = Vector2(-1, 1)
 scroll_scale = Vector2(0.07, 0)
-scroll_offset = Vector2(0, 50)
+scroll_offset = Vector2(-508, 115.119995)
 repeat_size = Vector2(640, 0)
 repeat_times = 11
 follow_viewport = false
 
-[node name="Sprite2D" type="Sprite2D" parent="Foreground" unique_id=2101759495]
-texture = ExtResource("14_o2evf")
-
 [node name="Foreground2" type="Parallax2D" parent="." unique_id=2096026156]
 z_index = -4
+scale = Vector2(-1, 1)
 scroll_scale = Vector2(0.04, 0)
-scroll_offset = Vector2(0, 100)
+scroll_offset = Vector2(-508, 165.12)
 repeat_size = Vector2(640, 0)
 repeat_times = 13
 follow_viewport = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Foreground2" unique_id=1850129325]
 position = Vector2(0, -24)
+scale = Vector2(-1, 1)
 texture = ExtResource("15_6u2sb")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Foreground2" unique_id=1272844999]
 position = Vector2(0, 476.7475)
-scale = Vector2(1, 1.7819306)
+scale = Vector2(-1, 1.7819306)
 texture = ExtResource("16_cr1ue")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=962489398]
+z_index = -6
+position = Vector2(-100, 46)
+texture = ExtResource("18_6u2sb")
