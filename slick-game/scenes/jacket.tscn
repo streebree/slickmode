@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bcx3xug75wae7" path="res://scenes/jacket.gd" id="1_q2umj"]
 [ext_resource type="Texture2D" uid="uid://cn7nsxqd7v75u" path="res://assets/art/jacket.png" id="1_qfe0r"]
+[ext_resource type="AudioStream" uid="uid://dlmirlaqmpxtv" path="res://assets/audio/get powerup 2.ogg" id="3_lot3l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2umj"]
 size = Vector2(29, 225)
@@ -17,5 +18,8 @@ texture = ExtResource("1_qfe0r")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=898167802]
 position = Vector2(-0.5, 4.5)
 shape = SubResource("RectangleShape2D_q2umj")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1418147036]
+stream = ExtResource("3_lot3l")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

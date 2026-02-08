@@ -11,13 +11,13 @@ func _ready() -> void:
 		})
 	elif level_name == "level2":
 		StateManager.raise("give_abilities", {
-			has_jacket = true,
+			has_jacket = false,
 			can_dash = false,
 			can_be_snowball = false
 		})
 	elif level_name == "level3":
 		StateManager.raise("give_abilities", {
-			has_jacket = true,
+			has_jacket = false,
 			can_dash = true,
 			can_be_snowball = false
 		})

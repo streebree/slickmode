@@ -704,7 +704,8 @@ func on_health_update(health):
 func on_give_abilities(abilities):
 	has_jacket = abilities.has_jacket
 	can_dash = abilities.can_dash
-	can_become_snowball = abilities.can_be_snowball
+	if "can_become_snowball" in abilities:
+		can_become_snowball = abilities.can_be_snowball
 	# This disabled property is just used during the final cutscene.
 	if "disabled" in abilities:
 		is_disabled = abilities.disabled

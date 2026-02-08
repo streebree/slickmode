@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cle1idslv4gx8" path="res://node-test.gd" id="1_a0gg5"]
 [ext_resource type="TileSet" uid="uid://ioexiochvppf" path="res://scenes/main_tile_set.tres" id="2_y8oc2"]
 [ext_resource type="PackedScene" uid="uid://ckjpn0vpiwogk" path="res://scenes/snowman.tscn" id="3_3btnx"]
-[ext_resource type="AudioStream" uid="uid://bweoljfccwl5c" path="res://assets/audio/Snow2.ogg" id="7_5o8i8"]
+[ext_resource type="AudioStream" uid="uid://dy2aemlqum3qq" path="res://assets/audio/Cool Snow2.ogg" id="4_hlb5a"]
 [ext_resource type="PackedScene" uid="uid://7pdxc61d0xxu" path="res://scenes/hud.tscn" id="8_n4uov"]
 [ext_resource type="PackedScene" uid="uid://c1duoa4rdhgyi" path="res://scenes/level_start.tscn" id="9_cocvt"]
 [ext_resource type="PackedScene" uid="uid://domfe53a2mmqd" path="res://scenes/level_end.tscn" id="10_m7iv3"]
@@ -32,8 +32,9 @@ tile_set = ExtResource("2_y8oc2")
 position = Vector2(-288, -72)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1346540891]
-stream = ExtResource("7_5o8i8")
+stream = ExtResource("4_hlb5a")
 volume_db = -14.597
+autoplay = true
 
 [node name="CanvasLayer" parent="." unique_id=67627577 instance=ExtResource("8_n4uov")]
 
