@@ -250,6 +250,7 @@ texture = ExtResource("7_2bgkt")
 
 [node name="Middle" type="Parallax2D" parent="." unique_id=1511427124]
 z_index = -2
+scroll_scale = Vector2(0.5, 0)
 scroll_offset = Vector2(0, -32.7)
 repeat_size = Vector2(640, 0)
 repeat_times = 14
@@ -260,6 +261,7 @@ texture = ExtResource("9_n07cq")
 
 [node name="Foreground" type="Parallax2D" parent="." unique_id=463207900]
 z_index = -1
+scroll_scale = Vector2(0.7, 0)
 scroll_offset = Vector2(0, -52.395)
 repeat_size = Vector2(640, 0)
 repeat_times = 11
@@ -269,6 +271,7 @@ texture = ExtResource("8_6fjde")
 
 [node name="Foreground2" type="Parallax2D" parent="." unique_id=961184668]
 z_index = -1
+scroll_scale = Vector2(1, 0)
 repeat_size = Vector2(640, 0)
 repeat_times = 13
 
